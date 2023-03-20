@@ -37,6 +37,24 @@ return require('packer').startup(function(use)
     config = function() require("nvim_comment").setup {} end
   }
 
+  use {
+    "nvim-neo-tree/neo-tree.nvim", -- File explorer
+    branch = "v2.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    }
+  }
+
+  use {
+    'nvim-telescope/telescope.nvim',
+    branch = "0.1.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+    }
+  }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
