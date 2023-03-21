@@ -13,3 +13,4 @@ vim.opt.backspace = {"indent", "eol", "start"}
 -- others
 vim.opt.clipboard = "unnamedplus"
 vim.opt.scrolloff = 5
+vim.opt.laststatus = 0

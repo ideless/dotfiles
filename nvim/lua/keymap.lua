@@ -20,7 +20,7 @@ set_keymap("i", "<C-_>", "<Cmd>CommentToggle<CR>")
 set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
 
 -- Neo Tree
-set_keymap("n", "<Leader>e", ":NeoTreeShowToggle<CR>")
+set_keymap("n", "<Leader>e", ":NeoTreeShowInSplitToggle<CR>")
 
 -- Telescope
 set_keymap("n", "<Leader>ff", ":Telescope find_files<CR>")
