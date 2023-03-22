@@ -55,6 +55,32 @@ return require('packer').startup(function(use)
     }
   }
 
+  -- mason and mason-lspconfig must be loaded before lspconfig
+  use {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim'
+  }
+  require("plugins/mason-config")
+
+  use 'neovim/nvim-lspconfig'
+  require("plugins/lsp-config")
+
+  use {
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-vsnip",
+    "hrsh7th/vim-vsnip"
+  }
+  require("plugins/cmp-config")
+
+  use {
+    'folke/which-key.nvim',
+    config = function() require("which-key").setup {} end
+  }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
