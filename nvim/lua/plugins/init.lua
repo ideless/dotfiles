@@ -36,7 +36,8 @@ return require('packer').startup(function(use)
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-    }
+    },
+    config = function() require('plugins/neo-tree-config') end
   }
 
   use {
@@ -82,6 +83,14 @@ return require('packer').startup(function(use)
     tag = "v3.*",
     requires = 'nvim-tree/nvim-web-devicons',
     config = function() require('plugins/bufferline-config') end
+  }
+
+  use "github/copilot.vim"
+
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = 'plenary.nvim',
+    config = function() require('plugins/null-ls-config') end
   }
 
   -- Automatically set up your configuration after cloning packer.nvim

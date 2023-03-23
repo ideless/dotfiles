@@ -20,19 +20,24 @@ set_keymap("n", "<C-w>-", ":split<CR>")
 
 -- buffer operations
 set_keymap('n', '<C-c>', ':bdelete<CR>')
+set_keymap('n', 'gb', ':BufferLinePick<CR>')
 
 -- comment (<C-_> = Ctrl+/)
 set_keymap("i", "<C-_>", "<Cmd>CommentToggle<CR>")
 set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
 
+-- conventional shortcuts
+set_keymap("in", "<C-s>", "<Cmd>w<CR>")
+set_keymap("in", "<C-z>", "<Cmd>u<CR>")
+set_keymap("i", "<C-v>", "<C-o>p")
+
 -- magics
 wk.register({
   name = "Magics",
   h = { ":noh<CR>", "Clear highlight" },
-  e = { ":NeoTreeShowInSplitToggle<CR>", "Toggle explorer" },
+  e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
   f = { ":Telescope find_files<CR>", "Find files" },
   g = { ":Telescope live_grep<CR>", "Live grep" },
-  b = { ":BufferLinePick<CR>", "Pick buffer" },
 }, { prefix = "<Leader>" })
 
 -- cmp
