@@ -22,23 +22,17 @@ vim.cmd([[
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use {
-    'windwp/nvim-autopairs',
-    config = function() require("nvim-autopairs").setup {} end
-  }
+  use 'windwp/nvim-autopairs'
+  require("nvim-autopairs").setup {}
+
+  use 'nmac427/guess-indent.nvim'
+  require("guess-indent").setup {}
+
+  use 'terrortylor/nvim-comment'
+  require("nvim_comment").setup {}
 
   use {
-    'nmac427/guess-indent.nvim',
-    config = function() require("guess-indent").setup {} end
-  }
-
-  use {
-    'terrortylor/nvim-comment',
-    config = function() require("nvim_comment").setup {} end
-  }
-
-  use {
-    "nvim-neo-tree/neo-tree.nvim", -- File explorer
+    "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     requires = { 
       "nvim-lua/plenary.nvim",
@@ -76,10 +70,15 @@ return require('packer').startup(function(use)
   }
   require("plugins/cmp-config")
 
+  use 'folke/which-key.nvim'
+  require("which-key").setup {}
+  
   use {
-    'folke/which-key.nvim',
-    config = function() require("which-key").setup {} end
+    'akinsho/bufferline.nvim',
+    tag = "v3.*",
+    requires = 'nvim-tree/nvim-web-devicons',
   }
+  require('plugins/bufferline-config')
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

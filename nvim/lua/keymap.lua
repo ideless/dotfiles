@@ -17,6 +17,9 @@ vim.g.mapleader = ' '
 set_keymap("n", "<C-w>\\", ":vsplit<CR>")
 set_keymap("n", "<C-w>-", ":split<CR>")
 
+-- buffer operations
+set_keymap('n', '<C-c>', ':bdelete<CR>')
+
 -- comment (<C-_> = Ctrl+/)
 set_keymap("i", "<C-_>", "<Cmd>CommentToggle<CR>")
 set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
@@ -27,8 +30,11 @@ set_keymap("n", "<Leader>e", ":NeoTreeShowInSplitToggle<CR>")
 -- Telescope
 set_keymap("n", "<Leader>f", ":Telescope find_files<CR>")
 -- set_keymap("n", "<Leader>fg", ":Telescope live_grep<CR>")
--- set_keymap("n", "<Leader>fb", ":Telescope buffers<CR>")
+set_keymap("n", "<Leader>b", ":Telescope buffers<CR>")
 -- set_keymap("n", "<Leader>fh", ":Telescope help_tags<CR>")
+
+-- Bufferline
+set_keymap('n', 'gb', ':BufferLinePick<CR>')
 
 -- cmp
 keymap.cmp_keys = function()
