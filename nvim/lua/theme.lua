@@ -2,7 +2,88 @@ function set_hl(group, val)
   vim.api.nvim_set_hl(0, group, val)
 end
 
-set_hl('FloatBorder', { bg = "NONE" })
-set_hl('NormalFloat', { bg = "NONE" })
-set_hl('TelescopeNormal', { bg = "NONE" })
-set_hl('TelescopeBorder', { bg = "NONE" })
+function set_terminal_colors(colors)
+  -- dark
+  vim.g.terminal_color_0 = colors.black
+  vim.g.terminal_color_8 = colors.terminal_black
+
+  -- light
+  vim.g.terminal_color_7 = colors.fg_dark
+  vim.g.terminal_color_15 = colors.fg
+
+  -- colors
+  vim.g.terminal_color_1 = colors.red
+  vim.g.terminal_color_9 = colors.red
+
+  vim.g.terminal_color_2 = colors.green
+  vim.g.terminal_color_10 = colors.green
+
+  vim.g.terminal_color_3 = colors.yellow
+  vim.g.terminal_color_11 = colors.yellow
+
+  vim.g.terminal_color_4 = colors.blue
+  vim.g.terminal_color_12 = colors.blue
+
+  vim.g.terminal_color_5 = colors.magenta
+  vim.g.terminal_color_13 = colors.magenta
+
+  vim.g.terminal_color_6 = colors.cyan
+  vim.g.terminal_color_14 = colors.cyan
+end
+
+-- colors
+local colors = {
+  none = "NONE",
+  fg = "#ffffff",
+  fg_dark = "#a9b1d6",
+  fg_gutter = "#c0caf5",
+  bg = "#24283b",
+  bg_dark = "#1f2335",
+  bg_highlight = "#292e42",
+  terminal_black = "#414868",
+  blue = "#7aa2f7",
+  cyan = "#7dcfff",
+  magenta = "#c74ae1",
+  purple = "#9d7cd8",
+  orange = "#f39c12",
+  yellow = "#ffe666",
+  green = "#87e072",
+  red = "#f7768e",
+  comment = "#666666",
+}
+
+-- setup colors
+if vim.g.colors_name then
+  vim.cmd("hi clear")
+end
+
+vim.o.termguicolors = true
+vim.g.colors_name = "custom"
+
+set_terminal_colors(colors)
+
+-- setup highlights
+local c = colors
+
+set_hl('Comment', { fg = c.comment })
+
+set_hl('Constant', { fg = c.orange }) -- any constant
+set_hl('String', { fg = c.green })
+set_hl('Character', { fg = c.green })
+
+set_hl('Statement', { fg = c.magenta, italic = true })
+set_hl('Keyword', { fg = c.magenta, italic = true })
+set_hl('Operator', { fg = c.red })
+
+set_hl('Function', { fg = c.yellow })
+set_hl('Identifier', { fg = c.cyan }) -- variables
+
+set_hl('LineNr', { fg = c.fg_gutter }) -- line number
+
+set_hl('FloatBorder', { bg = c.none })
+set_hl('NormalFloat', { bg = c.none })
+
+set_hl('TelescopeNormal', { bg = c.none })
+set_hl('TelescopeBorder', { bg = c.none })
+
+set_hl('BufferLineBufferSelected', { italic = true })

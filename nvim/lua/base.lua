@@ -14,4 +14,3 @@ vim.opt.backspace = {"indent", "eol", "start"}
 vim.opt.clipboard = "unnamedplus"
 vim.opt.scrolloff = 5
 vim.opt.laststatus = 0
-vim.opt.termguicolors = true

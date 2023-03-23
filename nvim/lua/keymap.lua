@@ -1,4 +1,5 @@
-local keymap = {}
+local M = {}
+local wk = require("which-key")
 
 function set_keymap(modes, lhs, rhs, opts)
   -- default options
@@ -24,20 +25,18 @@ set_keymap('n', '<C-c>', ':bdelete<CR>')
 set_keymap("i", "<C-_>", "<Cmd>CommentToggle<CR>")
 set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
 
--- Neo Tree
-set_keymap("n", "<Leader>e", ":NeoTreeShowInSplitToggle<CR>")
-
--- Telescope
-set_keymap("n", "<Leader>f", ":Telescope find_files<CR>")
--- set_keymap("n", "<Leader>fg", ":Telescope live_grep<CR>")
-set_keymap("n", "<Leader>b", ":Telescope buffers<CR>")
--- set_keymap("n", "<Leader>fh", ":Telescope help_tags<CR>")
-
--- Bufferline
-set_keymap('n', 'gb', ':BufferLinePick<CR>')
+-- magics
+wk.register({
+  name = "Magics",
+  h = { ":noh<CR>", "Clear highlight" },
+  e = { ":NeoTreeShowInSplitToggle<CR>", "Toggle explorer" },
+  f = { ":Telescope find_files<CR>", "Find files" },
+  g = { ":Telescope live_grep<CR>", "Live grep" },
+  b = { ":BufferLinePick<CR>", "Pick buffer" },
+}, { prefix = "<Leader>" })
 
 -- cmp
-keymap.cmp_keys = function()
+M.cmp_keys = function()
   local cmp = require("cmp")
   local smart_esc = cmp.mapping(function(callback)
     -- if cmp.visible() then
@@ -101,4 +100,4 @@ keymap.cmp_keys = function()
   return keys
 end
 
-return keymap
+return M

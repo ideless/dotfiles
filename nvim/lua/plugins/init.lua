@@ -11,25 +11,23 @@ end
 
 local packer_bootstrap = ensure_packer()
 
--- auto recompile
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
-
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use 'windwp/nvim-autopairs'
-  require("nvim-autopairs").setup {}
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require("nvim-autopairs").setup {} end
+  }
 
-  use 'nmac427/guess-indent.nvim'
-  require("guess-indent").setup {}
+  use {
+    'nmac427/guess-indent.nvim',
+    config = function() require("guess-indent").setup {} end
+  }
 
-  use 'terrortylor/nvim-comment'
-  require("nvim_comment").setup {}
+  use {
+    'terrortylor/nvim-comment',
+    config = function() require("nvim_comment").setup {} end
+  }
 
   use {
     "nvim-neo-tree/neo-tree.nvim",
@@ -49,36 +47,42 @@ return require('packer').startup(function(use)
     }
   }
 
-  -- mason and mason-lspconfig must be loaded before lspconfig
   use {
     'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim'
+    requires = 'williamboman/mason-lspconfig.nvim',
+    config = function() require("plugins/mason-config") end
   }
-  require("plugins/mason-config")
-
-  use 'neovim/nvim-lspconfig'
-  require("plugins/lsp-config")
 
   use {
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-vsnip",
-    "hrsh7th/vim-vsnip"
+    'neovim/nvim-lspconfig',
+    after = 'mason.nvim',
+    config = function() require("plugins/lsp-config") end
   }
-  require("plugins/cmp-config")
 
-  use 'folke/which-key.nvim'
-  require("which-key").setup {}
+  use {
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip"
+    },
+    config = function() require("plugins/cmp-config") end
+  }
+
+  use {
+    'folke/which-key.nvim',
+    config = function() require("which-key").setup {} end
+  }
   
   use {
     'akinsho/bufferline.nvim',
     tag = "v3.*",
     requires = 'nvim-tree/nvim-web-devicons',
+    config = function() require('plugins/bufferline-config') end
   }
-  require('plugins/bufferline-config')
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

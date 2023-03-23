@@ -5,10 +5,4 @@ require('bufferline').setup {
       style = 'underline',
     },
   },
-  highlights = {
-    buffer_selected = {
-      bold = true,
-      italic = true,
-    },
-  }
 }
