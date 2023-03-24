@@ -29,7 +29,7 @@ set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
 -- conventional shortcuts
 set_keymap("in", "<C-s>", "<Cmd>w<CR>")
 set_keymap("in", "<C-z>", "<Cmd>u<CR>")
-set_keymap("i", "<C-v>", "<C-o>p")
+-- set_keymap("i", "<C-v>", "<C-o>p")
 
 -- magics
 wk.register({
@@ -38,6 +38,7 @@ wk.register({
   e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
   f = { ":Telescope find_files<CR>", "Find files" },
   g = { ":Telescope live_grep<CR>", "Live grep" },
+  d = { function() vim.diagnostic.open_float({ border = 'single' }) end, "Open Diagnostic" }
 }, { prefix = "<Leader>" })
 
 -- cmp
@@ -103,6 +104,23 @@ M.cmp_keys = function()
     ["<Esc>"] = smart_esc,
   }
   return keys
+end
+
+M.lsp_set_keymap = function(client, bufnr)
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+  wk.register({
+    d = { vim.lsp.buf.definition, "Definition" },
+    D = { vim.lsp.buf.declaration, "Declaration" },
+    i = { vim.lsp.buf.implementation, "Implementation" },
+    t = { vim.lsp.buf.type_definition, "Type Definition" },
+  }, { prefix = "g", buffer = bufnr })
+  -- Refactor related mappings
+  wk.register({
+    name = "Refactor",
+    r = { vim.lsp.buf.rename, "Rename" },
+    a = { vim.lsp.buf.code_action, "Code Action" },
+  }, { prefix = "<Leader>r", buffer = bufnr })
 end
 
 return M

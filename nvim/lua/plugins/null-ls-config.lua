@@ -5,12 +5,17 @@ local event = "BufWritePre" -- or "BufWritePost"
 local async = event == "BufWritePost"
 
 null_ls.setup({
+  sources = {
+    -- Formatting
+    null_ls.builtins.formatting.autopep8, -- python
+    null_ls.builtins.formatting.beautysh, -- bash, csh, ksh, sh, zsh
+    null_ls.builtins.formatting.latexindent, -- tex
+    null_ls.builtins.formatting.clang_format, -- c, cpp, cs, java, cuda, proto
+    null_ls.builtins.formatting.prettierd, -- javascript, javascriptreact, typescript, typescriptreact, vue, css, scss, less, html, json, jsonc, yaml, markdown, markdown.mdx, graphql, handlebars
+  },
   on_attach = function(client, bufnr)
+    print("null-ls attached")
     if client.supports_method("textDocument/formatting") then
-      -- vim.keymap.set("n", "<Leader>f", function()
-      --   vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-      -- end, { buffer = bufnr, desc = "[lsp] format" })
-
       -- format on save
       vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
       vim.api.nvim_create_autocmd(event, {
@@ -22,11 +27,5 @@ null_ls.setup({
         desc = "[lsp] format on save",
       })
     end
-
-    -- if client.supports_method("textDocument/rangeFormatting") then
-    --   vim.keymap.set("x", "<Leader>f", function()
-    --     vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-    --   end, { buffer = bufnr, desc = "[lsp] format" })
-    -- end
   end,
 })

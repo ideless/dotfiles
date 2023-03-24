@@ -80,10 +80,10 @@ set_hl('Identifier', { fg = c.cyan }) -- variables
 
 set_hl('LineNr', { fg = c.fg_gutter }) -- line number
 
-set_hl('FloatBorder', { bg = c.none })
-set_hl('NormalFloat', { bg = c.none })
-
 set_hl('TelescopeNormal', { bg = c.none })
 set_hl('TelescopeBorder', { bg = c.none })
+
+set_hl('FloatBorder', { bg = c.none })
+set_hl('NormalFloat', { bg = c.none })
 
 set_hl('BufferLineBufferSelected', { italic = true })
