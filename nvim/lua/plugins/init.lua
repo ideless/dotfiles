@@ -17,7 +17,7 @@ return require("packer").startup(function(use)
   use {
     "folke/which-key.nvim",
     config = function()
-      require("plugins/which-key-config")
+      require("plugins.which-key-config")
     end,
   }
 
@@ -51,7 +51,7 @@ return require("packer").startup(function(use)
       "MunifTanjim/nui.nvim",
     },
     config = function()
-      require("plugins/neo-tree-config")
+      require("plugins.neo-tree-config")
     end,
   }
 
@@ -66,7 +66,7 @@ return require("packer").startup(function(use)
   use {
     "neovim/nvim-lspconfig", -- config lsp servers in mason-config.lua
     config = function()
-      require("plugins/lspconfig-config")
+      require("plugins.lspconfig-config")
     end,
   }
 
@@ -74,16 +74,19 @@ return require("packer").startup(function(use)
     "jose-elias-alvarez/null-ls.nvim",
     requires = "plenary.nvim",
     config = function()
-      require("plugins/null-ls-config")
+      require("plugins.null-ls-config")
     end,
   }
 
   use {
     "williamboman/mason.nvim",
-    requires = "williamboman/mason-lspconfig.nvim",
-    after = "which-key.nvim", -- needs to require which-key
+    requires = {
+      "williamboman/mason-lspconfig.nvim",
+      "jay-babu/mason-null-ls.nvim",
+    },
+    after = "which-key.nvim", -- needs to set keymaps via which-key
     config = function()
-      require("plugins/mason-config")
+      require("plugins.mason-config")
     end,
   }
 
@@ -98,7 +101,7 @@ return require("packer").startup(function(use)
       "hrsh7th/vim-vsnip",
     },
     config = function()
-      require("plugins/cmp-config")
+      require("plugins.cmp-config")
     end,
   }
 
@@ -107,11 +110,18 @@ return require("packer").startup(function(use)
     tag = "v3.*",
     requires = "nvim-tree/nvim-web-devicons",
     config = function()
-      require("plugins/bufferline-config")
+      require("plugins.bufferline-config")
     end,
   }
 
   use("github/copilot.vim")
+
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("plugins.nvim-treesitter-config")
+    end,
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

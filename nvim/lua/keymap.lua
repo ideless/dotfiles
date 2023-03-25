@@ -36,13 +36,14 @@ set_keymap("n", "q:", "<nop>")
 
 -- which-key
 M.wk_set_keymap = function()
-  wk = require("which-key")
+  local wk = require("which-key")
   wk.register({
     name = "Magics",
     h = { ":noh<CR>", "Clear highlight" },
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
     f = { ":Telescope find_files<CR>", "Find files" },
     g = { ":Telescope live_grep<CR>", "Live grep" },
+    s = { ":Telescope treesitter<CR>", "Goto symbols" },
     d = {
       function()
         vim.diagnostic.open_float { border = "single" }

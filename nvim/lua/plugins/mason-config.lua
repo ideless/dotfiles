@@ -7,21 +7,20 @@ require("mason").setup {
 require("mason-lspconfig").setup {
   ensure_installed = {},
 }
-
-local on_attach = function(client, bufnr)
+-- automatic lsp server setup
+local on_lsp_attach = function(client, bufnr)
   print("lsp attached")
   local keymap = require("keymap")
   keymap.lsp_set_keymap(client, bufnr)
 end
 
--- automatic server setup
 require("mason-lspconfig").setup_handlers {
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
   function(server_name) -- default handler (optional)
     require("lspconfig")[server_name].setup {
-      on_attach = on_attach,
+      on_attach = on_lsp_attach,
     }
   end,
   -- Next, you can provide targeted overrides for specific servers.
@@ -29,7 +28,7 @@ require("mason-lspconfig").setup_handlers {
   -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md for list of configs
   ["pyright"] = function()
     require("lspconfig").pyright.setup {
-      on_attach = on_attach,
+      on_attach = on_lsp_attach,
       settings = {
         python = {
           analysis = {
@@ -44,3 +43,11 @@ require("mason-lspconfig").setup_handlers {
     }
   end,
 }
+
+require("mason-null-ls").setup {
+  automatic_setup = true,
+  ensure_installed = {},
+}
+
+-- automatic null-ls server setup
+require("mason-null-ls").setup_handlers {}

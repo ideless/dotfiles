@@ -60,8 +60,6 @@ end
 vim.o.termguicolors = true
 vim.g.colors_name = "custom"
 
-set_terminal_colors(colors)
-
 -- setup highlights
 local c = colors
 
@@ -76,7 +74,7 @@ set_hl("Keyword", { fg = c.magenta, italic = true })
 set_hl("Operator", { fg = c.red })
 
 set_hl("Function", { fg = c.yellow })
-set_hl("Identifier", { fg = c.cyan }) -- variables
+set_hl("Identifier", { fg = c.cyan })  -- variables
 
 set_hl("LineNr", { fg = c.fg_gutter }) -- line number
 
@@ -87,6 +85,15 @@ set_hl("TelescopeNormal", { bg = c.none })
 set_hl("TelescopeBorder", { bg = c.none })
 
 set_hl("BufferLineModified", { italic = true })
+
+set_hl("TSTitle", { fg = c.red })
+set_hl("TSLiteral", { fg = c.none })
+set_hl("TSEmphasis", { fg = c.none })
+set_hl("TSStrong", { fg = c.none })
+set_hl("TSURI", { fg = c.none })
+set_hl("TSTextReference", { fg = c.none })
+set_hl("TSPunctSpecial", { fg = c.none })
+set_hl("TSStringEscape", { fg = c.none })
 
 -- setup borders for lsp
 local _border = "single"
