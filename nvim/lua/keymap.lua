@@ -1,5 +1,4 @@
 local M = {}
-local wk = require("which-key")
 
 function set_keymap(modes, lhs, rhs, opts)
   -- default options
@@ -30,15 +29,18 @@ set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
 set_keymap("in", "<C-s>", "<Cmd>w<CR>")
 set_keymap("in", "<C-z>", "<Cmd>u<CR>")
 
--- magics
-wk.register({
-  name = "Magics",
-  h = { ":noh<CR>", "Clear highlight" },
-  e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
-  f = { ":Telescope find_files<CR>", "Find files" },
-  g = { ":Telescope live_grep<CR>", "Live grep" },
-  d = { function() vim.diagnostic.open_float({ border = 'single' }) end, "Open Diagnostic" }
-}, { prefix = "<Leader>" })
+-- which-key
+M.wk_set_keymap = function()
+  wk = require('which-key')
+  wk.register({
+    name = "Magics",
+    h = { ":noh<CR>", "Clear highlight" },
+    e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
+    f = { ":Telescope find_files<CR>", "Find files" },
+    g = { ":Telescope live_grep<CR>", "Live grep" },
+    d = { function() vim.diagnostic.open_float({ border = 'single' }) end, "Open Diagnostic" }
+  }, { prefix = "<Leader>" })
+end
 
 -- cmp
 M.cmp_keys = function()
@@ -108,6 +110,7 @@ end
 
 M.lsp_set_keymap = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  local wk = require("which-key")
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   wk.register({
     d = { vim.lsp.buf.definition, "Definition" },

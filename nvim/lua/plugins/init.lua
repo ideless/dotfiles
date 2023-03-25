@@ -15,6 +15,11 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
+    'folke/which-key.nvim',
+    config = function() require("plugins/which-key-config") end
+  }
+
+  use {
     'windwp/nvim-autopairs',
     config = function() require("nvim-autopairs").setup {} end
   }
@@ -53,6 +58,7 @@ return require('packer').startup(function(use)
   use {
     'williamboman/mason.nvim',
     requires = 'williamboman/mason-lspconfig.nvim',
+    after = 'which-key.nvim', -- needs to require which-key
     config = function() require("plugins/mason-config") end
   }
 
@@ -67,11 +73,6 @@ return require('packer').startup(function(use)
       "hrsh7th/vim-vsnip"
     },
     config = function() require("plugins/cmp-config") end
-  }
-
-  use {
-    'folke/which-key.nvim',
-    config = function() require("which-key").setup {} end
   }
   
   use {
