@@ -53,7 +53,13 @@ return require('packer').startup(function(use)
     }
   }
 
-  use 'neovim/nvim-lspconfig'
+  use 'neovim/nvim-lspconfig' -- config lsp servers in mason-config.lua
+
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = 'plenary.nvim',
+    config = function() require('plugins/null-ls-config') end
+  }
 
   use {
     'williamboman/mason.nvim',
@@ -83,12 +89,6 @@ return require('packer').startup(function(use)
   }
 
   use "github/copilot.vim"
-
-  use {
-    'jose-elias-alvarez/null-ls.nvim',
-    requires = 'plenary.nvim',
-    config = function() require('plugins/null-ls-config') end
-  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
