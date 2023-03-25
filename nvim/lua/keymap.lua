@@ -29,6 +29,9 @@ set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
 set_keymap("in", "<C-s>", "<Cmd>w<CR>")
 set_keymap("in", "<C-z>", "<Cmd>u<CR>")
 
+-- diable annoying keymaps
+set_keymap("n", "q:", "<nop>")
+
 -- which-key
 M.wk_set_keymap = function()
   wk = require('which-key')
