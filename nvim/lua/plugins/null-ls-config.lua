@@ -12,6 +12,7 @@ null_ls.setup({
     null_ls.builtins.formatting.latexindent, -- tex
     null_ls.builtins.formatting.clang_format, -- c, cpp, cs, java, cuda, proto
     null_ls.builtins.formatting.prettierd, -- javascript, javascriptreact, typescript, typescriptreact, vue, css, scss, less, html, json, jsonc, yaml, markdown, markdown.mdx, graphql, handlebars
+    null_ls.builtins.formatting.rustfmt, -- rust
   },
   on_attach = function(client, bufnr)
     print("null-ls attached")

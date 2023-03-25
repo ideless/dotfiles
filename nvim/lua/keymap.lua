@@ -29,7 +29,6 @@ set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
 -- conventional shortcuts
 set_keymap("in", "<C-s>", "<Cmd>w<CR>")
 set_keymap("in", "<C-z>", "<Cmd>u<CR>")
--- set_keymap("i", "<C-v>", "<C-o>p")
 
 -- magics
 wk.register({
@@ -45,11 +44,6 @@ wk.register({
 M.cmp_keys = function()
   local cmp = require("cmp")
   local smart_esc = cmp.mapping(function(callback)
-    -- if cmp.visible() then
-    --   return cmp.abort()
-    -- else
-    --   callback()
-    -- end
     if cmp.visible() then
       cmp.abort()
     end
@@ -57,7 +51,13 @@ M.cmp_keys = function()
   end)
   local smart_cr = cmp.mapping(function(callback)
     if cmp.visible() then
-      cmp.confirm()
+      if cmp.get_selected_entry() then
+        cmp.confirm()
+      else
+        cmp.abort()
+        local newline = vim.api.nvim_replace_termcodes("<Esc>o", true, false, true)
+        vim.api.nvim_feedkeys(newline, "i", true)
+      end
     else
       callback()
     end
