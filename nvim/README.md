@@ -36,3 +36,7 @@ See `lua/theme.lua`
 Language server: see `lua/plugins/mason-config.lua`
 
 Formatter: see `lua/plugins/null-ls-config.lua`
+
+# Development tips
+
+- Always run `:PackerCompile` after modifying packer configurations.

@@ -65,25 +65,40 @@ set_terminal_colors(colors)
 -- setup highlights
 local c = colors
 
-set_hl('Comment', { fg = c.comment })
+set_hl("Comment", { fg = c.comment })
 
-set_hl('Constant', { fg = c.orange }) -- any constant
-set_hl('String', { fg = c.green })
-set_hl('Character', { fg = c.green })
+set_hl("Constant", { fg = c.orange }) -- any constant
+set_hl("String", { fg = c.green })
+set_hl("Character", { fg = c.green })
 
-set_hl('Statement', { fg = c.magenta, italic = true })
-set_hl('Keyword', { fg = c.magenta, italic = true })
-set_hl('Operator', { fg = c.red })
+set_hl("Statement", { fg = c.magenta, italic = true })
+set_hl("Keyword", { fg = c.magenta, italic = true })
+set_hl("Operator", { fg = c.red })
 
-set_hl('Function', { fg = c.yellow })
-set_hl('Identifier', { fg = c.cyan }) -- variables
+set_hl("Function", { fg = c.yellow })
+set_hl("Identifier", { fg = c.cyan }) -- variables
 
-set_hl('LineNr', { fg = c.fg_gutter }) -- line number
+set_hl("LineNr", { fg = c.fg_gutter }) -- line number
 
-set_hl('TelescopeNormal', { bg = c.none })
-set_hl('TelescopeBorder', { bg = c.none })
+set_hl("FloatBorder", { bg = c.none })
+set_hl("NormalFloat", { bg = c.none })
 
-set_hl('FloatBorder', { bg = c.none })
-set_hl('NormalFloat', { bg = c.none })
+set_hl("TelescopeNormal", { bg = c.none })
+set_hl("TelescopeBorder", { bg = c.none })
 
-set_hl('BufferLineBufferSelected', { italic = true })
+set_hl("BufferLineModified", { italic = true })
+
+-- setup borders for lsp
+local _border = "single"
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = _border,
+})
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = _border,
+})
+
+vim.diagnostic.config {
+  float = { border = _border },
+}

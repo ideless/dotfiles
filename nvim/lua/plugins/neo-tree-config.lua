@@ -1,4 +1,4 @@
-require('neo-tree').setup {
+require("neo-tree").setup {
   filesystem = {
     filtered_items = {
       hide_dotfiles = false,
@@ -11,5 +11,5 @@ require('neo-tree').setup {
         "Pipfile.lock",
       },
     },
-  }
+  },
 }

@@ -3,23 +3,25 @@ local M = {}
 function set_keymap(modes, lhs, rhs, opts)
   -- default options
   local options = { noremap = true }
-  if opts then options = vim.tbl_extend("force", options, opts) end
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
   -- set key map for each mode
-  for m in modes:gmatch"." do
+  for m in modes:gmatch(".") do
     vim.keymap.set(m, lhs, rhs, options)
   end
 end
 
 -- Leader key
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 
 -- window operations
 set_keymap("n", "<C-w>\\", ":vsplit<CR>")
 set_keymap("n", "<C-w>-", ":split<CR>")
 
 -- buffer operations
-set_keymap('n', '<C-c>', ':bdelete<CR>')
-set_keymap('n', 'gb', ':BufferLinePick<CR>')
+set_keymap("n", "<C-c>", ":bdelete<CR>")
+set_keymap("n", "gb", ":BufferLinePick<CR>")
 
 -- comment (<C-_> = Ctrl+/)
 set_keymap("i", "<C-_>", "<Cmd>CommentToggle<CR>")
@@ -34,14 +36,19 @@ set_keymap("n", "q:", "<nop>")
 
 -- which-key
 M.wk_set_keymap = function()
-  wk = require('which-key')
+  wk = require("which-key")
   wk.register({
     name = "Magics",
     h = { ":noh<CR>", "Clear highlight" },
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
     f = { ":Telescope find_files<CR>", "Find files" },
     g = { ":Telescope live_grep<CR>", "Live grep" },
-    d = { function() vim.diagnostic.open_float({ border = 'single' }) end, "Open Diagnostic" }
+    d = {
+      function()
+        vim.diagnostic.open_float { border = "single" }
+      end,
+      "Open Diagnostic",
+    },
   }, { prefix = "<Leader>" })
 end
 
@@ -104,7 +111,7 @@ M.cmp_keys = function()
     ["<C-k>"] = smart_prev,
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<CR>"] = smart_cr,
-    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+    ["<Tab>"] = cmp.mapping.confirm { select = true },
     ["<C-e>"] = cmp.mapping.abort(),
     ["<Esc>"] = smart_esc,
   }
@@ -123,10 +130,9 @@ M.lsp_set_keymap = function(client, bufnr)
   }, { prefix = "g", buffer = bufnr })
   -- Refactor related mappings
   wk.register({
-    name = "Refactor",
     r = { vim.lsp.buf.rename, "Rename" },
     a = { vim.lsp.buf.code_action, "Code Action" },
-  }, { prefix = "<Leader>r", buffer = bufnr })
+  }, { prefix = "<Leader>", buffer = bufnr })
 end
 
 return M
