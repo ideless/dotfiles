@@ -61,6 +61,10 @@ return require("packer").startup(function(use)
     requires = {
       "nvim-lua/plenary.nvim",
     },
+    after = "which-key.nvim", -- needs to set keymaps via which-key
+    config = function()
+      require("plugins.telescope-config")
+    end,
   }
 
   use {

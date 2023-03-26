@@ -34,6 +34,10 @@ set_keymap("in", "<C-z>", "<Cmd>u<CR>")
 -- diable annoying keymaps
 set_keymap("n", "q:", "<nop>")
 
+-- diagnostic
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+
 -- which-key
 M.wk_set_keymap = function()
   local wk = require("which-key")
@@ -43,15 +47,6 @@ M.wk_set_keymap = function()
     h = { ":noh<CR>", "Clear highlight" },
     c = { ":%bd|e#|bd#<CR>", "Close all but this buffer" },
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
-    f = { ":Telescope find_files<CR>", "Find files" },
-    g = { ":Telescope live_grep<CR>", "Live grep" },
-    s = { ":Telescope treesitter<CR>", "Goto symbols" },
-    d = {
-      function()
-        vim.diagnostic.open_float { border = "single" }
-      end,
-      "Open Diagnostic",
-    },
   }, { prefix = "<Leader>" })
   -- Hop
   wk.register({
@@ -62,7 +57,27 @@ M.wk_set_keymap = function()
     v = { ":HopVertical<CR>", "Vertical" },
     p = { ":HopPattern<CR>", "Pattern" },
     w = { ":HopWord<CR>", "Word" },
-  }, { prefix = "<Tab>" })
+  }, { prefix = ";" })
+end
+
+-- telescope
+M.telescope_set_keymap = function()
+  local wk = require("which-key")
+  local telescope = require("telescope.builtin")
+  wk.register({
+    f = { ":Telescope find_files<CR>", "Find files" },
+    g = { ":Telescope live_grep<CR>", "Live grep" },
+    t = { ":Telescope treesitter<CR>", "Treesitter symbols" },
+    s = { ":Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search" },
+    d = {
+      function()
+        telescope.diagnostics {
+          bufnr = 0,
+        }
+      end,
+      "Open diagnostics",
+    },
+  }, { prefix = "<Leader>" })
 end
 
 -- cmp
@@ -80,7 +95,7 @@ M.cmp_keys = function()
         cmp.confirm()
       else
         cmp.abort()
-        local newline = vim.api.nvim_replace_termcodes("<Esc>o", true, false, true)
+        local newline = vim.api.nvim_replace_termcodes("<Esc>a<CR>", true, false, true)
         vim.api.nvim_feedkeys(newline, "i", true)
       end
     else
