@@ -1,7 +1,7 @@
 # Installation
 
 - Install [neovim](https://neovim.io/).
-- Clone neovim configuration files to the appropriate folder for your system. For Linux, this is typically `~/.config/nvim/`. For Windows, it is `$HOME\AppData\Local\nvim\`.
+- Clone neovim configuration files to the appropriate folder for your system. For Linux, this is typically `~/.config/nvim/`. For Windows, it is `~\AppData\Local\nvim\`.
 - Open neovim, and it will install plugins automatically.
 - Note that Language servers, formatters, and other tools need to be installed manually (See [Languages](#Languages)).
 
@@ -24,7 +24,6 @@
 | [copilot.vim](https://github.com/github/copilot.vim)                  | Copilot                     |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Language parsers            |
 | [hop.nvim](https://github.com/phaazon/hop.nvim)                       | Fast jump                   |
-| [](ryanoasis/vim-devicons)                                            | File icons                  |
 
 # Dependencies
 
