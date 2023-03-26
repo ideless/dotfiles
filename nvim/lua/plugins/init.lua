@@ -118,8 +118,16 @@ return require("packer").startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter",
+    requires = "JoosepAlviste/nvim-ts-context-commentstring",
     config = function()
       require("plugins.nvim-treesitter-config")
+    end,
+  }
+
+  use {
+    "phaazon/hop.nvim",
+    config = function()
+      require("hop").setup {}
     end,
   }
 

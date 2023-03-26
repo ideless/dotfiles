@@ -1,8 +1,9 @@
 require("bufferline").setup {
   options = {
-    numbers = "ordinal",
+    numbers = "none",
     indicator = {
       style = "underline",
     },
+    diagnostics = "nvim_lsp"
   },
 }

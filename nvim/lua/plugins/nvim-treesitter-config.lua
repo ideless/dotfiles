@@ -5,4 +5,7 @@ require("nvim-treesitter.configs").setup {
     },
     sync_install = false,
     auto_install = true,
+    context_commentstring = {
+        enable = true,
+    },
 }

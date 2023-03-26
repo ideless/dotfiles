@@ -5,6 +5,7 @@ local event = "BufWritePre" -- or "BufWritePost"
 local async = event == "BufWritePost"
 
 null_ls.setup {
+  border = "single",
   on_attach = function(client, bufnr)
     print("null-ls attached")
     if client.supports_method("textDocument/formatting") then

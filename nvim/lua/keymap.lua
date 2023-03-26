@@ -20,7 +20,7 @@ set_keymap("n", "<C-w>\\", ":vsplit<CR>")
 set_keymap("n", "<C-w>-", ":split<CR>")
 
 -- buffer operations
-set_keymap("n", "<C-c>", ":bdelete<CR>")
+set_keymap("n", "<C-c>", ":bd<CR>")
 set_keymap("n", "gb", ":BufferLinePick<CR>")
 
 -- comment (<C-_> = Ctrl+/)
@@ -37,9 +37,11 @@ set_keymap("n", "q:", "<nop>")
 -- which-key
 M.wk_set_keymap = function()
   local wk = require("which-key")
+  -- Magics
   wk.register({
     name = "Magics",
     h = { ":noh<CR>", "Clear highlight" },
+    c = { ":%bd|e#|bd#<CR>", "Close all but this buffer" },
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
     f = { ":Telescope find_files<CR>", "Find files" },
     g = { ":Telescope live_grep<CR>", "Live grep" },
@@ -51,6 +53,16 @@ M.wk_set_keymap = function()
       "Open Diagnostic",
     },
   }, { prefix = "<Leader>" })
+  -- Hop
+  wk.register({
+    name = "Hop",
+    a = { ":HopAnywhere<CR>", "Anywhere" },
+    c = { ":HopChar1<CR>", "Character" },
+    l = { ":HopLineStart<CR>", "Line" },
+    v = { ":HopVertical<CR>", "Vertical" },
+    p = { ":HopPattern<CR>", "Pattern" },
+    w = { ":HopWord<CR>", "Word" },
+  }, { prefix = "<Tab>" })
 end
 
 -- cmp
@@ -119,7 +131,8 @@ M.cmp_keys = function()
   return keys
 end
 
-M.lsp_set_keymap = function(client, bufnr)
+-- lsp
+M.lsp_set_keymap = function(_client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   local wk = require("which-key")
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
