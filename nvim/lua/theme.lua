@@ -80,6 +80,7 @@ set_hl("LineNr", { fg = c.fg_gutter }) -- line number
 
 set_hl("FloatBorder", { bg = c.none })
 set_hl("NormalFloat", { bg = c.none })
+set_hl("Pmenu", { bg = c.bg_dark })
 
 set_hl("SignColumn", { bg = c.none })
 

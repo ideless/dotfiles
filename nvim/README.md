@@ -27,12 +27,12 @@
 
 # Dependencies
 
-| Dependency                                          | For                                      |
-| --------------------------------------------------- | ---------------------------------------- |
-| [ripgrep](https://github.com/BurntSushi/ripgrep)    | Telescope                                |
-| gcc or any other C compiler                         | Treesitter parser compilation            |
-| nodejs                                              | Installing some packages (e.g. prettier) |
-| [Nerd font](https://github.com/40huo/Patched-Fonts) | Icons and symbols                        |
+| Dependency                                          | For                               |
+| --------------------------------------------------- | --------------------------------- |
+| [ripgrep](https://github.com/BurntSushi/ripgrep)    | Telescope                         |
+| gcc or any other C compiler                         | Treesitter parser compilation     |
+| nodejs, python (with venv)                          | Installing some packages in Mason |
+| [Nerd font](https://github.com/40huo/Patched-Fonts) | Icons and symbols                 |
 
 # Keymaps
 
@@ -63,3 +63,4 @@ First read [Neovim Spaghetti - LSP Servers, Linters, Formatters, and Treesitter]
 # Troubleshooting
 
 - `treesitter/highlighter: Error executing lua: ...` wait or manually install missing Treesitter language parser by `:TSInstall`
+- Tmux not rendering properly: run `tmux -u` instead of `tmux`
