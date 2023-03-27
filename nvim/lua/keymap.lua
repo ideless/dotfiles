@@ -20,7 +20,7 @@ set_keymap("n", "<C-w>\\", ":vsplit<CR>")
 set_keymap("n", "<C-w>-", ":split<CR>")
 
 -- buffer operations
-set_keymap("n", "<C-c>", ":bd<CR>")
+set_keymap("n", "<C-x>", ":bd<CR>")
 set_keymap("n", "gb", ":BufferLinePick<CR>")
 
 -- comment (<C-_> = Ctrl+/)
@@ -45,7 +45,7 @@ M.wk_set_keymap = function()
   wk.register({
     name = "Magics",
     h = { ":noh<CR>", "Clear highlight" },
-    c = { ":%bd|e#|bd#<CR>", "Close all but this buffer" },
+    x = { ":%bd|e#|bd#<CR>", "Close all but this buffer" },
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
   }, { prefix = "<Leader>" })
   -- Hop
