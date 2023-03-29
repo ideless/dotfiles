@@ -83,12 +83,17 @@ set_hl("LineNr", { fg = c.fg_gutter }) -- line number
 
 set_hl("FloatBorder", { bg = c.none })
 set_hl("NormalFloat", { bg = c.none })
+
 set_hl("Pmenu", { bg = c.bg_dark })
+set_hl("Visual", { bg = c.bg_highlight })
 
 set_hl("SignColumn", { bg = c.none })
 
 set_hl("TelescopeNormal", { bg = c.none })
 set_hl("TelescopeBorder", { bg = c.none })
+
+set_hl("CmpItemAbbrMatch", { fg = c.orange })
+set_hl("CmpItemAbbrMatchFuzzy", { fg = c.orange })
 
 -- setup borders for lsp
 local _border = "single"

@@ -16,7 +16,7 @@ cmp.setup {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  confirmation = { completeopt = "menu,menuone,noinsert" },
+  completion = { completeopt = "menu,menuone,noinsert" },
   mapping = cmp.mapping.preset.insert(keymap),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
@@ -27,6 +27,7 @@ cmp.setup {
   }, {
     { name = "buffer" },
   }),
+  preselect = cmp.PreselectMode.Item,
 }
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
