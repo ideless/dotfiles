@@ -35,8 +35,14 @@ set_keymap("in", "<C-z>", "<Cmd>u<CR>")
 set_keymap("n", "q:", "<nop>")
 
 -- diagnostic
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+set_keymap("n", "[d", vim.diagnostic.goto_prev)
+set_keymap("n", "]d", vim.diagnostic.goto_next)
+
+-- copilot
+M.copilot_set_keymap = function()
+  vim.g.copilot_no_tab_map = true
+  vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+end
 
 -- which-key
 M.wk_set_keymap = function()
@@ -134,9 +140,7 @@ M.cmp_keys = function()
     ["<C-u>"] = smart_scroll_down,
     ["<C-d>"] = smart_scroll_up,
     ["<C-n>"] = smart_next,
-    ["<C-j>"] = smart_next,
     ["<C-p>"] = smart_prev,
-    ["<C-k>"] = smart_prev,
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<CR>"] = smart_cr,
     ["<Tab>"] = cmp.mapping.confirm { select = true },

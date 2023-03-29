@@ -118,7 +118,13 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use("github/copilot.vim")
+  use {
+    "github/copilot.vim",
+    -- after = "nvim-cmp", -- should I ?
+    config = function()
+      require("plugins.copilot-config")
+    end,
+  }
 
   use {
     "nvim-treesitter/nvim-treesitter",
