@@ -24,6 +24,7 @@
 | [copilot.vim](https://github.com/github/copilot.vim)                  | Copilot                     |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Language parsers            |
 | [hop.nvim](https://github.com/phaazon/hop.nvim)                       | Fast jump                   |
+| [vimtex](https://github.com/lervag/vimtex)                            | LaTeX                       |
 
 # Dependencies
 
@@ -33,6 +34,7 @@
 | gcc or any other C compiler                         | Treesitter parser compilation     |
 | nodejs, python (with venv)                          | Installing some packages in Mason |
 | [Nerd font](https://github.com/40huo/Patched-Fonts) | Icons and symbols                 |
+| [zathura](https://pwmt.org/projects/zathura/)       | VimTeX PDF preview                |
 
 # Keymaps
 
@@ -59,6 +61,7 @@ First read [Neovim Spaghetti - LSP Servers, Linters, Formatters, and Treesitter]
 - View error/debug/info messages via `:messages`.
 - Run `:checkhealth` to check plugins health (very helpful).
 - Use `:hi` and `:TSEditQuery` to help configuring themes.
+- Run `nvim --startuptime` to inspect startup time.
 
 # Troubleshooting
 

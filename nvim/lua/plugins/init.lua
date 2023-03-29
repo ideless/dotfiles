@@ -120,7 +120,6 @@ return require("packer").startup(function(use)
 
   use {
     "github/copilot.vim",
-    -- after = "nvim-cmp", -- should I ?
     config = function()
       require("plugins.copilot-config")
     end,
@@ -138,6 +137,13 @@ return require("packer").startup(function(use)
     "phaazon/hop.nvim",
     config = function()
       require("hop").setup {}
+    end,
+  }
+
+  use {
+    "lervag/vimtex",
+    config = function()
+      require("plugins.vimtex-config")
     end,
   }
 
