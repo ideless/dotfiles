@@ -41,7 +41,7 @@ local colors = {
   bg_dark = "#1f2335",
   bg_highlight = "#292e42",
   terminal_black = "#414868",
-  blue = "#7aa2f7",
+  blue = "#61afef",
   cyan = "#7dcfff",
   magenta = "#c74ae1",
   purple = "#9d7cd8",
@@ -75,6 +75,9 @@ set_hl("Operator", { fg = c.red })
 
 set_hl("Function", { fg = c.yellow })
 set_hl("Identifier", { fg = c.cyan }) -- variables
+
+set_hl("@tag", { fg = c.cyan })       -- html tag
+set_hl("@tag.attribute", { fg = c.yellow, italic = true })
 
 set_hl("LineNr", { fg = c.fg_gutter }) -- line number
 
