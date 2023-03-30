@@ -88,6 +88,7 @@ set_hl("Pmenu", { bg = c.bg_dark })
 set_hl("Visual", { bg = c.bg_highlight })
 
 set_hl("SignColumn", { bg = c.none })
+set_hl("ColorColumn", { bg = c.bg_dark })
 
 set_hl("TelescopeNormal", { bg = c.none })
 set_hl("TelescopeBorder", { bg = c.none })

@@ -26,7 +26,10 @@ vim.opt.backspace = { "indent", "eol", "start" }
 -- }
 vim.opt.clipboard = "unnamedplus"
 
+-- columns
+vim.opt.colorcolumn = "80"
+vim.opt.signcolumn = "yes"
+
 -- others
 vim.opt.scrolloff = 5
 vim.opt.laststatus = 0
-vim.opt.signcolumn = "yes"
