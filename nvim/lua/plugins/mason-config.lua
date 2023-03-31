@@ -10,6 +10,7 @@ require("mason-lspconfig").setup {
 -- automatic lsp server setup
 local on_lsp_attach = function(client, bufnr)
   print("lsp attached")
+  -- keymap
   local keymap = require("keymap")
   keymap.lsp_set_keymap(client, bufnr)
 end

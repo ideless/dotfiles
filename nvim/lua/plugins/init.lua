@@ -88,7 +88,11 @@ return require("packer").startup(function(use)
       "williamboman/mason-lspconfig.nvim",
       "jay-babu/mason-null-ls.nvim",
     },
-    after = "which-key.nvim", -- needs to set keymaps via which-key
+    after = {
+      "which-key.nvim", -- needs to set keymaps via which-key
+      "nvim-lspconfig",
+      "null-ls.nvim",
+    },
     config = function()
       require("plugins.mason-config")
     end,
