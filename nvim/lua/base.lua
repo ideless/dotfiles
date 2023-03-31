@@ -24,7 +24,7 @@ vim.opt.backspace = { "indent", "eol", "start" }
 --     },
 --     cache_enabled = 0,
 -- }
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = ""
 
 -- columns
 vim.opt.colorcolumn = "80"

@@ -32,6 +32,7 @@ cmp.setup {
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ "/", "?" }, {
+  completion = { completeopt = "menu,menuone,noinsert,noselect" },
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = "buffer" },
@@ -40,6 +41,7 @@ cmp.setup.cmdline({ "/", "?" }, {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
+  completion = { completeopt = "menu,menuone,noinsert,noselect" },
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = "path" },
