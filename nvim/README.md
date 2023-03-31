@@ -66,4 +66,5 @@ First read [Neovim Spaghetti - LSP Servers, Linters, Formatters, and Treesitter]
 # Troubleshooting
 
 - `treesitter/highlighter: Error executing lua: ...` wait or manually install missing Treesitter language parser by `:TSInstall`
-- Tmux not rendering properly: run `tmux -u` instead of `tmux`
+- Tmux not rendering unicodes properly: run `tmux -u` instead of `tmux`
+- Tmux not showing italic fonts: add `set -g default-terminal "xterm-256color"` to `~/.tmux.conf`
