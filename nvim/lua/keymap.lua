@@ -72,7 +72,7 @@ M.telescope_set_keymap = function()
   local telescope = require("telescope.builtin")
   wk.register({
     f = { ":Telescope find_files<CR>", "Find files" },
-    g = { ":Telescope live_grep<CR>", "Live grep" },
+    l = { ":Telescope live_grep<CR>", "Live grep" },
     t = { ":Telescope treesitter<CR>", "Treesitter symbols" },
     s = { ":Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search" },
     d = {
@@ -84,6 +84,14 @@ M.telescope_set_keymap = function()
       "Open diagnostics",
     },
   }, { prefix = "<Leader>" })
+  wk.register({
+    name = "Git",
+    s = { ":Telescope git_status<CR>", "Git status" },
+    b = { ":Telescope git_branches<CR>", "Git branches" },
+    c = { ":Telescope git_commits<CR>", "Git commits" },
+    C = { ":Telescope git_bcommits<CR>", "Git commits of current buffer" },
+    S = { ":Telescope git_stash<CR>", "Git stash" },
+  }, { prefix = "<Leader>g" })
 end
 
 -- cmp
