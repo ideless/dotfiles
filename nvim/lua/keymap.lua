@@ -22,6 +22,8 @@ set_keymap("n", "<C-w>-", ":split<CR>")
 -- buffer operations
 set_keymap("n", "<C-x>", ":bd<CR>")
 set_keymap("n", "gb", ":BufferLinePick<CR>")
+set_keymap("n", "[b", ":BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
+set_keymap("n", "]b", ":BufferLineCycleNext<CR>", { desc = "Previous buffer" })
 
 -- comment (<C-_> = Ctrl+/)
 set_keymap("i", "<C-_>", "<Cmd>CommentToggle<CR>")
@@ -35,8 +37,8 @@ set_keymap("in", "<C-z>", "<Cmd>u<CR>")
 set_keymap("n", "q:", "<nop>")
 
 -- diagnostic
-set_keymap("n", "[d", vim.diagnostic.goto_prev)
-set_keymap("n", "]d", vim.diagnostic.goto_next)
+set_keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+set_keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 
 -- copilot
 M.copilot_set_keymap = function()
@@ -86,11 +88,11 @@ M.telescope_set_keymap = function()
   }, { prefix = "<Leader>" })
   wk.register({
     name = "Git",
-    s = { ":Telescope git_status<CR>", "Git status" },
-    b = { ":Telescope git_branches<CR>", "Git branches" },
-    c = { ":Telescope git_commits<CR>", "Git commits" },
-    C = { ":Telescope git_bcommits<CR>", "Git commits of current buffer" },
-    S = { ":Telescope git_stash<CR>", "Git stash" },
+    s = { ":Telescope git_status<CR>", "Status" },
+    b = { ":Telescope git_branches<CR>", "Branches" },
+    c = { ":Telescope git_commits<CR>", "Commits" },
+    C = { ":Telescope git_bcommits<CR>", "Buffer commits" },
+    S = { ":Telescope git_stash<CR>", "Stash" },
   }, { prefix = "<Leader>g" })
 end
 
@@ -174,6 +176,11 @@ M.lsp_set_keymap = function(_client, bufnr)
     r = { vim.lsp.buf.rename, "Rename" },
     a = { vim.lsp.buf.code_action, "Code Action" },
   }, { prefix = "<Leader>", buffer = bufnr })
+end
+
+-- ocs52
+M.ocs52_set_keymap = function()
+  set_keymap("v", "<Leader>y", require("osc52").copy_visual)
 end
 
 return M
