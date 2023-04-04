@@ -76,7 +76,7 @@ set_hl("Operator", { fg = c.red })
 set_hl("Function", { fg = c.yellow })
 set_hl("Identifier", { fg = c.cyan }) -- variables
 
-set_hl("@tag", { fg = c.cyan })       -- html tag
+set_hl("@tag", { fg = c.cyan }) -- html tag
 set_hl("@tag.attribute", { fg = c.yellow, italic = true })
 
 set_hl("LineNr", { fg = c.fg_gutter }) -- line number
@@ -96,17 +96,14 @@ set_hl("TelescopeBorder", { bg = c.none })
 set_hl("CmpItemAbbrMatch", { fg = c.orange })
 set_hl("CmpItemAbbrMatchFuzzy", { fg = c.orange })
 
--- setup borders for lsp
-local _border = "single"
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = _border,
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = _border,
-})
-
-vim.diagnostic.config {
-  float = { border = _border },
-}
+-- highlight the current line
+vim.opt.cursorline = true
+vim.cmd([[
+  augroup CursorLine
+    autocmd!
+    autocmd FileType TelescopePrompt* setlocal nocursorline
+    autocmd WinEnter,BufEnter * setlocal cursorline
+    autocmd WinLeave,BufLeave * setlocal nocursorline
+  augroup END
+]])
+set_hl("CursorLine", { bg = c.bg_dark })
