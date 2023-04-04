@@ -32,11 +32,15 @@ set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
 -- conventional shortcuts
 set_keymap("in", "<C-s>", "<Cmd>w<CR>")
 set_keymap("in", "<C-z>", "<Cmd>u<CR>")
-set_keymap("n", "<C-a>", "ggvG$")
+set_keymap("n", "<C-a>", "gg^vG$")
 
 -- insert mode motions
 set_keymap("i", "<C-a>", "<End>")
 set_keymap("i", "<C-i>", "<Home>")
+set_keymap("i", "<C-h>", "<Left>")
+set_keymap("i", "<C-l>", "<Right>")
+set_keymap("i", "<C-j>", "<Down>")
+set_keymap("i", "<C-k>", "<Up>")
 
 -- diable annoying keymaps
 set_keymap("n", "q:", "<nop>")
@@ -48,7 +52,7 @@ set_keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 -- copilot
 M.copilot_set_keymap = function()
   vim.g.copilot_no_tab_map = true
-  vim.api.nvim_set_keymap("i", "<C-j>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+  vim.api.nvim_set_keymap("i", "<C-m>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 end
 
 -- which-key
@@ -104,12 +108,7 @@ end
 -- cmp
 M.cmp_keys = function()
   local cmp = require("cmp")
-  local smart_esc = cmp.mapping(function(callback)
-    if cmp.visible() then
-      cmp.abort()
-    end
-    callback()
-  end)
+
   local smart_cr = cmp.mapping(function(callback)
     if cmp.visible() then
       if cmp.get_selected_entry() then
@@ -156,11 +155,9 @@ M.cmp_keys = function()
     ["<C-d>"] = smart_scroll_up,
     ["<C-n>"] = smart_next,
     ["<C-p>"] = smart_prev,
-    ["<C-Space>"] = cmp.mapping.complete(),
     ["<CR>"] = smart_cr,
     ["<Tab>"] = cmp.mapping.confirm { select = true },
     ["<C-e>"] = cmp.mapping.abort(),
-    ["<Esc>"] = smart_esc,
   }
   return keys
 end
