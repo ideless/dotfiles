@@ -64,6 +64,7 @@ M.wk_set_keymap = function()
     h = { ":noh<CR>", "Clear highlight" },
     x = { ":%bd|e#|bd#<CR>", "Close all but this buffer" },
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
+    E = { ":NeoTreeShowToggle<CR>", "Toggle explorer (side)" },
   }, { prefix = "<Leader>" })
   -- Hop
   wk.register({
