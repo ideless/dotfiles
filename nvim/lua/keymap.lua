@@ -34,9 +34,9 @@ set_keymap("in", "<C-s>", "<Cmd>w<CR>")
 set_keymap("in", "<C-z>", "<Cmd>u<CR>")
 set_keymap("n", "<C-a>", "gg^vG$")
 
--- insert mode motions
-set_keymap("i", "<C-a>", "<End>")
-set_keymap("i", "<C-i>", "<Home>")
+-- motions
+set_keymap("inv", "<C-a>", "<Home>")
+set_keymap("inv", "<C-e>", "<End>")
 set_keymap("i", "<C-h>", "<Left>")
 set_keymap("i", "<C-l>", "<Right>")
 set_keymap("i", "<C-j>", "<Down>")
@@ -52,7 +52,7 @@ set_keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 -- copilot
 M.copilot_set_keymap = function()
   vim.g.copilot_no_tab_map = true
-  vim.api.nvim_set_keymap("i", "<C-m>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+  vim.api.nvim_set_keymap("i", "<S-Tab>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 end
 
 -- which-key
@@ -110,17 +110,18 @@ M.cmp_keys = function()
   local cmp = require("cmp")
 
   local smart_cr = cmp.mapping(function(callback)
-    if cmp.visible() then
-      if cmp.get_selected_entry() then
-        cmp.confirm()
-      else
-        cmp.abort()
-        local newline = vim.api.nvim_replace_termcodes("<Esc>a<CR>", true, false, true)
-        vim.api.nvim_feedkeys(newline, "i", true)
-      end
-    else
-      callback()
-    end
+    callback()
+    -- if cmp.visible() then
+    --   if cmp.get_selected_entry() then
+    --     cmp.confirm()
+    --   else
+    --     cmp.abort()
+    --     local newline = vim.api.nvim_replace_termcodes("<Esc>a<CR>", true, false, true)
+    --     vim.api.nvim_feedkeys(newline, "i", true)
+    --   end
+    -- else
+    --   callback()
+    -- end
   end)
   local smart_scroll_up = cmp.mapping(function(callback)
     if cmp.visible() then
@@ -157,7 +158,7 @@ M.cmp_keys = function()
     ["<C-p>"] = smart_prev,
     ["<CR>"] = smart_cr,
     ["<Tab>"] = cmp.mapping.confirm { select = true },
-    ["<C-e>"] = cmp.mapping.abort(),
+    ["<C-x>"] = cmp.mapping.abort(),
   }
   return keys
 end
