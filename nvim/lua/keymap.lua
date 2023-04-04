@@ -32,6 +32,11 @@ set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
 -- conventional shortcuts
 set_keymap("in", "<C-s>", "<Cmd>w<CR>")
 set_keymap("in", "<C-z>", "<Cmd>u<CR>")
+set_keymap("n", "<C-a>", "ggvG$")
+
+-- insert mode motions
+set_keymap("i", "<C-a>", "<End>")
+set_keymap("i", "<C-i>", "<Home>")
 
 -- diable annoying keymaps
 set_keymap("n", "q:", "<nop>")
