@@ -35,7 +35,8 @@ set_keymap("in", "<C-z>", "<Cmd>u<CR>")
 set_keymap("n", "<C-a>", "gg^vG$")
 
 -- motions
-set_keymap("inv", "<C-a>", "<Home>")
+set_keymap("i", "<C-a>", "<C-o>I")
+set_keymap("nv", "<C-a>", "^")
 set_keymap("inv", "<C-e>", "<End>")
 set_keymap("i", "<C-h>", "<Left>")
 set_keymap("i", "<C-l>", "<Right>")
@@ -110,19 +111,21 @@ end
 M.cmp_keys = function()
   local cmp = require("cmp")
 
-  local smart_cr = cmp.mapping(function(callback)
+  local do_nothing = cmp.mapping(function(callback)
     callback()
-    -- if cmp.visible() then
-    --   if cmp.get_selected_entry() then
-    --     cmp.confirm()
-    --   else
-    --     cmp.abort()
-    --     local newline = vim.api.nvim_replace_termcodes("<Esc>a<CR>", true, false, true)
-    --     vim.api.nvim_feedkeys(newline, "i", true)
-    --   end
-    -- else
-    --   callback()
-    -- end
+  end)
+  local smart_cr = cmp.mapping(function(callback)
+    if cmp.visible() then
+      if cmp.get_selected_entry() then
+        cmp.confirm()
+      else
+        cmp.abort()
+        local newline = vim.api.nvim_replace_termcodes("<Esc>a<CR>", true, false, true)
+        vim.api.nvim_feedkeys(newline, "i", true)
+      end
+    else
+      callback()
+    end
   end)
   local smart_scroll_up = cmp.mapping(function(callback)
     if cmp.visible() then
@@ -157,8 +160,9 @@ M.cmp_keys = function()
     ["<C-d>"] = smart_scroll_up,
     ["<C-n>"] = smart_next,
     ["<C-p>"] = smart_prev,
-    ["<CR>"] = smart_cr,
+    ["<CR>"] = do_nothing,
     ["<Tab>"] = cmp.mapping.confirm { select = true },
+    ["<C-e>"] = do_nothing,
     ["<C-x>"] = cmp.mapping.abort(),
   }
   return keys
