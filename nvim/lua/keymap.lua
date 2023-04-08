@@ -35,8 +35,7 @@ set_keymap("n", "<C-a>", "gg^vG$")
 
 -- motions
 set_keymap("i", "<C-a>", "<C-o>I")
-set_keymap("nv", "<C-a>", "^")
-set_keymap("inv", "<C-e>", "<End>")
+set_keymap("i", "<C-e>", "<End>")
 set_keymap("i", "<C-h>", "<Left>")
 set_keymap("i", "<C-l>", "<Right>")
 set_keymap("i", "<C-j>", "<Down>")
@@ -65,8 +64,8 @@ M.wk_set_keymap = function()
   wk.register({
     name = "Magics",
     h = { ":noh<CR>", "Clear highlight" },
-    x = { ":%bd|e#|bd#<CR>", "Close all but this buffer" },
-    X = { ":bd<CR>", "Close buffer" },
+    x = { ":bd<CR>", "Close buffer" },
+    X = { ":%bd|e#|bd#<CR>", "Close all but this buffer" },
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
     E = { ":NeoTreeShowToggle<CR>", "Toggle explorer (side)" },
   }, { prefix = "<Leader>" })
