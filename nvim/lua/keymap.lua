@@ -20,7 +20,6 @@ set_keymap("n", "<C-w>\\", ":vsplit<CR>")
 set_keymap("n", "<C-w>-", ":split<CR>")
 
 -- buffer operations
-set_keymap("n", "<C-x>", ":bd<CR>")
 set_keymap("n", "gb", ":BufferLinePick<CR>")
 set_keymap("n", "[b", ":BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
 set_keymap("n", "]b", ":BufferLineCycleNext<CR>", { desc = "Previous buffer" })
@@ -67,6 +66,7 @@ M.wk_set_keymap = function()
     name = "Magics",
     h = { ":noh<CR>", "Clear highlight" },
     x = { ":%bd|e#|bd#<CR>", "Close all but this buffer" },
+    X = { ":bd<CR>", "Close buffer" },
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
     E = { ":NeoTreeShowToggle<CR>", "Toggle explorer (side)" },
   }, { prefix = "<Leader>" })
