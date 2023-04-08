@@ -46,6 +46,9 @@ set_keymap("i", "<C-k>", "<Up>")
 -- diable annoying keymaps
 set_keymap("n", "q:", "<nop>")
 
+-- <C-c> not triggering InsertLeave event
+set_keymap("i", "<C-c>", "<Esc>")
+
 -- diagnostic
 set_keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
 set_keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
