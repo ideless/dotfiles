@@ -96,6 +96,9 @@ set_hl("TelescopeBorder", { bg = c.none })
 set_hl("CmpItemAbbrMatch", { fg = c.orange })
 set_hl("CmpItemAbbrMatchFuzzy", { fg = c.orange })
 
+-- cmp signature help higtlight
+set_hl("markdownBoldItalic", { fg = c.orange, italic = true, bold = true })
+
 -- highlight the current line
 vim.opt.cursorline = true
 vim.cmd([[

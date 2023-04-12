@@ -14,4 +14,9 @@ require("neo-tree").setup {
       },
     },
   },
+  window = {
+    mappings = {
+      ["<C-c>"] = "close_window",
+    },
+  },
 }
