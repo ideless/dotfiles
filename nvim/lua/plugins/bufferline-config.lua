@@ -4,6 +4,7 @@ require("bufferline").setup {
     indicator = {
       style = "underline",
     },
-    diagnostics = "nvim_lsp"
+    buffer_close_icon = "",
+    diagnostics = "nvim_lsp",
   },
 }
