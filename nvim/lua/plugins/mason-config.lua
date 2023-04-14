@@ -9,7 +9,7 @@ require("mason-lspconfig").setup {
 }
 -- automatic lsp server setup
 local on_lsp_attach = function(client, bufnr)
-  print("lsp attached")
+  -- print("lsp attached")
   -- keymap
   local keymap = require("keymap")
   keymap.lsp_set_keymap(client, bufnr)
@@ -56,6 +56,5 @@ require("mason-null-ls").setup {
         extra_args = { "-l" }, -- https://latexindentpl.readthedocs.io/en/latest/sec-indent-config-and-settings.html#localsettings-yaml-and-friends
       })
     end,
-  }
+  },
 }
-

@@ -2,7 +2,7 @@ require("null-ls").setup {
   -- debug = true,
   border = "single",
   on_attach = function(client, bufnr)
-    print("null-ls attached")
+    -- print("null-ls attached")
     if client.supports_method("textDocument/formatting") then
       -- format on save
       vim.api.nvim_create_autocmd("BufWritePre", {
