@@ -1,5 +1,8 @@
 require("nvim-treesitter.configs").setup {
-  ensure_installed = {},
+  ensure_installed = {
+    "markdown", -- required by lspsaga
+    "markdown_inline", -- required by lspsaga
+  },
   highlight = {
     enable = true,
     disable = {

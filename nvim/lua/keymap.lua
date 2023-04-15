@@ -47,10 +47,6 @@ set_keymap("n", "q:", "<nop>")
 -- <C-c> not triggering InsertLeave event
 set_keymap("i", "<C-c>", "<Esc>")
 
--- diagnostic
-set_keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-set_keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-
 -- copilot
 M.copilot_set_keymap = function()
   vim.g.copilot_no_tab_map = true
@@ -88,16 +84,16 @@ M.telescope_set_keymap = function()
   wk.register({
     f = { ":Telescope find_files<CR>", "Find files" },
     l = { ":Telescope live_grep<CR>", "Live grep" },
-    t = { ":Telescope treesitter<CR>", "Treesitter symbols" },
+    t = { ":Telescope lsp_document_symbols<CR>", "Symbols" },
     s = { ":Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search" },
-    d = {
-      function()
-        telescope.diagnostics {
-          bufnr = 0,
-        }
-      end,
-      "Open diagnostics",
-    },
+    -- d = {
+    --   function()
+    --     telescope.diagnostics {
+    --       bufnr = 0,
+    --     }
+    --   end,
+    --   "Open diagnostics",
+    -- },
   }, { prefix = "<Leader>" })
   wk.register({
     name = "Git",
@@ -171,7 +167,10 @@ M.cmp_keys = function()
 end
 
 -- lsp
+-- set_keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+-- set_keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 M.lsp_set_keymap = function(_client, bufnr)
+  --[[
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   local wk = require("which-key")
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
@@ -186,11 +185,40 @@ M.lsp_set_keymap = function(_client, bufnr)
     r = { vim.lsp.buf.rename, "Rename" },
     a = { vim.lsp.buf.code_action, "Code Action" },
   }, { prefix = "<Leader>", buffer = bufnr })
+  --]]
 end
 
 -- ocs52
 M.ocs52_set_keymap = function()
   set_keymap("v", "<Leader>y", require("osc52").copy_visual)
+end
+
+-- lspsaga
+M.lspsaga_set_keymap = function()
+  local wk = require("which-key")
+  wk.register({
+    d = { "<Cmd>Lspsaga goto_definition<CR>", "Definition" },
+    D = { "<Cmd>Lspsaga peek_definition<CR>", "Definition (peek)" },
+    t = { "<Cmd>Lspsaga goto_type_definition<CR>", "Type definition" },
+    T = { "<Cmd>Lspsaga peek_type_definition<CR>", "Type definition (peek)" },
+    h = { "<Cmd>Lspsaga lsp_finder<CR>", "LSP finder" },
+  }, { prefix = "g" })
+  wk.register({
+    r = { "<Cmd>Lspsaga rename<CR>", "Rename" },
+    a = { "<Cmd>Lspsaga code_action<CR>", "Code Action" },
+    d = { "<Cmd>Lspsaga show_buf_diagnostics<CR>", "Diagnostics" },
+    o = { "<Cmd>Lspsaga outline<CR>", "Outline" },
+  }, { prefix = "<Leader>" })
+  set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>")
+  set_keymap("n", "[d", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous diagnostic" })
+  set_keymap("n", "]d", "<Cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next diagnostic" })
+  set_keymap("n", "[D", function()
+    require("lspsaga.diagnostic"):goto_prev { severity = vim.diagnostic.severity.ERROR }
+  end, { desc = "Previous error" })
+  set_keymap("n", "]D", function()
+    require("lspsaga.diagnostic"):goto_next { severity = vim.diagnostic.severity.ERROR }
+  end, { desc = "Next error" })
+  set_keymap("nt", "<A-t>", "<Cmd>Lspsaga term_toggle<CR>")
 end
 
 return M

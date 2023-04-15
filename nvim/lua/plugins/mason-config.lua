@@ -11,8 +11,8 @@ require("mason-lspconfig").setup {
 local on_lsp_attach = function(client, bufnr)
   -- print("lsp attached")
   -- keymap
-  local keymap = require("keymap")
-  keymap.lsp_set_keymap(client, bufnr)
+  -- local keymap = require("keymap")
+  -- keymap.lsp_set_keymap(client, bufnr)
 end
 
 require("mason-lspconfig").setup_handlers {
