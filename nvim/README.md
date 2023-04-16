@@ -40,9 +40,11 @@
 
 See `lua/keymap.lua`
 
-# Theme
+# Colorscheme
 
-See `lua/theme.lua`
+Frist read this [slides](https://speakerdeck.com/cocopon/creating-your-lovely-color-scheme) about colorschemes.
+
+See `lua/colors`
 
 # Languages
 
@@ -60,8 +62,9 @@ First read [Neovim Spaghetti - LSP Servers, Linters, Formatters, and Treesitter]
 - Always run `:PackerCompile` after modifying packer configurations.
 - View error/debug/info messages via `:messages`.
 - Run `:checkhealth` to check plugins health (very helpful).
-- Use `:hi` and `:TSEditQuery` to help configuring themes.
+- Use `:hi`, `:TSEditQuery` and `<C-h>` (See `lua/keymap.lua`) to help configuring themes.
 - Run `nvim --startuptime` to inspect startup time.
+- Run `:luafile path/to/some.lua` to run lua scripts.
 
 # Troubleshooting
 

@@ -15,6 +15,12 @@ end
 -- Leader key
 vim.g.mapleader = " "
 
+-- inspect hightlight group
+set_keymap("n", "<C-h>", function()
+  local result = vim.treesitter.get_captures_at_cursor(0)
+  print(vim.inspect(result))
+end, { silent = false })
+
 -- window operations
 set_keymap("n", "<C-w>\\", ":vsplit<CR>")
 set_keymap("n", "<C-w>-", ":split<CR>")
@@ -84,6 +90,7 @@ M.telescope_set_keymap = function()
   wk.register({
     f = { ":Telescope find_files<CR>", "Find files" },
     l = { ":Telescope live_grep<CR>", "Live grep" },
+    L = { ":Telescope grep_string<CR>", "Grep string under cursor" },
     t = { ":Telescope lsp_document_symbols<CR>", "Symbols" },
     s = { ":Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search" },
     -- d = {

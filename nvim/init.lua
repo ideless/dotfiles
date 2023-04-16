@@ -1,4 +1,4 @@
 require("base")
 require("keymap")
-require("theme")
 require("plugins")
+vim.cmd("colorscheme custom-dark")

@@ -33,3 +33,15 @@ vim.opt.signcolumn = "yes"
 -- others
 vim.opt.scrolloff = 5
 vim.opt.laststatus = 0
+vim.o.termguicolors = true
+
+-- cursorline
+vim.opt.cursorline = true
+vim.cmd([[
+  augroup CursorLine
+    autocmd!
+    autocmd FileType TelescopePrompt* setlocal nocursorline
+    autocmd WinEnter,BufEnter * setlocal cursorline
+    autocmd WinLeave,BufLeave * setlocal nocursorline
+  augroup END
+]])
