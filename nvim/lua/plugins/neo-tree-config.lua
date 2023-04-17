@@ -20,3 +20,5 @@ require("neo-tree").setup {
     },
   },
 }
+
+require("keymap").neo_tree_set_keymap()

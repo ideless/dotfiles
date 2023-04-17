@@ -27,6 +27,7 @@
 | [vimtex](https://github.com/lervag/vimtex)                            | LaTeX                       |
 | [nvim-osc52](https://github.com/ojroques/nvim-osc52)                  | Copy via OSC52              |
 | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)           | TokyoNight theme            |
+| [lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)               | LSP UI                      |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)           | Git signs                   |
 
 # Dependencies

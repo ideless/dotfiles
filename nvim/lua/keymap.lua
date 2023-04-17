@@ -87,10 +87,21 @@ M.wk_set_keymap = function()
       "Close buffer",
     },
     X = { ":%bd!|e#|bd#<CR>", "Close all but this buffer" },
+  }, { prefix = "<Leader>" })
+end
+
+-- Neo Tree
+M.neo_tree_set_keymap = function()
+  local wk = require("which-key")
+  wk.register({
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
     E = { ":NeoTreeShowToggle<CR>", "Toggle explorer (side)" },
   }, { prefix = "<Leader>" })
-  -- Hop
+end
+
+-- Hop
+M.hop_set_keymap = function()
+  local wk = require("which-key")
   wk.register({
     name = "Hop",
     a = { ":HopAnywhere<CR>", "Anywhere" },
@@ -102,16 +113,16 @@ M.wk_set_keymap = function()
   }, { prefix = ";" })
 end
 
--- telescope
+-- Telescope
 M.telescope_set_keymap = function()
   local wk = require("which-key")
-  local telescope = require("telescope.builtin")
+  local ts = require("telescope.builtin")
   wk.register({
-    f = { ":Telescope find_files<CR>", "Find files" },
-    l = { ":Telescope live_grep<CR>", "Live grep" },
-    L = { ":Telescope grep_string<CR>", "Grep string under cursor" },
-    t = { ":Telescope lsp_document_symbols<CR>", "Symbols" },
-    s = { ":Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search" },
+    f = { ts.find_files, "Find files" },
+    l = { ts.live_grep, "Live grep" },
+    L = { ts.grep_string, "Grep string under cursor" },
+    t = { ts.lsp_document_symbols, "Symbols" },
+    s = { ts.current_buffer_fuzzy_find, "Fuzzy search" },
     -- d = {
     --   function()
     --     telescope.diagnostics {
@@ -123,11 +134,11 @@ M.telescope_set_keymap = function()
   }, { prefix = "<Leader>" })
   wk.register({
     name = "Git",
-    s = { ":Telescope git_status<CR>", "Status" },
-    b = { ":Telescope git_branches<CR>", "Branches" },
-    c = { ":Telescope git_commits<CR>", "Commits" },
-    C = { ":Telescope git_bcommits<CR>", "Buffer commits" },
-    S = { ":Telescope git_stash<CR>", "Stash" },
+    s = { ts.git_status, "Status" },
+    b = { ts.git_branches, "Branches" },
+    c = { ts.git_commits, "Commits" },
+    C = { ts.git_bcommits, "Buffer commits" },
+    S = { ts.git_stash, "Stash" },
   }, { prefix = "<Leader>g" })
 end
 
@@ -195,8 +206,8 @@ end
 -- lsp
 -- set_keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
 -- set_keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-M.lsp_set_keymap = function(_client, bufnr)
-  --[[
+-- M.lsp_set_keymap = function(_client, bufnr)
+--[[
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   local wk = require("which-key")
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
@@ -212,7 +223,7 @@ M.lsp_set_keymap = function(_client, bufnr)
     a = { vim.lsp.buf.code_action, "Code Action" },
   }, { prefix = "<Leader>", buffer = bufnr })
   --]]
-end
+-- end
 
 -- ocs52
 M.ocs52_set_keymap = function()

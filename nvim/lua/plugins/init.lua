@@ -141,7 +141,7 @@ return require("packer").startup(function(use)
   use {
     "phaazon/hop.nvim",
     config = function()
-      require("hop").setup {}
+      require("plugins.hop-config")
     end,
   }
 
