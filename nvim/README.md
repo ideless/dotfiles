@@ -25,6 +25,9 @@
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Language parsers            |
 | [hop.nvim](https://github.com/phaazon/hop.nvim)                       | Fast jump                   |
 | [vimtex](https://github.com/lervag/vimtex)                            | LaTeX                       |
+| [nvim-osc52](https://github.com/ojroques/nvim-osc52)                  | Copy via OSC52              |
+| [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)           | TokyoNight theme            |
+| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)           | Git signs                   |
 
 # Dependencies
 

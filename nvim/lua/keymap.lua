@@ -16,10 +16,11 @@ end
 vim.g.mapleader = " "
 
 -- inspect hightlight group
-set_keymap("n", "<C-h>", function()
+set_keymap("n", "<C-i>", function()
   local result = vim.treesitter.get_captures_at_cursor(0)
   print(vim.inspect(result))
 end, { silent = false })
+set_keymap("n", "<C-h>", ":noh<CR>", { desc = "Clear highlight" })
 
 -- window operations
 set_keymap("n", "<C-w>\\", ":vsplit<CR>")
@@ -65,8 +66,26 @@ M.wk_set_keymap = function()
   -- Magics
   wk.register({
     name = "Magics",
-    h = { ":noh<CR>", "Clear highlight" },
-    x = { ":bd!<CR>", "Close buffer" },
+    x = {
+      function()
+        -- close all buffers whose path starts with "gitsigns://" if there are
+        -- any, and otherwise close the current buffer
+        local gitsigns_bufs_exist = false
+        local buf_list = vim.api.nvim_list_bufs()
+        for _, buf in ipairs(buf_list) do
+          local buf_path = vim.api.nvim_buf_get_name(buf)
+          if string.match(buf_path, "^gitsigns://") then
+            gitsigns_bufs_exist = true
+            vim.api.nvim_buf_delete(buf, { force = true })
+          end
+        end
+
+        if not gitsigns_bufs_exist then
+          vim.api.nvim_buf_delete(0, { force = true })
+        end
+      end,
+      "Close buffer",
+    },
     X = { ":%bd!|e#|bd#<CR>", "Close all but this buffer" },
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
     E = { ":NeoTreeShowToggle<CR>", "Toggle explorer (side)" },
@@ -226,6 +245,33 @@ M.lspsaga_set_keymap = function()
     require("lspsaga.diagnostic"):goto_next { severity = vim.diagnostic.severity.ERROR }
   end, { desc = "Next error" })
   set_keymap("nt", "<A-t>", "<Cmd>Lspsaga term_toggle<CR>")
+end
+
+-- Gitsigns
+M.gitsigns_set_keymap = function()
+  local gs = require("gitsigns")
+  local wk = require("which-key")
+  set_keymap("n", "[h", gs.prev_hunk, { desc = "Previous hunk" })
+  set_keymap("n", "]h", gs.next_hunk, { desc = "Next hunk" })
+  wk.register({
+    s = { gs.stage_hunk, "Stage hunk" },
+    u = { gs.undo_stage_hunk, "Undo stage hunk" },
+    r = { gs.reset_hunk, "Reset hunk" },
+    S = { gs.stage_buffer, "Stage buffer" },
+    R = { gs.reset_buffer, "Reset buffer" },
+    p = { gs.preview_hunk, "Preview hunk" },
+    b = { gs.blame_line, "Blame line" },
+    t = { gs.toggle_current_line_blame, "Toggle blame line" },
+  }, { prefix = "<Leader>h" })
+  wk.register({
+    d = { gs.diffthis, "Diff" },
+    D = {
+      function()
+        gs.diffthis("~")
+      end,
+      "Diff against last commit",
+    },
+  }, { prefix = "<Leader>g" })
 end
 
 return M
