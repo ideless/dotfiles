@@ -19,6 +19,10 @@ require("neo-tree").setup {
       ["<C-c>"] = "close_window",
     },
   },
+  source_selector = {
+    winbar = true,
+    statusline = false,
+  },
 }
 
 require("keymap").neo_tree_set_keymap()
