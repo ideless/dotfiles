@@ -38,7 +38,7 @@ return require("packer").startup(function(use)
   use {
     "terrortylor/nvim-comment",
     config = function()
-      require("nvim_comment").setup {}
+      require("plugins.comment-config")
     end,
   }
 

@@ -1,6 +1,6 @@
 local M = {}
 
-function set_keymap(modes, lhs, rhs, opts)
+local map = function(modes, lhs, rhs, opts)
   -- default options
   local options = { noremap = true }
   if opts then
@@ -16,48 +16,57 @@ end
 vim.g.mapleader = " "
 
 -- inspect hightlight group
-set_keymap("n", "<C-i>", function()
+map("n", "<C-i>", function()
   local result = vim.treesitter.get_captures_at_cursor(0)
   print(vim.inspect(result))
 end, { silent = false })
-set_keymap("n", "<C-h>", ":noh<CR>", { desc = "Clear highlight" })
+map("n", "<C-h>", ":noh<CR>", { desc = "Clear highlight" })
 
 -- window operations
-set_keymap("n", "<C-w>\\", ":vsplit<CR>")
-set_keymap("n", "<C-w>-", ":split<CR>")
-
--- buffer operations
-set_keymap("n", "gb", ":BufferLinePick<CR>")
-set_keymap("n", "[b", ":BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
-set_keymap("n", "]b", ":BufferLineCycleNext<CR>", { desc = "Previous buffer" })
-
--- comment (<C-_> = Ctrl+/)
-set_keymap("i", "<C-_>", "<Cmd>CommentToggle<CR>")
-set_keymap("nx", "<C-_>", ":CommentToggle<CR>")
+map("n", "<C-w>\\", ":vsplit<CR>")
+map("n", "<C-w>-", ":split<CR>")
 
 -- conventional shortcuts
-set_keymap("in", "<C-s>", "<Cmd>w<CR>")
-set_keymap("in", "<C-z>", "<Cmd>u<CR>")
-set_keymap("n", "<C-a>", "gg^vG$")
+map("in", "<C-s>", "<Cmd>w<CR>")
+map("in", "<C-z>", "<Cmd>u<CR>")
+map("n", "<C-a>", "gg^vG$")
 
 -- motions
-set_keymap("i", "<C-a>", "<C-o>I")
-set_keymap("i", "<C-e>", "<End>")
-set_keymap("i", "<C-h>", "<Left>")
-set_keymap("i", "<C-l>", "<Right>")
-set_keymap("i", "<C-j>", "<Down>")
-set_keymap("i", "<C-k>", "<Up>")
+map("i", "<C-a>", "<C-o>I")
+map("i", "<C-e>", "<End>")
+map("i", "<C-h>", "<Left>")
+map("i", "<C-l>", "<Right>")
+map("i", "<C-j>", "<Down>")
+map("i", "<C-k>", "<Up>")
 
 -- diable annoying keymaps
-set_keymap("n", "q:", "<nop>")
+map("n", "q:", "<nop>")
 
 -- <C-c> not triggering InsertLeave event
-set_keymap("i", "<C-c>", "<Esc>")
+map("i", "<C-c>", "<Esc>")
 
 -- search for visually selected text with escaping
 -- hint: type in :%s//abc/g to replace
-set_keymap("x", "*", "y/\\V<C-r>=escape(@\",'/\\')<CR><CR>")
-set_keymap("x", "/", "y/\\V<C-r>=escape(@\",'/\\')<CR>")
+map("x", "*", "y/\\V<C-r>=escape(@\",'/\\')<CR><CR>")
+map("x", "//", "y/\\V<C-r>=escape(@\",'/\\')<CR>")
+map("x", "/s", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/")
+
+-- Escape from terminal mode
+map("t", "<Esc>", "<C-\\><C-n>")
+
+-- Bufferline
+M.bufferline_set_keymap = function()
+  map("n", "gb", ":BufferLinePick<CR>")
+  map("n", "[b", ":BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
+  map("n", "]b", ":BufferLineCycleNext<CR>", { desc = "Previous buffer" })
+end
+
+-- comment
+M.comment_set_keymap = function()
+  -- comment (<C-_> = Ctrl+/)
+  map("i", "<C-_>", "<Cmd>CommentToggle<CR>")
+  map("nx", "<C-_>", ":CommentToggle<CR>")
+end
 
 -- copilot
 M.copilot_set_keymap = function()
@@ -232,7 +241,7 @@ end
 
 -- ocs52
 M.ocs52_set_keymap = function()
-  set_keymap("v", "<Leader>y", require("osc52").copy_visual)
+  map("x", "<Leader>y", require("osc52").copy_visual)
 end
 
 -- lspsaga
@@ -251,24 +260,24 @@ M.lspsaga_set_keymap = function()
     d = { "<Cmd>Lspsaga show_buf_diagnostics<CR>", "Diagnostics" },
     o = { "<Cmd>Lspsaga outline<CR>", "Outline" },
   }, { prefix = "<Leader>" })
-  set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>")
-  set_keymap("n", "[d", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous diagnostic" })
-  set_keymap("n", "]d", "<Cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next diagnostic" })
-  set_keymap("n", "[D", function()
+  map("n", "K", "<Cmd>Lspsaga hover_doc<CR>")
+  map("n", "[d", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous diagnostic" })
+  map("n", "]d", "<Cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next diagnostic" })
+  map("n", "[D", function()
     require("lspsaga.diagnostic"):goto_prev { severity = vim.diagnostic.severity.ERROR }
   end, { desc = "Previous error" })
-  set_keymap("n", "]D", function()
+  map("n", "]D", function()
     require("lspsaga.diagnostic"):goto_next { severity = vim.diagnostic.severity.ERROR }
   end, { desc = "Next error" })
-  set_keymap("nt", "<A-t>", "<Cmd>Lspsaga term_toggle<CR>")
+  map("nt", "<A-t>", "<Cmd>Lspsaga term_toggle<CR>")
 end
 
 -- Gitsigns
 M.gitsigns_set_keymap = function()
   local gs = require("gitsigns")
   local wk = require("which-key")
-  set_keymap("n", "[h", gs.prev_hunk, { desc = "Previous hunk" })
-  set_keymap("n", "]h", gs.next_hunk, { desc = "Next hunk" })
+  map("n", "[h", gs.prev_hunk, { desc = "Previous hunk" })
+  map("n", "]h", gs.next_hunk, { desc = "Next hunk" })
   wk.register({
     name = "Hunk",
     s = { gs.stage_hunk, "Stage hunk" },

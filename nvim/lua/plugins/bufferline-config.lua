@@ -8,3 +8,5 @@ require("bufferline").setup {
     diagnostics = "nvim_lsp",
   },
 }
+
+require("keymap").bufferline_set_keymap()
