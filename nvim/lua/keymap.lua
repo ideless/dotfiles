@@ -54,6 +54,11 @@ set_keymap("n", "q:", "<nop>")
 -- <C-c> not triggering InsertLeave event
 set_keymap("i", "<C-c>", "<Esc>")
 
+-- search for visually selected text with escaping
+-- hint: type in :%s//abc/g to replace
+set_keymap("x", "*", "y/\\V<C-r>=escape(@\",'/\\')<CR><CR>")
+set_keymap("x", "/", "y/\\V<C-r>=escape(@\",'/\\')<CR>")
+
 -- copilot
 M.copilot_set_keymap = function()
   vim.g.copilot_no_tab_map = true
@@ -265,6 +270,7 @@ M.gitsigns_set_keymap = function()
   set_keymap("n", "[h", gs.prev_hunk, { desc = "Previous hunk" })
   set_keymap("n", "]h", gs.next_hunk, { desc = "Next hunk" })
   wk.register({
+    name = "Hunk",
     s = { gs.stage_hunk, "Stage hunk" },
     u = { gs.undo_stage_hunk, "Undo stage hunk" },
     r = { gs.reset_hunk, "Reset hunk" },
