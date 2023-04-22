@@ -54,6 +54,15 @@ map("x", "/s", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/")
 -- Escape from terminal mode
 map("t", "<Esc>", "<C-\\><C-n>")
 
+-- auto indent when editing empty lines
+map("n", "i", function()
+  if #vim.fn.getline(".") == 0 then
+    return [["_cc]]
+  else
+    return "i"
+  end
+end, { expr = true })
+
 -- Bufferline
 M.bufferline_set_keymap = function()
   map("n", "gb", ":BufferLinePick<CR>")
@@ -257,7 +266,8 @@ M.lspsaga_set_keymap = function()
   wk.register({
     r = { "<Cmd>Lspsaga rename<CR>", "Rename" },
     a = { "<Cmd>Lspsaga code_action<CR>", "Code Action" },
-    d = { "<Cmd>Lspsaga show_buf_diagnostics<CR>", "Diagnostics" },
+    d = { "<Cmd>Lspsaga show_buf_diagnostics<CR>", "Diagnostics of buffer" },
+    D = { "<Cmd>Lspsaga show_workspace_diagnostics<CR>", "Diagnostics of workspace" },
     o = { "<Cmd>Lspsaga outline<CR>", "Outline" },
   }, { prefix = "<Leader>" })
   map("n", "K", "<Cmd>Lspsaga hover_doc<CR>")
