@@ -1,4 +1,10 @@
 require("neo-tree").setup {
+  sources = {
+    "filesystem",
+    "buffers",
+    "git_status",
+    "document_symbols",
+  },
   filesystem = {
     filtered_items = {
       hide_dotfiles = true,
@@ -17,11 +23,21 @@ require("neo-tree").setup {
   window = {
     mappings = {
       ["<C-c>"] = "close_window",
+      ["<Space>"] = {
+        "toggle_node",
+        nowait = true,
+      },
     },
   },
   source_selector = {
     winbar = true,
     statusline = false,
+    sources = {
+      { source = "filesystem" },
+      { source = "buffers" },
+      { source = "git_status" },
+      { source = "document_symbols" },
+    },
   },
 }
 
