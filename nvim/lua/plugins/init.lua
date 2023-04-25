@@ -159,7 +159,12 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use("folke/tokyonight.nvim")
+  use {
+    "folke/tokyonight.nvim",
+    config = function()
+      require("plugins.tokyonight-config")
+    end,
+  }
 
   use {
     "glepnir/lspsaga.nvim",
@@ -180,6 +185,14 @@ return require("packer").startup(function(use)
     "lewis6991/gitsigns.nvim",
     config = function()
       require("plugins.gitsigns-config")
+    end,
+  }
+
+  use {
+    "nvim-lualine/lualine.nvim",
+    requires = { "nvim-tree/nvim-web-devicons", opt = true },
+    config = function()
+      require("plugins.lualine-config")
     end,
   }
 
