@@ -1,4 +1,0 @@
-[submodule "nvim"]
-	path = nvim
-	url = git@github.com:ideless/nvim.config
-	branch = master
