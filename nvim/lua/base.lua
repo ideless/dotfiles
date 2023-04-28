@@ -47,15 +47,9 @@ vim.cmd([[
 ]])
 
 -- Auto reload file when it's changed on disk, when focus
+vim.opt.autoread = true
 vim.cmd([[
   augroup AutoReload
-    autocmd!
-    autocmd FocusGained * lua check_reload()
+    autocmd CursorHold * checktime
   augroup END
 ]])
-function check_reload()
-  if vim.bo.modified then -- Check if the buffer has been modified
-    print("Reloading file: " .. vim.fn.expand("%"))
-    vim.cmd("edit!") -- Reload the file
-  end
-end
