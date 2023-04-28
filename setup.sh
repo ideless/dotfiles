@@ -181,13 +181,14 @@ if confirm "Setup zsh"; then
     zas_prefix="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
     if [ ! -d "$zas_prefix" ]; then
         git clone https://github.com/zsh-users/zsh-autosuggestions "$zas_prefix"
+        sed -i "s/ZSH_AUTOSUGGEST_STRATEGY=(history)/ZSH_AUTOSUGGEST_STRATEGY=(history completion)/" "$zas_prefix/zsh-autosuggestions.zsh"
         should_manually_do+=("omz plugin enable zsh-autosuggestions")
     fi
     # install powerlevel10k
     pl_prefix="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
     if [ ! -d "$pl_prefix" ]; then
         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$pl_prefix"
-        should_manually_do+=("omz theme use powerlevel10k/powerlevel10k")
+        should_manually_do+=("omz theme set powerlevel10k/powerlevel10k")
     fi
 fi
 
