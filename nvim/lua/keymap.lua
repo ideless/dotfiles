@@ -15,12 +15,9 @@ end
 -- Leader key
 vim.g.mapleader = " "
 
--- inspect hightlight group
-map("n", "<C-i>", function()
-  local result = vim.treesitter.get_captures_at_cursor(0)
-  print(vim.inspect(result))
-end, { silent = false })
-map("n", "<C-h>", ":noh<CR>", { desc = "Clear highlight" })
+-- hightlight
+map("n", "<C-i>", ":Inspect<CR>")
+map("n", "<C-h>", ":noh<CR>")
 
 -- window operations
 map("n", "<C-w>\\", ":vsplit<CR>")
@@ -52,7 +49,7 @@ map("x", "//", "y/\\V<C-r>=escape(@\",'/\\')<CR>")
 map("x", "/s", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/")
 
 -- Escape from terminal mode
-map("t", "<Esc>", "<C-\\><C-n>")
+map("t", "<A-[>", "<C-\\><C-n>")
 
 -- auto indent when editing empty lines
 map("n", "i", function()
@@ -279,7 +276,7 @@ M.lspsaga_set_keymap = function()
   map("n", "]D", function()
     require("lspsaga.diagnostic"):goto_next { severity = vim.diagnostic.severity.ERROR }
   end, { desc = "Next error" })
-  map("nt", "<A-t>", "<Cmd>Lspsaga term_toggle<CR>")
+  -- map("nt", "<A-t>", "<Cmd>Lspsaga term_toggle<CR>")
 end
 
 -- Gitsigns
@@ -308,6 +305,16 @@ M.gitsigns_set_keymap = function()
       "Diff against last commit",
     },
   }, { prefix = "<Leader>g" })
+end
+
+-- ToggleTerm
+M.toggleterm_set_keymap = function()
+  map("intx", "<A-t>", "<Cmd>ToggleTerm direction=float<CR>")
+  map("intx", "<A-T>\\", "<Cmd>ToggleTerm direction=vertical<CR>")
+  map("intx", "<A-T>-", "<Cmd>ToggleTerm direction=horizontal<CR>")
+  -- <C-j> equals <C-Enter>
+  map("n", "<C-j>", "<Cmd>ToggleTermSendCurrentLine<CR>")
+  map("x", "<C-j>", "<Cmd>ToggleTermSendVisualLines<CR>")
 end
 
 return M

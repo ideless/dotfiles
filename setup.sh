@@ -182,13 +182,31 @@ if confirm "Setup zsh"; then
     if [ ! -d "$zas_prefix" ]; then
         git clone https://github.com/zsh-users/zsh-autosuggestions "$zas_prefix"
         sed -i "s/ZSH_AUTOSUGGEST_STRATEGY=(history)/ZSH_AUTOSUGGEST_STRATEGY=(history completion)/" "$zas_prefix/zsh-autosuggestions.zsh"
-        should_manually_do+=("omz plugin enable zsh-autosuggestions")
+        if [ -n $(which omz) ]; then
+            omz plugin enable zsh-autosuggestions
+        else
+            should_manually_do+=("omz plugin enable zsh-autosuggestions")
+        fi
     fi
     # install powerlevel10k
     pl_prefix="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
     if [ ! -d "$pl_prefix" ]; then
         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$pl_prefix"
-        should_manually_do+=("omz theme set powerlevel10k/powerlevel10k")
+        if [ -n $(which omz) ]; then
+            omz theme set powerlevel10k/powerlevel10k
+        else
+            should_manually_do+=("omz theme set powerlevel10k/powerlevel10k")
+        fi
+    fi
+    # install zsh-vi-mode
+    zvm_prefix="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-vi-mode"
+    if [ ! -d "$zvm_prefix" ]; then
+        git clone https://github.com/jeffreytse/zsh-vi-mode "$zvm_prefix"
+        if [ -n $(which omz) ]; then
+            omz plugin enable zsh-vi-mode
+        else
+            should_manually_do+=("omz plugin enable zsh-vi-mode")
+        fi
     fi
 fi
 
