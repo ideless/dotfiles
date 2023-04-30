@@ -95,6 +95,7 @@ function installed {
 prerequisites=(
     "git"
     "curl"
+    "make"
 )
 all_installed=true
 for cmd in "${prerequisites[@]}"; do
@@ -182,31 +183,37 @@ if confirm "Setup zsh"; then
     if [ ! -d "$zas_prefix" ]; then
         git clone https://github.com/zsh-users/zsh-autosuggestions "$zas_prefix"
         sed -i "s/ZSH_AUTOSUGGEST_STRATEGY=(history)/ZSH_AUTOSUGGEST_STRATEGY=(history completion)/" "$zas_prefix/zsh-autosuggestions.zsh"
-        if [ -n $(which omz) ]; then
-            omz plugin enable zsh-autosuggestions
-        else
-            should_manually_do+=("omz plugin enable zsh-autosuggestions")
-        fi
+        should_manually_do+=("omz plugin enable zsh-autosuggestions")
     fi
     # install powerlevel10k
     pl_prefix="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
     if [ ! -d "$pl_prefix" ]; then
         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$pl_prefix"
-        if [ -n $(which omz) ]; then
-            omz theme set powerlevel10k/powerlevel10k
-        else
-            should_manually_do+=("omz theme set powerlevel10k/powerlevel10k")
-        fi
+        should_manually_do+=("omz theme set powerlevel10k/powerlevel10k")
     fi
     # install zsh-vi-mode
     zvm_prefix="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-vi-mode"
     if [ ! -d "$zvm_prefix" ]; then
         git clone https://github.com/jeffreytse/zsh-vi-mode "$zvm_prefix"
-        if [ -n $(which omz) ]; then
-            omz plugin enable zsh-vi-mode
-        else
-            should_manually_do+=("omz plugin enable zsh-vi-mode")
-        fi
+        should_manually_do+=("omz plugin enable zsh-vi-mode")
+    fi
+    # install zsh-z
+    zz_prefix="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-z"
+    if [ ! -d "$zz_prefix" ]; then
+        git clone https://github.com/agkozak/zsh-z "$zz_prefix"
+        should_manually_do+=("omz plugin enable zsh-z")
+    fi
+fi
+
+
+if confirm "Setup nodejs"; then
+    if ! installed "node"; then
+        n_prefix=$(input "Input n installation path" "$HOME/.local/apps/n")
+        curl -L https://git.io/n-install | N_PREFIX="$n_prefix" bash -s -- -y latest
+        should_manually_do+=("add_path $n_prefix/bin")
+    fi
+    if ! installed "yarn"; then
+        should_manually_do+=("corepack enable")
     fi
 fi
 
