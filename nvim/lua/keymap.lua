@@ -141,8 +141,8 @@ M.telescope_set_keymap = function()
     f = { ts.find_files, "Find files" },
     l = { ts.live_grep, "Live grep" },
     L = { ts.grep_string, "Grep string under cursor" },
-    t = { ts.lsp_document_symbols, "Symbols" },
     s = { ts.current_buffer_fuzzy_find, "Fuzzy search" },
+    S = { ts.lsp_document_symbols, "Search symbols" },
     -- d = {
     --   function()
     --     telescope.diagnostics {
@@ -279,6 +279,22 @@ M.lspsaga_set_keymap = function()
   -- map("nt", "<A-t>", "<Cmd>Lspsaga term_toggle<CR>")
 end
 
+M.lspsaga_keys = function()
+  return {
+    finder = {
+      keys = {
+        expand_or_jump = "<Enter>",
+        quit = { "q", "<Esc>", "<C-c>" },
+      },
+    },
+    outline = {
+      keys = {
+        expand_or_jump = "<Enter>",
+      },
+    },
+  }
+end
+
 -- Gitsigns
 M.gitsigns_set_keymap = function()
   local gs = require("gitsigns")
@@ -312,9 +328,8 @@ M.toggleterm_set_keymap = function()
   map("intx", "<A-t>", "<Cmd>ToggleTerm direction=float<CR>")
   map("intx", "<A-T>\\", "<Cmd>ToggleTerm direction=vertical<CR>")
   map("intx", "<A-T>-", "<Cmd>ToggleTerm direction=horizontal<CR>")
-  -- <C-j> equals <C-Enter>
-  map("n", "<C-j>", "<Cmd>ToggleTermSendCurrentLine<CR>")
-  map("x", "<C-j>", "<Cmd>ToggleTermSendVisualLines<CR>")
+  map("n", "<C-\\>", "<Cmd>ToggleTermSendCurrentLine<CR>")
+  map("x", "<C-\\>", ":ToggleTermSendVisualLines<CR>")
 end
 
 return M
