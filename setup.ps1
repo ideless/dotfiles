@@ -66,12 +66,59 @@ function Get-Input {
     return $answer
 }
 
+function Check-Installed {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$Command
+    )
+    $cmd = Get-Command $Command -ErrorAction SilentlyContinue
+    return $cmd -ne $null
+}
+
 # Step 1: check prerequisites
+$prerequisites = @(
+    "scoop"
+)
+$allInstalled = $true
+foreach ($cmd in $prerequisites) {
+    if (Check-Installed $cmd) {
+        Write-Host "${cmd}: installed" -ForegroundColor Green
+    } else {
+        Write-Host "${cmd}: not installed" -ForegroundColor Red
+        $allInstalled = $false
+    }
+}
+if ($allInstalled -eq $false) {
+    Write-Host "Please install missing packages"
+    Exit
+}
+
 # Step 2: prepare
+if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+    Write-Host "You may need administrator privileges for some operations" -ForegroundColor Yellow
+    $answer = Get-Input -Prompt "Do you still want to continue? [y/n]"
+    if ($answer -ne "y") {
+        Write-Host "Aborted"
+        Exit
+    }
+}
 
 # Step 3: jobs
 if (Confirm-Action -Title "Setup nvim") {
+    if (!(Check-Installed "nvim")) {
+        scoop bucket add main
+        scoop install neovim
+    }
     Create-Link -SourcePath "$PSScriptRoot/nvim" -LinkPath "$HOME/AppData/Local/nvim"
+}
+
+if (Confirm-Action -Title "Setup wezterm") {
+    if (!(Check-Installed "wezterm")) {
+        scoop bucket add extras
+        scoop install wezterm
+    }
+    Create-Link -SourcePath "$PSScriptRoot/wezterm/.wezterm.lua" -LinkPath "$HOME/.wezterm.lua"
 }
 
 # Step 4: cleanup
