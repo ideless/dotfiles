@@ -41,8 +41,7 @@ function Confirm-Action {
     $answer = Read-Host "Do you want to continue? [y/n] "
     if ($answer -eq "y") {
         return $true
-    }
-    else {
+    } else {
         return $false
     }
 }
@@ -56,8 +55,7 @@ function Get-Input {
     )
     if ([string]::IsNullOrEmpty($DefaultValue)) {
         $answer = Read-Host -Prompt $Prompt
-    }
-    else {
+    } else {
         $answer = Read-Host -Prompt "$Prompt (default: $DefaultValue)"
         if ([string]::IsNullOrEmpty($answer)) {
             $answer = $DefaultValue
