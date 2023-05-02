@@ -15,6 +15,13 @@ return require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
 
   use {
+    "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("plugins.nvim-web-devicons-config")
+    end,
+  }
+
+  use {
     "folke/which-key.nvim",
     config = function()
       require("plugins.which-key-config")
