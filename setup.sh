@@ -217,6 +217,34 @@ if confirm "Setup nodejs"; then
     fi
 fi
 
+if confirm "Setup xplr"; then
+    if ! installed "xplr"; then
+        xplr_prefix=$(input "Input xplr installation path" "$HOME/.local/apps/xplr")
+        mkdir -p "$xplr_prefix"
+        pushd "$xplr_prefix"
+        gzfile="xplr-linux.tar.gz"
+        curl -LO https://github.com/sayanarijit/xplr/releases/latest/download/$gzfile
+        tar xzvf $gzfile
+        rm $gzfile
+        popd
+        should_manually_do+=("add_path $xplr_prefix")
+    fi
+fi
+
+if confirm "Setup gitui"; then
+    if ! installed "gitui"; then
+        gitui_prefix=$(input "Input gitui installation path" "$HOME/.local/apps/gitui")
+        mkdir -p "$gitui_prefix"
+        pushd "$gitui_prefix"
+        gzfile="gitui-linux-musl.tar.gz"
+        curl -LO https://github.com/extrawurst/gitui/releases/latest/download/$gzfile
+        tar xzvf $gzfile
+        rm $gzfile
+        popd
+        should_manually_do+=("add_path $gitui_prefix")
+    fi
+fi
+
 if confirm "Link bash scripts"; then
     create_link "$SCRIPT_DIR/scripts" "$HOME/scripts"
 fi
