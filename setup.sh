@@ -96,6 +96,7 @@ prerequisites=(
     "git"
     "curl"
     "make"
+    "tar"
 )
 all_installed=true
 for cmd in "${prerequisites[@]}"; do
@@ -151,7 +152,7 @@ if confirm "Setup nvim"; then
         else
             echo "You do not seem to have fuse installed, extracting nvim.appimage..."
             ./nvim.appimage --appimage-extract
-            should_manually_do+=("add_path $nvim_prefix/squashfs-root/usr/bin")
+            should_manually_do+=("add_path \"$nvim_prefix/squashfs-root/usr/bin\"")
         fi
         popd
     fi
@@ -210,7 +211,7 @@ if confirm "Setup nodejs"; then
     if ! installed "node"; then
         n_prefix=$(input "Input n installation path" "$HOME/.local/apps/n")
         curl -L https://git.io/n-install | N_PREFIX="$n_prefix" bash -s -- -y latest
-        should_manually_do+=("add_path $n_prefix/bin")
+        should_manually_do+=("add_path \"$n_prefix/bin\"")
     fi
     if ! installed "yarn"; then
         should_manually_do+=("corepack enable")
@@ -227,7 +228,7 @@ if confirm "Setup xplr"; then
         tar xzvf $gzfile
         rm $gzfile
         popd
-        should_manually_do+=("add_path $xplr_prefix")
+        should_manually_do+=("add_path \"$xplr_prefix\"")
     fi
 fi
 
@@ -241,7 +242,7 @@ if confirm "Setup gitui"; then
         tar xzvf $gzfile
         rm $gzfile
         popd
-        should_manually_do+=("add_path $gitui_prefix")
+        should_manually_do+=("add_path \"$gitui_prefix\"")
     fi
 fi
 
