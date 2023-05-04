@@ -16,5 +16,5 @@ done
 
 chmod 777 /tmp/* -R
 
-bash -x apt.sh
-bash -x add_user.sh $username $password
+bash -ex apt.sh
+bash -ex add_user.sh $username $password
