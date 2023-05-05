@@ -1,31 +1,44 @@
 #!/bin/bash
 
-HOST_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
-WSL_IP=$(hostname -I | awk '{print $1}')
-PROXY_PORT=7890
+if [ -n "$(grep -i WSL2 /proc/version)" ]; then
+    # is WSL 2
+    HTTP_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+    HTTP_PORT="7890"
+    HTTP_PROXY_URL="http://$HTTP_IP:$HTTP_PORT"
+
+    SOCKS_IP="$HTTP_IP"
+    SOCKS_PORT="$HTTP_PORT"
+    SOCKS_PROXY_URL="socks5://$SOCKS_IP:$SOCKS_PORT"
+else
+    HTTP_IP="localhost"
+    HTTP_PORT="7890"
+    HTTP_PROXY_URL="http://$HTTP_IP:$HTTP_PORT"
+
+    SOCKS_IP="localhost"
+    SOCKS_PORT="7891"
+    SOCKS_PROXY_URL="socks5://$SOCKS_IP:$SOCKS_PORT"
+fi
+
+PH="# PROXY"
  
-PROXY_HTTP="http://${HOST_IP}:${PROXY_PORT}"
-PROXY_SOCKS5="socks5://${HOST_IP}:${PROXY_PORT}"
+set_proxy() {
+    export http_proxy="$HTTP_PROXY_URL"
+    export HTTP_PROXY="$HTTP_PROXY_URL"
  
-set_proxy(){
-    export http_proxy="${PROXY_HTTP}"
-    export HTTP_PROXY="${PROXY_HTTP}"
+    export https_proxy="$HTTP_PROXY_URL"
+    export HTTPS_proxy="$HTTP_PROXY_URL"
  
-    export https_proxy="${PROXY_HTTP}"
-    export HTTPS_proxy="${PROXY_HTTP}"
+    export ALL_PROXY="$SOCKS_PROXY_URL"
+    export all_proxy="$SOCKS_PROXY_URL"
  
-    export ALL_PROXY="${PROXY_SOCKS5}"
-    export all_proxy="${PROXY_SOCKS5}"
- 
-    git config --global http.proxy ${PROXY_HTTP}
-    git config --global https.proxy ${PROXY_HTTP}
+    git config --global http.proxy $HTTP_PROXY_URL
+    git config --global https.proxy $HTTP_PROXY_URL
  
     # git ssh proxy
-    sed -i "s/# ProxyCommand/ProxyCommand/" ~/.ssh/config
-    sed -i -E "s/ProxyCommand nc -x [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+ %h %p/ProxyCommand nc -x ${HOST_IP}:${PROXY_PORT} %h %p/" ~/.ssh/config
+    sed -i "/^\s*$PH\s*$/s/$PH/ProxyCommand nc -x $SOCKS_IP:$SOCKS_PORT %h %p $PH/" ~/.ssh/config
 }
  
-unset_proxy(){
+unset_proxy() {
     unset http_proxy
     unset HTTP_PROXY
     unset https_proxy
@@ -33,14 +46,16 @@ unset_proxy(){
     unset ALL_PROXY
     unset all_proxy
  
-    git config --global --unset http.proxy ${PROXY_HTTP}
-    git config --global --unset https.proxy ${PROXY_HTTP}
+    git config --global --unset http.proxy
+    git config --global --unset https.proxy
  
-    sed -i -E "s/ProxyCommand nc -x [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+ %h %p/# ProxyCommand nc -x 0.0.0.0:0 %h %p/" ~/.ssh/config
+    sed -i "/$PH/s/ProxyCommand .* $PH/$PH/" ~/.ssh/config
 }
+
  
-test_proxy(){
-    echo "Host ip:" ${HOST_IP}
-    echo "WSL ip:" ${WSL_IP}
-    echo "Current proxy:" ${https_proxy}
+test_proxy() {
+    echo "HTTP proxy:" $https_proxy
+    echo "All proxy:" $all_proxy
+    echo "Git HTTP proxy:" $(git config --global --get https.proxy)
+    echo "Git SOCKS proxy:" $(sed -n "s/^\s*ProxyCommand\s*//p" ~/.ssh/config)
 }
