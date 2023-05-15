@@ -91,26 +91,21 @@ function installed {
     [ -x "$(command -v $1)" ]
 }
 
-# Step 1: check prerequisites
+# Step 1: install prerequisites
 prerequisites=(
     "git"
     "curl"
     "make"
     "tar"
 )
-all_installed=true
 for cmd in "${prerequisites[@]}"; do
     if installed "$cmd"; then
         info "$cmd: installed"
     else
         error "$cmd: not installed"
-        all_installed=false
+        sudo apt install "$cmd" -y
     fi
 done
-if [ "$all_installed" = false ]; then
-    echo "Please install missing packages"
-    exit 1
-fi
 
 # Step 2: prepare (proxy, global variables, etc.)
 should_unset_proxy=false
@@ -248,6 +243,10 @@ fi
 
 if confirm "Link bash scripts"; then
     create_link "$SCRIPT_DIR/scripts" "$HOME/scripts"
+fi
+
+if confirm "Setup rust"; then
+    curl --proto '=https' --tlsv1.3 https://sh.rustup.rs -sSf | sh
 fi
 
 # Step 4: cleanup
