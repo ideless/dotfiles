@@ -1,5 +1,10 @@
-require("null-ls").setup {
+local null_ls = require("null-ls")
+
+null_ls.setup {
   -- debug = true,
+  sources = {
+    null_ls.builtins.formatting.bibclean,
+  },
   border = "single",
   on_attach = function(client, bufnr)
     -- print("null-ls attached")
