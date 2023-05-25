@@ -1,5 +1,6 @@
-local M = {}
+local utils = require("utils")
 
+local M = {}
 local map = function(modes, lhs, rhs, opts)
   -- default options
   local options = { noremap = true }
@@ -47,6 +48,7 @@ map("i", "<C-c>", "<Esc>")
 map("x", "*", "y/\\V<C-r>=escape(@\",'/\\')<CR><CR>")
 map("x", "//", "y/\\V<C-r>=escape(@\",'/\\')<CR>")
 map("x", "/s", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/")
+map("x", "/S", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/<C-r>=escape(@\",'/\\')<CR>")
 
 -- Escape from terminal mode
 map("t", "<A-[>", "<C-\\><C-n>")
@@ -117,6 +119,39 @@ M.neo_tree_set_keymap = function()
     e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
     E = { ":NeoTreeShowToggle<CR>", "Toggle explorer (side)" },
   }, { prefix = "<Leader>" })
+end
+
+M.neo_tree_keys = function()
+  return {
+    filesystem = {
+      window = {
+        mappings = {
+          ["i"] = "show_fs_stat",
+        },
+      },
+      commands = {
+        show_fs_stat = function(state)
+          local node = state.tree:get_node()
+          local stat = vim.loop.fs_stat(node.path)
+          local str = ""
+          str = str .. string.format("Type: %s\n", stat.type)
+          str = str .. string.format("Size: %s\n", utils.format_size(stat.size))
+          str = str .. string.format("Time: %s\n", utils.format_time(stat.mtime.sec))
+          str = str .. string.format("Mode: %s\n", utils.format_mode(stat.mode, stat.type))
+          vim.notify(str)
+        end,
+      },
+    },
+    window = {
+      mappings = {
+        ["<C-c>"] = "close_window",
+        ["<Space>"] = {
+          "toggle_node",
+          nowait = true,
+        },
+      },
+    },
+  }
 end
 
 -- Hop

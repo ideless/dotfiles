@@ -1,4 +1,4 @@
-require("neo-tree").setup {
+require("neo-tree").setup(vim.tbl_deep_extend("force", {
   sources = {
     "filesystem",
     "buffers",
@@ -20,15 +20,6 @@ require("neo-tree").setup {
       },
     },
   },
-  window = {
-    mappings = {
-      ["<C-c>"] = "close_window",
-      ["<Space>"] = {
-        "toggle_node",
-        nowait = true,
-      },
-    },
-  },
   source_selector = {
     winbar = true,
     statusline = false,
@@ -39,6 +30,6 @@ require("neo-tree").setup {
       { source = "document_symbols" },
     },
   },
-}
+}, require("keymap").neo_tree_keys()))
 
 require("keymap").neo_tree_set_keymap()
