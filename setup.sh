@@ -173,6 +173,7 @@ if confirm "Setup zsh"; then
     # install oh-my-zsh
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -- --unattended
+        should_manually_do+=("omz plugin enable git ssh-agent")
     fi
     # install zsh-autosuggestions
     zas_prefix="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
