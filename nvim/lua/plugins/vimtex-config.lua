@@ -9,3 +9,4 @@ vim.g.vimtex_compiler_method = "latexmk"
 vim.g.vimtex_compiler_latexmk_engines = { _ = "-xelatex" }
 
 vim.g.vimtex_matchparen_enabled = 0
+vim.g.vimtex_syntax_enabled = 0
