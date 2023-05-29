@@ -21,8 +21,6 @@ config.window_padding = {
 config.hide_tab_bar_if_only_one_tab = true
 config.default_prog = {
 	"C:/WINDOWS/system32/wsl.exe",
-	"-d",
-	"Ubuntu-20.04",
 }
 config.color_scheme = "Andromeda"
 config.keys = {
