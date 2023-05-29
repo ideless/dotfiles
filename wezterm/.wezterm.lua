@@ -11,7 +11,7 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
-config.font = wezterm.font("Code New Roman")
+config.font = wezterm.font("CodeNewRoman Nerd Font")
 config.window_padding = {
 	left = 0,
 	right = 0,
