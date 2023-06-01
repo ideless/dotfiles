@@ -154,7 +154,7 @@ if confirm "Setup nvim"; then
     create_link "$SCRIPT_DIR/nvim" "$HOME/.config/nvim"
     if ! installed "rg"; then
         sudo apt install ripgrep
-    end
+    fi
 fi
 
 if confirm "Setup zathura"; then
