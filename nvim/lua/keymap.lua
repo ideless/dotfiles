@@ -71,9 +71,10 @@ end
 
 -- comment
 M.comment_set_keymap = function()
-  -- comment (<C-_> = Ctrl+/)
   map("i", "<C-_>", "<Cmd>CommentToggle<CR>")
+  map("i", "<C-/>", "<Cmd>CommentToggle<CR>")
   map("nx", "<C-_>", ":CommentToggle<CR>")
+  map("nx", "<C-/>", ":CommentToggle<CR>")
 end
 
 -- copilot

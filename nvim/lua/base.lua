@@ -10,6 +10,10 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.backspace = { "indent", "eol", "start" }
 
+--indent
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+
 -- clipboard
 -- neovim's clipboard.vim takes a long time finding the right clipboard provider (~950ms for WSL)
 -- vim.g.clipboard = {

@@ -139,10 +139,20 @@ return require("packer").startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter",
-    requires = "JoosepAlviste/nvim-ts-context-commentstring",
     config = function()
       require("plugins.nvim-treesitter-config")
     end,
+  }
+
+  use {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    requires = "nvim-treesitter/nvim-treesitter",
+  }
+
+  use {
+    "yioneko/nvim-yati",
+    tag = "*",
+    requires = "nvim-treesitter/nvim-treesitter",
   }
 
   use {
