@@ -24,9 +24,9 @@ require("neo-tree").setup(vim.tbl_deep_extend("force", {
     winbar = true,
     statusline = false,
     sources = {
-      { source = "filesystem" },
-      { source = "buffers" },
-      { source = "git_status" },
+      { source = "filesystem", display_name = " 󰉓 Files " },
+      -- { source = "buffers", display_name = " 󰈙 Buffers " },
+      { source = "git_status", display_name = " 󰊢 Git " },
       { source = "document_symbols" },
     },
   },
