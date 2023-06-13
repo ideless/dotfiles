@@ -34,6 +34,10 @@ vim.opt.clipboard = ""
 vim.opt.colorcolumn = "80"
 vim.opt.signcolumn = "yes"
 
+-- window
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
 -- others
 vim.opt.scrolloff = 5
 vim.opt.laststatus = 0
