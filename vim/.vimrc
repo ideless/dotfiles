@@ -1,44 +1,59 @@
-" basic
-set number
-set relativenumber
+" we want Vim, not Vi
+set nocompatible
+
+" syntax not supported by vim-tiny
+" syntax on
+" filetype plugin indent on
+
+" indent
+set autoindent
+set expandtab
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+
+" line numbers are too wide in vim-tiny
+" set number
+" set relativenumber
+" set numberwidth=4
+
+" encoding
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
-" tab
-set expandtab
-set tabstop=4 shiftwidth=4 softtabstop=4
+" backspace
 set backspace=indent,eol,start
 
-" file
-set autowrite autoread
-set nobackup noswapfile
+" statusline
+set laststatus=2
 
-" syntax
-syntax on
-filetype plugin indent on
-set t_Co=256
+" show current mode
+set showmode
+set showcmd
 
-" italics
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
+" highlight search
+set hlsearch
+set incsearch
 
-" highlight current line
-set cursorline
-hi cursorline cterm=none term=none
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
-" https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
-highlight CursorLine guibg=#444444 ctermbg=238
+" render
+set ttyfast
+set lazyredraw
 
-" menu
-set completeopt=noinsert,menuone,noselect
-set wildmenu
-" https://vi.stackexchange.com/a/12665
-highlight Pmenu ctermbg=gray guibg=gray
+" backup
+set autowrite
+set autoread
+set nobackup
+set noswapfile
 
-" others
-set clipboard=unnamedplus
+" window
+set splitbelow
+set splitright
+
+" misc
 set hidden
-set splitbelow splitright
+set display=lastline
+set cursorline
+set wrapscan
+set report=0
 set title
 set ttimeoutlen=0
 set scrolloff=5

@@ -128,9 +128,9 @@ if confirm "Setup tmux"; then
     create_link "$SCRIPT_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
 fi
 
-if confirm "Setup vim"; then
-    if ! installed "vim"; then
-        sudo apt install vim -y
+if confirm "Setup vim-tiny"; then
+    if ! installed "vi"; then
+        sudo apt install vim-tiny -y
     fi
     create_link "$SCRIPT_DIR/vim/.vimrc" "$HOME/.vimrc"
 fi
