@@ -38,7 +38,7 @@ return require("packer").startup(function(use)
   use {
     "nmac427/guess-indent.nvim",
     config = function()
-      require("guess-indent").setup {}
+      require("plugins.guess-indent-config")
     end,
   }
 
