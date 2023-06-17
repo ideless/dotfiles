@@ -17,14 +17,14 @@ return require("packer").startup(function(use)
   use {
     "nvim-tree/nvim-web-devicons",
     config = function()
-      require("plugins.nvim-web-devicons-config")
+      require("plugins.configs.nvim-web-devicons-config")
     end,
   }
 
   use {
     "folke/which-key.nvim",
     config = function()
-      require("plugins.which-key-config")
+      require("plugins.configs.which-key-config")
     end,
   }
 
@@ -38,14 +38,14 @@ return require("packer").startup(function(use)
   use {
     "nmac427/guess-indent.nvim",
     config = function()
-      require("plugins.guess-indent-config")
+      require("plugins.configs.guess-indent-config")
     end,
   }
 
   use {
     "terrortylor/nvim-comment",
     config = function()
-      require("plugins.comment-config")
+      require("plugins.configs.comment-config")
     end,
   }
 
@@ -58,7 +58,7 @@ return require("packer").startup(function(use)
       "MunifTanjim/nui.nvim",
     },
     config = function()
-      require("plugins.neo-tree-config")
+      require("plugins.configs.neo-tree-config")
     end,
   }
 
@@ -70,14 +70,14 @@ return require("packer").startup(function(use)
     },
     after = "which-key.nvim", -- needs to set keymaps via which-key
     config = function()
-      require("plugins.telescope-config")
+      require("plugins.configs.telescope-config")
     end,
   }
 
   use {
     "neovim/nvim-lspconfig", -- config lsp servers in mason-config.lua
     config = function()
-      require("plugins.lspconfig-config")
+      require("plugins.configs.lspconfig-config")
     end,
   }
 
@@ -85,7 +85,7 @@ return require("packer").startup(function(use)
     "jose-elias-alvarez/null-ls.nvim",
     requires = "plenary.nvim",
     config = function()
-      require("plugins.null-ls-config")
+      require("plugins.configs.null-ls-config")
     end,
   }
 
@@ -101,7 +101,7 @@ return require("packer").startup(function(use)
       "null-ls.nvim",
     },
     config = function()
-      require("plugins.mason-config")
+      require("plugins.configs.mason-config")
     end,
   }
 
@@ -117,7 +117,7 @@ return require("packer").startup(function(use)
       "hrsh7th/cmp-nvim-lsp-signature-help",
     },
     config = function()
-      require("plugins.cmp-config")
+      require("plugins.configs.cmp-config")
     end,
   }
 
@@ -126,21 +126,21 @@ return require("packer").startup(function(use)
     tag = "v3.*",
     requires = "nvim-tree/nvim-web-devicons",
     config = function()
-      require("plugins.bufferline-config")
+      require("plugins.configs.bufferline-config")
     end,
   }
 
   use {
     "github/copilot.vim",
     config = function()
-      require("plugins.copilot-config")
+      require("plugins.configs.copilot-config")
     end,
   }
 
   use {
     "nvim-treesitter/nvim-treesitter",
     config = function()
-      require("plugins.nvim-treesitter-config")
+      require("plugins.configs.nvim-treesitter-config")
     end,
   }
 
@@ -158,28 +158,28 @@ return require("packer").startup(function(use)
   use {
     "phaazon/hop.nvim",
     config = function()
-      require("plugins.hop-config")
+      require("plugins.configs.hop-config")
     end,
   }
 
   use {
     "lervag/vimtex",
     config = function()
-      require("plugins.vimtex-config")
+      require("plugins.configs.vimtex-config")
     end,
   }
 
   use {
     "ojroques/nvim-osc52",
     config = function()
-      require("plugins.nvim-osc52-config")
+      require("plugins.configs.nvim-osc52-config")
     end,
   }
 
   use {
     "folke/tokyonight.nvim",
     config = function()
-      require("plugins.tokyonight-config")
+      require("plugins.configs.tokyonight-config")
     end,
   }
 
@@ -189,7 +189,7 @@ return require("packer").startup(function(use)
     branch = "main",
     event = "LspAttach",
     config = function()
-      require("plugins.lspsaga-config")
+      require("plugins.configs.lspsaga-config")
     end,
     requires = {
       { "nvim-tree/nvim-web-devicons" },
@@ -201,7 +201,7 @@ return require("packer").startup(function(use)
   use {
     "lewis6991/gitsigns.nvim",
     config = function()
-      require("plugins.gitsigns-config")
+      require("plugins.configs.gitsigns-config")
     end,
   }
 
@@ -209,7 +209,7 @@ return require("packer").startup(function(use)
     "nvim-lualine/lualine.nvim",
     requires = { "nvim-tree/nvim-web-devicons", opt = true },
     config = function()
-      require("plugins.lualine-config")
+      require("plugins.configs.lualine-config")
     end,
   }
 
@@ -217,16 +217,18 @@ return require("packer").startup(function(use)
     "akinsho/toggleterm.nvim",
     tag = "*",
     config = function()
-      require("plugins.toggleterm-config")
+      require("plugins.configs.toggleterm-config")
     end,
   }
 
   use {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("plugins.indent-blankline-config")
+      require("plugins.configs.indent-blankline-config")
     end,
   }
+
+  use("nvim-pack/nvim-spectre")
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
