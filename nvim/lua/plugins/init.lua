@@ -228,7 +228,12 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use("nvim-pack/nvim-spectre")
+  use {
+    "nvim-pack/nvim-spectre",
+    config = function()
+      require("plugins.configs.spectre-config")
+    end,
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

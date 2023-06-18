@@ -175,10 +175,6 @@ M.telescope_set_keymap = function()
   local ts = require("telescope.builtin")
   wk.register({
     f = { ts.find_files, "Find files" },
-    l = { ts.live_grep, "Live grep" },
-    L = { ts.grep_string, "Grep string under cursor" },
-    s = { ts.current_buffer_fuzzy_find, "Fuzzy search" },
-    S = { ts.lsp_document_symbols, "Search symbols" },
     -- d = {
     --   function()
     --     telescope.diagnostics {
@@ -188,6 +184,15 @@ M.telescope_set_keymap = function()
     --   "Open diagnostics",
     -- },
   }, { prefix = "<Leader>" })
+  -- Search
+  wk.register({
+    name = "Search",
+    s = { ts.current_buffer_fuzzy_find, "Search" },
+    t = { ts.lsp_document_symbols, "Search tags" },
+    g = { ts.live_grep, "Grep in files" },
+    c = { ts.grep_string, "Grep current word in files" },
+  }, { prefix = "<Leader>s" })
+  -- Git
   wk.register({
     name = "Git",
     s = { ts.git_status, "Status" },
@@ -366,6 +371,15 @@ M.toggleterm_set_keymap = function()
   map("intx", "<A-T>-", "<Cmd>ToggleTerm direction=horizontal<CR>")
   map("n", "<C-\\>", "<Cmd>ToggleTermSendCurrentLine<CR>")
   map("x", "<C-\\>", ":ToggleTermSendVisualLines<CR>")
+end
+
+-- Spectre
+M.spectre_set_keymap = function()
+  local wk = require("which-key")
+  wk.register({
+    name = "Search",
+    r = { "<Cmd>Spectre<CR>", "Replace in files" },
+  }, { prefix = "<Leader>s" })
 end
 
 return M
