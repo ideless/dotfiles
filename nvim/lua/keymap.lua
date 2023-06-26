@@ -158,15 +158,36 @@ end
 -- Hop
 M.hop_set_keymap = function()
   local wk = require("which-key")
+  local hop = require("hop")
+  local directions = require("hop.hint").HintDirection
+
   wk.register({
     name = "Hop",
-    a = { ":HopAnywhere<CR>", "Anywhere" },
-    c = { ":HopChar1<CR>", "Character" },
-    l = { ":HopLineStart<CR>", "Line" },
-    v = { ":HopVertical<CR>", "Vertical" },
-    p = { ":HopPattern<CR>", "Pattern" },
-    w = { ":HopWord<CR>", "Word" },
-  }, { prefix = ";" })
+    a = { "<Cmd>HopAnywhere<CR>", "Anywhere" },
+    c = { "<Cmd>HopChar1<CR>", "Character" },
+    l = { "<Cmd>HopLineStart<CR>", "Line" },
+    v = { "<Cmd>HopVertical<CR>", "Vertical" },
+    p = { "<Cmd>HopPattern<CR>", "Pattern" },
+    w = { "<Cmd>HopWord<CR>", "Word" },
+  }, { prefix = ";", mode = "", noremap = false })
+
+  wk.register({
+    name = "Hop",
+    f = { "<Cmd>HopChar1CurrentLineAC<CR>", "Character after cursor" },
+    F = { "<Cmd>HopChar1CurrentLineBC<CR>", "Character before cursor" },
+    t = {
+      function()
+        hop.hint_char1 { direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }
+      end,
+      "Character after cursor",
+    },
+    T = {
+      function()
+        hop.hint_char1 { direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }
+      end,
+      "Character before cursor",
+    },
+  }, { mode = "", noremap = false })
 end
 
 -- Telescope
