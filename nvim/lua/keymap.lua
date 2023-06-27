@@ -158,8 +158,8 @@ end
 -- Hop
 M.hop_set_keymap = function()
   local wk = require("which-key")
-  local hop = require("hop")
-  local directions = require("hop.hint").HintDirection
+  -- local hop = require("hop")
+  -- local directions = require("hop.hint").HintDirection
 
   wk.register({
     name = "Hop",
@@ -169,25 +169,25 @@ M.hop_set_keymap = function()
     v = { "<Cmd>HopVertical<CR>", "Vertical" },
     p = { "<Cmd>HopPattern<CR>", "Pattern" },
     w = { "<Cmd>HopWord<CR>", "Word" },
-  }, { prefix = ";", mode = "", noremap = false })
+  }, { prefix = ";", mode = { "n", "o", "x" }, noremap = false }) -- mode cannot be set to "", otherwise <a> gets hijacked by matchit, seems to be a bug of which-key
 
-  wk.register({
-    name = "Hop",
-    f = { "<Cmd>HopChar1CurrentLineAC<CR>", "Character after cursor" },
-    F = { "<Cmd>HopChar1CurrentLineBC<CR>", "Character before cursor" },
-    t = {
-      function()
-        hop.hint_char1 { direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }
-      end,
-      "Character after cursor",
-    },
-    T = {
-      function()
-        hop.hint_char1 { direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }
-      end,
-      "Character before cursor",
-    },
-  }, { mode = "", noremap = false })
+  -- wk.register({
+  --   name = "Hop",
+  --   f = { "<Cmd>HopChar1CurrentLineAC<CR>", "Character after cursor" },
+  --   F = { "<Cmd>HopChar1CurrentLineBC<CR>", "Character before cursor" },
+  --   t = {
+  --     function()
+  --       hop.hint_char1 { direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }
+  --     end,
+  --     "Character after cursor",
+  --   },
+  --   T = {
+  --     function()
+  --       hop.hint_char1 { direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }
+  --     end,
+  --     "Character before cursor",
+  --   },
+  -- }, { mode = "", noremap = false })
 end
 
 -- Telescope

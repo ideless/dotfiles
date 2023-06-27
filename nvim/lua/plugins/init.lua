@@ -15,13 +15,6 @@ return require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
 
   use {
-    "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("plugins.configs.nvim-web-devicons-config")
-    end,
-  }
-
-  use {
     "folke/which-key.nvim",
     config = function()
       require("plugins.configs.which-key-config")
@@ -131,6 +124,14 @@ return require("packer").startup(function(use)
   }
 
   use {
+    "nvim-lualine/lualine.nvim",
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("plugins.configs.lualine-config")
+    end,
+  }
+
+  use {
     "github/copilot.vim",
     config = function()
       require("plugins.configs.copilot-config")
@@ -139,20 +140,13 @@ return require("packer").startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter",
+    requires = {
+      { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" },
+      { "yioneko/nvim-yati", after = "nvim-treesitter" },
+    },
     config = function()
       require("plugins.configs.nvim-treesitter-config")
     end,
-  }
-
-  use {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    requires = "nvim-treesitter/nvim-treesitter",
-  }
-
-  use {
-    "yioneko/nvim-yati",
-    tag = "*",
-    requires = "nvim-treesitter/nvim-treesitter",
   }
 
   use {
@@ -192,9 +186,9 @@ return require("packer").startup(function(use)
       require("plugins.configs.lspsaga-config")
     end,
     requires = {
-      { "nvim-tree/nvim-web-devicons" },
+      "nvim-tree/nvim-web-devicons",
       --Please make sure you install markdown and markdown_inline parser
-      { "nvim-treesitter/nvim-treesitter" },
+      "nvim-treesitter/nvim-treesitter",
     },
   }
 
@@ -202,14 +196,6 @@ return require("packer").startup(function(use)
     "lewis6991/gitsigns.nvim",
     config = function()
       require("plugins.configs.gitsigns-config")
-    end,
-  }
-
-  use {
-    "nvim-lualine/lualine.nvim",
-    requires = { "nvim-tree/nvim-web-devicons", opt = true },
-    config = function()
-      require("plugins.configs.lualine-config")
     end,
   }
 
@@ -234,6 +220,8 @@ return require("packer").startup(function(use)
       require("plugins.configs.spectre-config")
     end,
   }
+
+  use("andymass/vim-matchup")
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

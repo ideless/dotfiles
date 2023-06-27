@@ -7,28 +7,32 @@
 
 # Plugins
 
-| Plugin                                                                | Description                 |
-| --------------------------------------------------------------------- | --------------------------- |
-| [packer.nvim](https://github.com/wbthomason/packer.nvim)              | Plugin manager              |
-| [which-key.nvim](https://github.com/folke/which-key.nvim)             | Key bindings hint           |
-| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)            | Autopair                    |
-| [guess-indent.nvim](https://github.com/nmac427/guess-indent.nvim)     | Guess indent                |
-| [nvim-comment](https://github.com/terrortylor/nvim-comment)           | Toggle comments             |
-| [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)       | File explorer               |
-| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)    | Fuzzy finder                |
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)            | Language server config      |
-| [null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)    | External LSP clients config |
-| [mason.nvim](https://github.com/williamboman/mason.nvim)              | Package manager             |
-| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                       | Code completion             |
-| [bufferline.nvim](https://github.com/bufferline.nvim)                 | Tabs                        |
-| [copilot.vim](https://github.com/github/copilot.vim)                  | Copilot                     |
-| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Language parsers            |
-| [hop.nvim](https://github.com/phaazon/hop.nvim)                       | Fast jump                   |
-| [vimtex](https://github.com/lervag/vimtex)                            | LaTeX                       |
-| [nvim-osc52](https://github.com/ojroques/nvim-osc52)                  | Copy via OSC52              |
-| [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)           | TokyoNight theme            |
-| [lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)               | LSP UI                      |
-| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)           | Git signs                   |
+| Plugin                                                                          | Description              |
+| ------------------------------------------------------------------------------- | ------------------------ |
+| [packer.nvim](https://github.com/wbthomason/packer.nvim)                        | Plugin manager           |
+| [which-key.nvim](https://github.com/folke/which-key.nvim)                       | Key bindings hint        |
+| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                      | Autopair                 |
+| [guess-indent.nvim](https://github.com/nmac427/guess-indent.nvim)               | Guess indent             |
+| [nvim-comment](https://github.com/terrortylor/nvim-comment)                     | Toggle comments          |
+| [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)                 | File explorer            |
+| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)              | Fuzzy finder             |
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                      | Language server config   |
+| [null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)              | External LSP clients     |
+| [mason.nvim](https://github.com/williamboman/mason.nvim)                        | Package manager          |
+| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                 | Code completion          |
+| [bufferline.nvim](https://github.com/bufferline.nvim)                           | Tabs                     |
+| [copilot.vim](https://github.com/github/copilot.vim)                            | Copilot                  |
+| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)           | Language parsers         |
+| [hop.nvim](https://github.com/phaazon/hop.nvim)                                 | Fast jump                |
+| [vimtex](https://github.com/lervag/vimtex)                                      | LaTeX                    |
+| [nvim-osc52](https://github.com/ojroques/nvim-osc52)                            | Copy via OSC52           |
+| [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)                     | TokyoNight theme         |
+| [lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)                         | LSP UI                   |
+| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                     | Git signs, staging, diff |
+| [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)                   | Terminal                 |
+| [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indentation guides       |
+| [nvim-spectre](https://github.com/nvim-pack/nvim-spectre)                       | Search and replace       |
+| [vim-matchup](https://github.com/andymass/vim-matchup)                          | Fuck matchit.vim         |
 
 # Dependencies
 
