@@ -53,7 +53,10 @@ require("mason-null-ls").setup {
   handlers = {
     latexindent = function(source_name, methods)
       null_ls.register(null_ls.builtins.formatting.latexindent.with {
-        extra_args = { "-l" }, -- https://latexindentpl.readthedocs.io/en/latest/sec-indent-config-and-settings.html#localsettings-yaml-and-friends
+        extra_args = {
+          "-l", -- look for configs in current dir
+          "-m", -- allow modifying line breaks
+        },
       })
     end,
   },
