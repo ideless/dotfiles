@@ -21,6 +21,13 @@ fi
 
 PH="# PROXY"
  
+test_proxy() {
+    echo "HTTP proxy:" $https_proxy
+    echo "All proxy:" $all_proxy
+    echo "Git HTTP proxy:" $(git config --global --get https.proxy)
+    echo "Git SOCKS proxy:" $(sed -n "s/^\s*ProxyCommand\s*//p" ~/.ssh/config)
+}
+ 
 set_proxy() {
     export http_proxy="$HTTP_PROXY_URL"
     export HTTP_PROXY="$HTTP_PROXY_URL"
@@ -36,6 +43,8 @@ set_proxy() {
  
     # git ssh proxy
     sed -i "/^\s*$PH\s*$/s/$PH/ProxyCommand nc -x $SOCKS_IP:$SOCKS_PORT %h %p $PH/" ~/.ssh/config
+
+    test_proxy
 }
  
 unset_proxy() {
@@ -50,12 +59,6 @@ unset_proxy() {
     git config --global --unset https.proxy
  
     sed -i "/$PH/s/ProxyCommand .* $PH/$PH/" ~/.ssh/config
-}
 
- 
-test_proxy() {
-    echo "HTTP proxy:" $https_proxy
-    echo "All proxy:" $all_proxy
-    echo "Git HTTP proxy:" $(git config --global --get https.proxy)
-    echo "Git SOCKS proxy:" $(sed -n "s/^\s*ProxyCommand\s*//p" ~/.ssh/config)
+    test_proxy
 }
