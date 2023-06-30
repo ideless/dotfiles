@@ -11,7 +11,7 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
-config.font = wezterm.font("CodeNewRoman Nerd Font")
+config.font = wezterm.font("CodeNewRoman Nerd Font") -- Use Nerd Font 2.x.x, for example https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/CodeNewRoman.zip
 config.window_padding = {
 	left = 0,
 	right = 0,
@@ -19,9 +19,9 @@ config.window_padding = {
 	bottom = 0,
 }
 config.hide_tab_bar_if_only_one_tab = true
-config.default_prog = {
-	"C:/WINDOWS/system32/wsl.exe",
-}
+-- config.default_prog = {
+-- 	"C:/WINDOWS/system32/wsl.exe",
+-- }
 config.color_scheme = "Andromeda"
 config.keys = {
 	{
@@ -75,6 +75,7 @@ config.keys = {
 		action = wezterm.action.AdjustPaneSize({ "Right", 1 }),
 	},
 }
+-- config.debug_key_events = true
 
 -- and finally, return the configuration to wezterm
 return config

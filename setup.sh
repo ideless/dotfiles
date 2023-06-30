@@ -253,6 +253,10 @@ if confirm "Setup rust"; then
     curl --proto '=https' --tlsv1.3 https://sh.rustup.rs -sSf | sh
 fi
 
+if confirm "Setup wezterm"; then
+    create_link "$SCRIPT_DIR/wezterm/.wezterm.lua" "$HOME/.wezterm.lua"
+fi
+
 # Step 4: cleanup
 if [ "$should_unset_proxy" = true ]; then
     unset_proxy
