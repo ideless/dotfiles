@@ -10,7 +10,8 @@ RUN cd /tmp && \
     rm -r ./* 
 
 USER ${username}
-ENV TERM xterm-256color
+ENV TERM="xterm-256color"
+ENV TZ="Asia/Shanghai"
 WORKDIR /home/${username}
 
 CMD ["bash"]
