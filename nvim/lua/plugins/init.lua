@@ -221,7 +221,7 @@ return require("packer").startup(function(use)
     end,
   }
 
-  use("andymass/vim-matchup")
+  -- use("andymass/vim-matchup")
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
