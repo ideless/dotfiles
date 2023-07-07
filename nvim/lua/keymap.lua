@@ -62,6 +62,9 @@ map("n", "i", function()
   end
 end, { expr = true })
 
+-- <F5> to reload lsp
+map("n", "<F5>", "<Cmd>LspRestart<CR>")
+
 -- Bufferline
 M.bufferline_set_keymap = function()
   map("n", "gb", ":BufferLinePick<CR>")
