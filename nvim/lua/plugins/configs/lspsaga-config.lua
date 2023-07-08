@@ -4,6 +4,7 @@ require("lspsaga").setup(vim.tbl_deep_extend("force", {
   },
   lightbulb = {
     enabled = false,
+    enable_in_insert = false,
   },
 }, require("keymap").lspsaga_keys()))
 
