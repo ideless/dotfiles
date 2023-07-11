@@ -36,6 +36,14 @@ map("i", "<C-h>", "<Left>")
 map("i", "<C-l>", "<Right>")
 map("i", "<C-j>", "<Down>")
 map("i", "<C-k>", "<Up>")
+map("nxo", "H", "^")
+map("nxo", "L", "$")
+map("nxo", "J", "6j")
+map("nxo", "K", "6k")
+
+-- Don't leave visual mode when changing indent
+map("x", ">", ">gv")
+map("x", "<", "<gv")
 
 -- diable annoying keymaps
 map("n", "q:", "<nop>")
