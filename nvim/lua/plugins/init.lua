@@ -15,4 +15,5 @@ require("lazy").setup {
   { import = "plugins.specs.basic" },
   { import = "plugins.specs.coding" },
   { import = "plugins.specs.ui" },
+  { import = "plugins.specs.tools" },
 }
