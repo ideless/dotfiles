@@ -8,8 +8,10 @@ return {
 
       gs.setup(opts)
 
-      vim.keymap.set("n", "[h", gs.prev_hunk, { desc = "Previous hunk" })
-      vim.keymap.set("n", "]h", gs.next_hunk, { desc = "Next hunk" })
+      wk.register {
+        ["[h"] = { gs.prev_hunk, "Previous hunk" },
+        ["]h"] = { gs.next_hunk, "Previous hunk" },
+      }
 
       wk.register({
         name = "Hunk",
@@ -24,6 +26,7 @@ return {
       }, { prefix = "<Leader>h" })
 
       wk.register({
+        name = "Git",
         d = { gs.diffthis, "Diff" },
         D = {
           function()

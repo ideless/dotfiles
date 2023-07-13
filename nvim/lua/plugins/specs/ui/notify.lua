@@ -1,18 +1,8 @@
 return {
   {
     "rcarriga/nvim-notify",
-    enabled = false,
-    keys = {
-      {
-        "<Leader>u",
-        function()
-          require("notify").dismiss { silent = true, pending = true }
-        end,
-        desc = "Dismiss all Notifications",
-      },
-    },
     opts = {
-      timeout = 3000,
+      timeout = 1000,
       max_height = function()
         return math.floor(vim.o.lines * 0.75)
       end,
@@ -24,8 +14,10 @@ return {
 
   {
     "folke/noice.nvim",
-    enabled = false,
-    event = "VeryLazy",
+    lazy = false,
+    keys = {
+      { "<Leader>n", ":NoiceDismiss<CR>", desc = "Dismiss notifies", silent = true },
+    },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
@@ -50,6 +42,14 @@ return {
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = false, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = false, -- add a border to hover docs and signature help
+      },
+      cmdline = {
+        view = "cmdline",
+        format = {
+          cmdline = { pattern = "^:", icon = ":", lang = "vim" },
+          search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
+          search_up = { kind = "search", pattern = "^%?", icon = "?", lang = "regex" },
+        },
       },
     },
   },

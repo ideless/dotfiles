@@ -14,9 +14,13 @@ return {
   -- guess indent
   {
     "nmac427/guess-indent.nvim",
+    event = "VeryLazy",
     config = function()
       require("guess-indent").setup {}
-      vim.cmd([[autocmd InsertEnter * :GuessIndent]])
+
+      require("which-key").register {
+        ["<Leader>i"] = { "<Cmd>GuessIndent<CR>", "Guess indent" },
+      }
     end,
   },
 
@@ -24,14 +28,23 @@ return {
   {
     "terrortylor/nvim-comment",
     keys = {
-      { "<C-_>", "<Cmd>CommentToggle<CR>", mode = "i" },
-      { "<C-/>", "<Cmd>CommentToggle<CR>", mode = "i" },
-      { "<C-_>", ":CommentToggle<CR>", mode = { "n", "x" } },
-      { "<C-/>", ":CommentToggle<CR>", mode = { "n", "x" } },
+      { "<C-_>", mode = { "i", "n", "x" } },
+      { "<C-/>", mode = { "i", "n", "x" } },
     },
     config = function()
       require("nvim_comment").setup {}
-    end
+
+      local wk = require("which-key")
+
+      wk.register({
+        ["<C-_>"] = { "<Cmd>CommentToggle<CR>", "Toggle comment" },
+        ["<C-/>"] = { "<Cmd>CommentToggle<CR>", "Toggle comment" },
+      }, { mode = { "i", "n" } })
+      wk.register({
+        ["<C-_>"] = { ":CommentToggle<CR>", "Toggle comment" },
+        ["<C-/>"] = { ":CommentToggle<CR>", "Toggle comment" },
+      }, { mode = { "x" } })
+    end,
   },
 
   -- quick jump
@@ -60,20 +73,26 @@ return {
   -- osc52 copy
   {
     "ojroques/nvim-osc52",
+    keys = {
+      { "<Leader>y", mode = "x" },
+    },
     config = function()
-      vim.keymap.set("x", "<Leader>y", require("osc52").copy_visual)
+      require("which-key").register({
+        ["<Leader>y"] = { require("osc52").copy_visual, "Copy to clipboard" },
+      }, { mode = "x" })
     end,
   },
-  
+
   -- terminal
   {
     "akinsho/toggleterm.nvim",
     keys = {
-      { "<A-t>", "<Cmd>ToggleTerm direction=float<CR>", mode = { "i", "n", "t", "x" } },
-      { "<A-T>\\", "<Cmd>ToggleTerm direction=vertical<CR>", mode = { "i", "n", "t", "x" } },
-      { "<A-T>-", "<Cmd>ToggleTerm direction=horizontal<CR>", mode = { "i", "n", "t", "x" } },
-      { "<C-\\>", "<Cmd>ToggleTermSendCurrentLine<CR>", mode = "n" },
-      { "<C-\\>", ":ToggleTermSendVisualLines<CR>", mode = "x" },
+      -- <A-*> does not seem to work in which-key, put them here instead
+      { "<A-t>", "<Cmd>ToggleTerm direction=float<CR>", mode = { "i", "n", "t", "x" }, silent = true },
+      { "<A-T>\\", "<Cmd>ToggleTerm direction=vertical<CR>", mode = { "i", "n", "t", "x" }, silent = true },
+      { "<A-T>-", "<Cmd>ToggleTerm direction=horizontal<CR>", mode = { "i", "n", "t", "x" }, silent = true },
+      { "<C-\\>", "<Cmd>ToggleTermSendCurrentLine<CR>", mode = "n", silent = true },
+      { "<C-\\>", ":ToggleTermSendVisualLines<CR>", mode = "x", silent = true },
     },
     opts = {
       size = function(term)
@@ -94,7 +113,7 @@ return {
     opts = {
       space_char_blankline = " ",
     },
-    init = function()
+    config = function()
       vim.opt.list = true
     end,
   },
@@ -103,10 +122,13 @@ return {
   {
     "nvim-pack/nvim-spectre",
     dependencies = {
-      'nvim-lua/plenary.nvim',
+      "nvim-lua/plenary.nvim",
     },
-    keys = {
-      { "<Leader>sr", "<Cmd>Spectre<CR>", desc = "Replace in files" },
-    }
-  }
+    keys = "<Leader>sr",
+    config = function()
+      require("which-key").register {
+        ["<Leader>sr"] = { "<Cmd>Spectre<CR>", "Replace in multiple files" },
+      }
+    end,
+  },
 }

@@ -28,11 +28,17 @@ return {
           expand_or_jump = "<Enter>",
         },
       },
+      rename = {
+        keys = {
+          quit = { "<C-c>" },
+        },
+      },
     },
     config = function(_, opts)
       require("lspsaga").setup(opts)
 
       local wk = require("which-key")
+      local err_level = vim.diagnostic.severity.ERROR
 
       wk.register({
         d = { "<Cmd>Lspsaga goto_definition<CR>", "Definition" },
@@ -50,15 +56,23 @@ return {
         o = { "<Cmd>Lspsaga outline<CR>", "Outline" },
       }, { prefix = "<Leader>" })
 
-      vim.keymap.set("n", "K", "<Cmd>Lspsaga hover_doc<CR>")
-      vim.keymap.set("n", "[d", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Previous diagnostic" })
-      vim.keymap.set("n", "]d", "<Cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next diagnostic" })
-      vim.keymap.set("n", "[D", function()
-        require("lspsaga.diagnostic"):goto_prev { severity = vim.diagnostic.severity.ERROR }
-      end, { desc = "Previous error" })
-      vim.keymap.set("n", "]D", function()
-        require("lspsaga.diagnostic"):goto_next { severity = vim.diagnostic.severity.ERROR }
-      end, { desc = "Next error" })
+      wk.register {
+        ["K"] = { "<Cmd>Lspsaga hover_doc<CR>" },
+        ["[d"] = { "<Cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous diagnostic" },
+        ["]d"] = { "<Cmd>Lspsaga diagnostic_jump_next<CR>", "Next diagnostic" },
+        ["[D"] = {
+          function()
+            require("lspsaga.diagnostic"):goto_prev { severity = err_level }
+          end,
+          "Previous error",
+        },
+        ["]D"] = {
+          function()
+            require("lspsaga.diagnostic"):goto_next { severity = err_level }
+          end,
+          "Next error",
+        },
+      }
     end,
   },
 }

@@ -4,12 +4,6 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    lazy = false,
-    keys = {
-      { "gb", ":BufferLinePick<CR>" },
-      { "[b", ":BufferLineCyclePrev<CR>", desc = "Previous buffer" },
-      { "]b", ":BufferLineCycleNext<CR>", desc = "Next buffer" },
-    },
     opts = {
       options = {
         numbers = "none",
@@ -20,5 +14,14 @@ return {
         diagnostics = "nvim_lsp",
       },
     },
+    config = function(_, opts)
+      require("bufferline").setup(opts)
+
+      require("which-key").register {
+        ["gb"] = { ":BufferLinePick<CR>", "Pick buffer" },
+        ["[b"] = { ":BufferLineCyclePrev<CR>", "Previous buffer" },
+        ["]b"] = { ":BufferLineCycleNext<CR>", "Next buffer" },
+      }
+    end,
   },
 }

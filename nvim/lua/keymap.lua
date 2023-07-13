@@ -1,6 +1,6 @@
 local map = function(modes, lhs, rhs, opts)
   -- default options
-  local options = { noremap = true }
+  local options = { noremap = true, silent = true }
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
@@ -27,8 +27,8 @@ map("in", "<C-z>", "<Cmd>u<CR>")
 map("n", "<C-a>", "gg^vG$")
 
 -- motions
-map("i", "<C-a>", "<C-o>I")
-map("i", "<C-e>", "<End>")
+-- map("i", "<C-a>", "<C-o>I")
+-- map("i", "<C-e>", "<End>") -- useless, and conflicts with Copilot
 map("i", "<C-h>", "<Left>")
 map("i", "<C-l>", "<Right>")
 map("i", "<C-j>", "<Down>")
