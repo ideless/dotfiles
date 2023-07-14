@@ -56,8 +56,10 @@ return {
         o = { "<Cmd>Lspsaga outline<CR>", "Outline" },
       }, { prefix = "<Leader>" })
 
+      vim.keymap.set("n", "K", "<Cmd>Lspsaga hover_doc<CR>", { silent = true })
+
       wk.register {
-        ["K"] = { "<Cmd>Lspsaga hover_doc<CR>" },
+        -- K = { "<Cmd>Lspsaga hover_doc<CR>" }, -- it won't work
         ["[d"] = { "<Cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous diagnostic" },
         ["]d"] = { "<Cmd>Lspsaga diagnostic_jump_next<CR>", "Next diagnostic" },
         ["[D"] = {

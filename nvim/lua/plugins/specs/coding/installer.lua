@@ -26,7 +26,6 @@ return {
         end,
         ["pyright"] = function()
           require("lspconfig").pyright.setup {
-            on_attach = on_lsp_attach,
             settings = {
               python = {
                 analysis = {

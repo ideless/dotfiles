@@ -48,16 +48,39 @@ return {
   -- the builtin ltex code actions (add to dict) is broken
   {
     "barreiroleo/ltex_extra.nvim",
-    ft = { "markdown", "tex" },
+    ft = { "markdown", "tex" }, -- TODO: it gets load when opening diagnostic of other ls
     dependencies = { "neovim/nvim-lspconfig" },
     opts = {
-      server_opts = {
-        on_attach = function(client, bufnr) end,
-        settings = {
-          ltex = {},
-        },
-      },
       path = ".vscode",
     },
+  },
+
+  -- task runner
+  {
+    "stevearc/overseer.nvim",
+    dependencies = {
+      "stevearc/dressing.nvim",
+    },
+    opts = {},
+    config = function(_, opts)
+      require("overseer").setup(opts)
+
+      local wk = require("which-key")
+
+      wk.register({
+        name = "Tasks",
+        o = { ":OverseerToggle<CR>", "Toggle window" },
+        s = { ":OverseerSaveBundle<CR>", "Save bundle" },
+        l = { ":OverseerLoadBundle<CR>", "Load bundle" },
+        d = { ":OverseerDeleteBundle<CR>", "Delete bundle" },
+        t = { ":OverseerRun<CR>", "Run a task from a template" },
+        T = { ":OverseerRunCmd<CR>", "Run a raw shell command" },
+        i = { ":OverseerInfo<CR>", "Display diagnostic information" },
+        b = { ":OverseerBuild<CR>", "Open the task builder" },
+        q = { ":OverseerQuickAction<CR>", "Run an action on the most recent/under cursor task" },
+        a = { ":OverseerTaskAction<CR>", "Select a task to run an action on" },
+        c = { ":OverseerClearCache<CR>", "Clear the task cache" },
+      }, { prefix = "<Leader>t" })
+    end,
   },
 }
