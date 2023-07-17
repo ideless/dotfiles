@@ -1,7 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
+    branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
@@ -15,8 +15,8 @@ return {
       local utils = require("utils")
 
       require("which-key").register({
-        e = { ":NeoTreeFloatToggle<CR>", "Toggle explorer" },
-        E = { ":NeoTreeShowToggle<CR>", "Toggle explorer (side)" },
+        e = { ":Neotree toggle float<CR>", "Toggle explorer" },
+        E = { ":Neotree toggle left<CR>", "Toggle explorer (side)" },
       }, { prefix = "<Leader>" })
 
       return {
@@ -62,9 +62,9 @@ return {
           winbar = true,
           statusline = false,
           sources = {
-            { source = "filesystem", display_name = " 󰉓 Files " },
-            -- { source = "buffers", display_name = " 󰈙 Buffers " },
-            { source = "git_status", display_name = " 󰊢 Git " },
+            { source = "filesystem" },
+            -- { source = "buffers"},
+            { source = "git_status" },
             { source = "document_symbols" },
           },
         },
