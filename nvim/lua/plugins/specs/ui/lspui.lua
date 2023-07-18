@@ -19,13 +19,13 @@ return {
       },
       finder = {
         keys = {
-          expand_or_jump = "<Enter>",
+          toggle_or_open = { "<Enter>", "o", "<Space>" },
           quit = { "q", "<Esc>", "<C-c>" },
         },
       },
       outline = {
         keys = {
-          expand_or_jump = "<Enter>",
+          toggle_or_jump = { "<Enter>", "o", "<Space>" },
         },
       },
       rename = {
@@ -45,7 +45,7 @@ return {
         D = { "<Cmd>Lspsaga peek_definition<CR>", "Definition (peek)" },
         t = { "<Cmd>Lspsaga goto_type_definition<CR>", "Type definition" },
         T = { "<Cmd>Lspsaga peek_type_definition<CR>", "Type definition (peek)" },
-        h = { "<Cmd>Lspsaga lsp_finder<CR>", "LSP finder" },
+        h = { "<Cmd>Lspsaga finder<CR>", "LSP finder" },
       }, { prefix = "g" })
 
       wk.register({
