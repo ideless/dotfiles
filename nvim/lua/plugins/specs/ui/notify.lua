@@ -24,6 +24,9 @@ return {
     },
     opts = {
       lsp = {
+        progress = {
+          enabled = true, -- turn off for ltex
+        },
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -45,6 +48,40 @@ return {
           cmdline = { pattern = "^:", icon = ":", lang = "vim" },
           search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
           search_up = { kind = "search", pattern = "^%?", icon = "?", lang = "regex" },
+        },
+      },
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "written",
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "lines yanked",
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "more lines",
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "fewer lines",
+          },
+          opts = { skip = true },
         },
       },
     },

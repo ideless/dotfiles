@@ -18,6 +18,17 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
+
+      -- load and reload lsp
+      local wk = require("which-key")
+
+      wk.register({
+        s = { "<Cmd>LspStart<CR>", "Start LSP" },
+        S = { "<Cmd>LspStop<CR>", "Stop LSP" },
+        r = { "<Cmd>LspRestart<CR>", "Restart LSP" },
+        i = { "<Cmd>LspInfo<CR>", "LSP info" },
+        l = { "<Cmd>LspLog<CR>", "LSP log" },
+      }, { prefix = "<Leader>l" })
     end,
   },
 

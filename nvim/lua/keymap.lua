@@ -65,9 +65,6 @@ map("n", "i", function()
   end
 end, { expr = true })
 
--- <F5> to reload lsp
-map("n", "<F5>", "<Cmd>LspRestart<CR>")
-
 -- close buffer
 map("n", "<Leader>x", function()
   -- close all buffers whose path starts with "gitsigns://" if there are
