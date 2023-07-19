@@ -24,9 +24,6 @@ return {
     },
     opts = {
       lsp = {
-        progress = {
-          enabled = true, -- turn off for ltex
-        },
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -55,31 +52,40 @@ return {
           filter = {
             event = "msg_show",
             kind = "",
-            find = "written",
+            cond = function(message)
+              local content = message:content()
+              local skipped_patterns = {
+                "written",
+                "lines? yanked",
+                "more lines?",
+                "fewer lines?",
+              }
+              for _, pattern in ipairs(skipped_patterns) do
+                if content:find(pattern) then
+                  return true
+                end
+              end
+              return false
+            end,
           },
           opts = { skip = true },
         },
         {
           filter = {
-            event = "msg_show",
-            kind = "",
-            find = "lines yanked",
-          },
-          opts = { skip = true },
-        },
-        {
-          filter = {
-            event = "msg_show",
-            kind = "",
-            find = "more lines",
-          },
-          opts = { skip = true },
-        },
-        {
-          filter = {
-            event = "msg_show",
-            kind = "",
-            find = "fewer lines",
+            event = "lsp",
+            kind = "progress",
+            cond = function(message)
+              local client = vim.tbl_get(message.opts, "progress", "client")
+              local skipped_clients = {
+                "ltex",
+              }
+              for _, skipped_client in ipairs(skipped_clients) do
+                if client == skipped_client then
+                  return true
+                end
+              end
+              return false
+            end,
           },
           opts = { skip = true },
         },
