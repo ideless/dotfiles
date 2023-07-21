@@ -153,7 +153,14 @@ if confirm "Setup nvim"; then
     fi
     create_link "$SCRIPT_DIR/nvim" "$HOME/.config/nvim"
     if ! installed "rg"; then
-        sudo apt install ripgrep
+        sudo apt install ripgrep -y
+    fi
+    sudo apt install python3-venv -y
+    if ! installed "fd"; then
+        sudo apt install fd-find -y
+        mkdir -p ~/.local/bin
+        ln -s $(which fdfind) ~/.local/bin/fd
+        should_manually_do+=("add_path \"\$HOME/.local/bin\"")
     fi
 fi
 
