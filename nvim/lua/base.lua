@@ -61,3 +61,6 @@ vim.cmd([[
     autocmd CursorHold * checktime
   augroup END
 ]])
+
+-- visualize whitespaces
+vim.opt.list = true

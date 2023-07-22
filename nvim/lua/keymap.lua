@@ -14,8 +14,8 @@ end
 vim.g.mapleader = " "
 
 -- hightlight
-map("n", "<C-i>", ":Inspect<CR>")
-map("n", "<C-h>", ":noh<CR>")
+map("n", "<Leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+map("in", "<Esc>", "<Cmd>noh<CR><Esc>", { desc = "Escape and clear hlsearch" })
 
 -- window operations
 map("n", "<C-w>\\", ":vsplit<CR>")
@@ -36,6 +36,19 @@ map("i", "<C-k>", "<Up>")
 map("nxo", "H", "^")
 map("nxo", "L", "$")
 
+-- Add undo break-points
+map("i", ",", ",<C-g>u")
+map("i", ".", ".<C-g>u")
+map("i", ";", ";<C-g>u")
+
+-- Move Lines
+map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+
 -- Don't leave visual mode when changing indent
 map("x", ">", ">gv")
 map("x", "<", "<gv")
@@ -49,9 +62,9 @@ map("i", "<C-c>", "<Esc>")
 -- search for visually selected text with escaping
 -- hint: type in :%s//abc/g to replace
 map("x", "*", "y/\\V<C-r>=escape(@\",'/\\')<CR><CR>")
-map("x", "//", "y/\\V<C-r>=escape(@\",'/\\')<CR>")
-map("x", "/s", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/")
-map("x", "/S", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/<C-r>=escape(@\",'/\\')<CR>")
+-- map("x", "//", "y/\\V<C-r>=escape(@\",'/\\')<CR>")
+-- map("x", "/s", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/")
+-- map("x", "/S", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/<C-r>=escape(@\",'/\\')<CR>")
 
 -- Escape from terminal mode
 map("t", "<A-[>", "<C-\\><C-n>")

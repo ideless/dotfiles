@@ -40,6 +40,10 @@ return {
               "package-lock.json",
             },
           },
+          follow_current_file = {
+            enabled = true,
+            leave_dirs_open = true,
+          },
           window = {
             mappings = {
               ["i"] = "show_fs_stat",

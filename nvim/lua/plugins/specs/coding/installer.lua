@@ -2,6 +2,7 @@ return {
   -- language server installer
   {
     "williamboman/mason.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       ui = {
         border = "single",
@@ -12,6 +13,7 @@ return {
   -- mason with lspconfig
   {
     "williamboman/mason-lspconfig.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       ensure_installed = {},
     },
@@ -45,6 +47,7 @@ return {
 
   {
     "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     opts = function()
       local null_ls = require("null-ls")
 

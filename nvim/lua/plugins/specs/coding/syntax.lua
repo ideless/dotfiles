@@ -5,6 +5,13 @@ return {
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
       "yioneko/nvim-yati",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "TSUpdateSync" },
+    keys = {
+      { "<Enter>", desc = "Increment selection" },
+      { "<BS>", desc = "Decrement selection", mode = "x" },
     },
     opts = {
       ensure_installed = {
@@ -31,6 +38,15 @@ return {
       },
       matchup = {
         enable = true,
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<Enter>",
+          node_incremental = "<Enter>",
+          scope_incremental = false,
+          node_decremental = "<BS>",
+        },
       },
     },
     config = function(_, opts)

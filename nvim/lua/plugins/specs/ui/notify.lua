@@ -1,6 +1,15 @@
 return {
   {
     "rcarriga/nvim-notify",
+    keys = {
+      {
+        "<Leader>ux",
+        function()
+          require("notify").dismiss { silent = true, pending = true }
+        end,
+        desc = "Dismiss all Notifications",
+      },
+    },
     opts = {
       timeout = 1000,
       max_height = function()
@@ -14,7 +23,7 @@ return {
 
   {
     "folke/noice.nvim",
-    lazy = false,
+    event = "VeryLazy",
     keys = {
       { "<Leader>n", ":NoiceDismiss<CR>", desc = "Dismiss notifies", silent = true },
     },

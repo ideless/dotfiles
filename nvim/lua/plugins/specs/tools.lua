@@ -61,6 +61,19 @@ return {
     dependencies = {
       "stevearc/dressing.nvim",
     },
+    keys = {
+      { "<Leader>to", desc = "Toggle window" },
+      { "<Leader>ts", desc = "Save bundle" },
+      { "<Leader>tl", desc = "Load bundle" },
+      { "<Leader>td", desc = "Delete bundle" },
+      { "<Leader>tt", desc = "Run a task from a template" },
+      { "<Leader>tT", desc = "Run a raw shell command" },
+      { "<Leader>ti", desc = "Display diagnostic information" },
+      { "<Leader>tb", desc = "Open the task builder" },
+      { "<Leader>tq", desc = "Run an action on the most recent/under cursor task" },
+      { "<Leader>ta", desc = "Select a task to run an action on" },
+      { "<Leader>tc", desc = "Clear the task cache" },
+    },
     opts = {},
     config = function(_, opts)
       require("overseer").setup(opts)
