@@ -42,12 +42,12 @@ map("i", ".", ".<C-g>u")
 map("i", ";", ";<C-g>u")
 
 -- Move Lines
-map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+map("n", "<A-j>", "<cmd>m .+1<CR>==", { desc = "Move down" })
+map("n", "<A-k>", "<cmd>m .-2<CR>==", { desc = "Move up" })
+map("i", "<A-j>", "<esc><cmd>m .+1<CR>==gi", { desc = "Move down" })
+map("i", "<A-k>", "<esc><cmd>m .-2<CR>==gi", { desc = "Move up" })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move down" })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move up" })
 
 -- Don't leave visual mode when changing indent
 map("x", ">", ">gv")
@@ -61,7 +61,7 @@ map("i", "<C-c>", "<Esc>")
 
 -- search for visually selected text with escaping
 -- hint: type in :%s//abc/g to replace
-map("x", "*", "y/\\V<C-r>=escape(@\",'/\\')<CR><CR>")
+map("x", "*", "y/\\V<C-r>=escape(@\",'/\\')<CR><CR>") -- FIX: sometimes (in finder.lua) it doesn't work
 -- map("x", "//", "y/\\V<C-r>=escape(@\",'/\\')<CR>")
 -- map("x", "/s", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/")
 -- map("x", "/S", "y:%s/\\V<C-r>=escape(@\",'/\\')<CR>/<C-r>=escape(@\",'/\\')<CR>")

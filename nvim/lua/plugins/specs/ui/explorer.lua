@@ -8,16 +8,11 @@ return {
       "MunifTanjim/nui.nvim",
     },
     keys = {
-      { "<Leader>e", desc = "Toggle explorer" },
-      { "<Leader>E", desc = "Toggle explorer (side)" },
+      { "<Leader>e", ":Neotree toggle float<CR>", desc = "Toggle explorer" },
+      { "<Leader>E", ":Neotree toggle left<CR>", desc = "Toggle explorer (side)" },
     },
     opts = function()
       local utils = require("utils")
-
-      require("which-key").register({
-        e = { ":Neotree toggle float<CR>", "Toggle explorer" },
-        E = { ":Neotree toggle left<CR>", "Toggle explorer (side)" },
-      }, { prefix = "<Leader>" })
 
       return {
         sources = {

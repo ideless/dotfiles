@@ -62,38 +62,18 @@ return {
       "stevearc/dressing.nvim",
     },
     keys = {
-      { "<Leader>to", desc = "Toggle window" },
-      { "<Leader>ts", desc = "Save bundle" },
-      { "<Leader>tl", desc = "Load bundle" },
-      { "<Leader>td", desc = "Delete bundle" },
-      { "<Leader>tt", desc = "Run a task from a template" },
-      { "<Leader>tT", desc = "Run a raw shell command" },
-      { "<Leader>ti", desc = "Display diagnostic information" },
-      { "<Leader>tb", desc = "Open the task builder" },
-      { "<Leader>tq", desc = "Run an action on the most recent/under cursor task" },
-      { "<Leader>ta", desc = "Select a task to run an action on" },
-      { "<Leader>tc", desc = "Clear the task cache" },
+      { "<Leader>to", "<Cmd>OverseerToggle<CR>", desc = "Toggle window" },
+      { "<Leader>ts", "<Cmd>OverseerSaveBundle<CR>", desc = "Save bundle" },
+      { "<Leader>tl", "<Cmd>OverseerLoadBundle<CR>", desc = "Load bundle" },
+      { "<Leader>td", "<Cmd>OverseerDeleteBundle<CR>", desc = "Delete bundle" },
+      { "<Leader>tt", "<Cmd>OverseerRun<CR>", desc = "Run a task from a template" },
+      { "<Leader>tT", "<Cmd>OverseerRunCmd<CR>", desc = "Run a raw shell command" },
+      { "<Leader>ti", "<Cmd>OverseerInfo<CR>", desc = "Display diagnostic information" },
+      { "<Leader>tb", "<Cmd>OverseerBuild<CR>", desc = "Open the task builder" },
+      { "<Leader>tq", "<Cmd>OverseerQuickAction<CR>", desc = "Run an action on the most recent/under cursor task" },
+      { "<Leader>ta", "<Cmd>OverseerTaskAction<CR>", desc = "Select a task to run an action on" },
+      { "<Leader>tc", "<Cmd>OverseerClearCache<CR>", desc = "Clear the task cache" },
     },
     opts = {},
-    config = function(_, opts)
-      require("overseer").setup(opts)
-
-      local wk = require("which-key")
-
-      wk.register({
-        name = "Tasks",
-        o = { ":OverseerToggle<CR>", "Toggle window" },
-        s = { ":OverseerSaveBundle<CR>", "Save bundle" },
-        l = { ":OverseerLoadBundle<CR>", "Load bundle" },
-        d = { ":OverseerDeleteBundle<CR>", "Delete bundle" },
-        t = { ":OverseerRun<CR>", "Run a task from a template" },
-        T = { ":OverseerRunCmd<CR>", "Run a raw shell command" },
-        i = { ":OverseerInfo<CR>", "Display diagnostic information" },
-        b = { ":OverseerBuild<CR>", "Open the task builder" },
-        q = { ":OverseerQuickAction<CR>", "Run an action on the most recent/under cursor task" },
-        a = { ":OverseerTaskAction<CR>", "Select a task to run an action on" },
-        c = { ":OverseerClearCache<CR>", "Clear the task cache" },
-      }, { prefix = "<Leader>t" })
-    end,
   },
 }

@@ -109,39 +109,4 @@ return {
       )
     end,
   },
-
-  -- A pretty list for showing diagnostics
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = {
-      { "<Leader>dd", desc = "Toggle diagnostics (document)" },
-      { "<Leader>dw", desc = "Toggle diagnostics (workspace)" },
-      { "<Leader>dl", desc = "Toggle loclist" },
-      { "<Leader>dq", desc = "Toggle quickfix" },
-      { "gr", desc = "Goto references" },
-      { "gd", desc = "Goto definitions" },
-      { "gI", desc = "Goto implementations" },
-      { "gt", desc = "Goto type definitions" },
-    },
-    opts = {},
-    config = function(_, opts)
-      local wk = require("which-key")
-
-      wk.register({
-        d = { "<Cmd>TroubleToggle document_diagnostics<CR>", "Toggle diagnostics (document)" },
-        D = { "<Cmd>TroubleToggle workspace_diagnostics<CR>", "Toggle diagnostics (workspace)" },
-        l = { "<Cmd>TroubleToggle loclist<CR>", "Toggle loclist" },
-        q = { "<Cmd>TroubleToggle quickfix<CR>", "Toggle quickfix" },
-      }, { prefix = "<Leader>d" })
-
-      wk.register({
-        r = { "<Cmd>TroubleToggle lsp_references<CR>", "Goto references" },
-        d = { "<Cmd>TroubleToggle lsp_definitions<CR>", "Goto definitions" },
-        i = { "<Cmd>TroubleToggle lsp_implementations<CR>", "Goto implementations" },
-        t = { "<Cmd>TroubleToggle lsp_type_definitions<CR>", "Goto type definitions" },
-      }, { prefix = "g" })
-    end,
-  },
 }
