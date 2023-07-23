@@ -15,7 +15,7 @@ return {
       }
 
       wk.register({
-        name = "Hunk",
+        name = "hunk",
         s = { gs.stage_hunk, "Stage hunk" },
         u = { gs.undo_stage_hunk, "Undo stage hunk" },
         r = { gs.reset_hunk, "Reset hunk" },
@@ -27,7 +27,7 @@ return {
       }, { prefix = "<Leader>h" })
 
       wk.register({
-        name = "Git",
+        name = "git",
         d = { gs.diffthis, "Diff" },
         D = {
           function()

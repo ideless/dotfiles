@@ -4,7 +4,31 @@ return {
   "folke/lazy.nvim",
 
   -- keymap hint
-  "folke/which-key.nvim",
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      plugins = { spelling = true },
+      defaults = {
+        mode = { "n", "v" },
+        ["g"] = { name = "+goto" },
+        ["]"] = { name = "+next" },
+        ["["] = { name = "+prev" },
+        ["<leader>t"] = { name = "+tasks" },
+        ["<leader>g"] = { name = "+git" },
+        ["<leader>h"] = { name = "+hunks" },
+        ["<Leader>l"] = { name = "+lsp" },
+        ["<Leader>s"] = { name = "+search" },
+        ["<Leader>u"] = { name = "+utils" },
+        ["<Leader>d"] = { name = "+diagnostics" },
+      },
+    },
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+      wk.register(opts.defaults)
+    end,
+  },
 
   -- autopairs
   {
@@ -16,12 +40,12 @@ return {
   -- guess indent
   {
     "nmac427/guess-indent.nvim",
-    event = "InsertEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("guess-indent").setup {}
 
       require("which-key").register {
-        ["<Leader>i"] = { "<Cmd>GuessIndent<CR>", "Guess indent" },
+        ["<Leader>ui"] = { "<Cmd>GuessIndent<CR>", "Guess indent" },
       }
     end,
   },

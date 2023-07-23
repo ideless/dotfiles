@@ -24,9 +24,6 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    keys = {
-      { "<Leader>n", ":NoiceDismiss<CR>", desc = "Dismiss notifies", silent = true },
-    },
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
