@@ -50,29 +50,6 @@ return {
     end,
   },
 
-  -- toggle comment
-  {
-    "terrortylor/nvim-comment",
-    keys = {
-      { "<C-_>", mode = { "i", "n", "x" } },
-      { "<C-/>", mode = { "i", "n", "x" } },
-    },
-    config = function()
-      require("nvim_comment").setup {}
-
-      local wk = require("which-key")
-
-      wk.register({
-        ["<C-_>"] = { "<Cmd>CommentToggle<CR>", "Toggle comment" },
-        ["<C-/>"] = { "<Cmd>CommentToggle<CR>", "Toggle comment" },
-      }, { mode = { "i", "n" } })
-      wk.register({
-        ["<C-_>"] = { ":CommentToggle<CR>", "Toggle comment" },
-        ["<C-/>"] = { ":CommentToggle<CR>", "Toggle comment" },
-      }, { mode = { "x" } })
-    end,
-  },
-
   -- quick jump
   {
     "phaazon/hop.nvim",
