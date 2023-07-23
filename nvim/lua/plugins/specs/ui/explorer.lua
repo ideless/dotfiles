@@ -8,8 +8,8 @@ return {
       "MunifTanjim/nui.nvim",
     },
     keys = {
-      { "<Leader>e", ":Neotree toggle float<CR>", desc = "Toggle explorer" },
-      { "<Leader>E", ":Neotree toggle left<CR>", desc = "Toggle explorer (side)" },
+      { "<Leader>e", ":Neotree toggle reveal float<CR>", desc = "Toggle explorer" },
+      { "<Leader>E", ":Neotree toggle reveal left<CR>", desc = "Toggle explorer (side)" },
     },
     opts = function()
       local utils = require("utils")
@@ -34,10 +34,6 @@ return {
               "yarn.lock",
               "package-lock.json",
             },
-          },
-          follow_current_file = {
-            enabled = true,
-            leave_dirs_open = true,
           },
           window = {
             mappings = {
