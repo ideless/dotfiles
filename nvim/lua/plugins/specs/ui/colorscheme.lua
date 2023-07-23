@@ -40,6 +40,15 @@ return {
         highlights.SpectreReplace = {
           fg = colors.orange,
         }
+        highlights.IlluminatedWordText = {
+          underline = true,
+        }
+        highlights.IlluminatedWordRead = {
+          underline = true,
+        }
+        highlights.IlluminatedWordWrite = {
+          underline = true,
+        }
       end,
     },
     config = function(_, opts)
