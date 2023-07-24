@@ -51,6 +51,17 @@ return {
           cmdline = { pattern = "^:", icon = ":", lang = "vim" },
           search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
           search_up = { kind = "search", pattern = "^%?", icon = "?", lang = "regex" },
+          inc_rename = {
+            view = "cmdline_popup",
+            pattern = "^:%s*IncRename%s+",
+            title = "Rename",
+            conceal = true,
+            opts = {
+              relative = "cursor",
+              size = { min_width = 20 },
+              position = { row = -3, col = 0 },
+            },
+          },
         },
       },
       routes = {

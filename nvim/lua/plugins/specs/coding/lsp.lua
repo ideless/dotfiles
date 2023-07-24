@@ -42,7 +42,7 @@ return {
       }, { prefix = "<Leader>l" })
 
       wk.register({
-        -- leave definition/references/implementations/type definitions to rouble
+        -- leave definition/references/implementations/type definitions to trouble
         D = { vim.lsp.buf.declaration, "Goto Declaration" },
         K = { vim.lsp.buf.signature_help, "Signature Help" },
       }, { prefix = "g" })
@@ -59,7 +59,7 @@ return {
 
       wk.register({
         a = { vim.lsp.buf.code_action, "Code action" },
-        r = { vim.lsp.buf.rename, "Rename" },
+        -- leave rename to inc-rename
       }, { prefix = "<Leader>" })
     end,
   },
@@ -108,5 +108,21 @@ return {
         { silent = true, desc = "Save without formatting" }
       )
     end,
+  },
+
+  -- rename
+  {
+    "smjonas/inc-rename.nvim",
+    keys = {
+      {
+        "<Leader>r",
+        function()
+          return ":IncRename " .. vim.fn.expand("<cword>")
+        end,
+        desc = "Rename",
+        expr = true,
+      },
+    },
+    opts = {},
   },
 }
