@@ -10,6 +10,20 @@ local show_macro_recording = function()
   end
 end
 
+local show_toggleterm_name = function()
+  if vim.bo.filetype == "toggleterm" then
+    local name = vim.fn.expand("%")
+    local shell_path, buffer_id = name:match("term://.+:(.+);#toggleterm#(%d+)")
+    if not shell_path or not buffer_id then
+      return "Terminal ?"
+    else
+      return shell_path .. " [" .. buffer_id .. "]"
+    end
+  else
+    return ""
+  end
+end
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -27,6 +41,10 @@ return {
           {
             "macro-recording",
             fmt = show_macro_recording,
+          },
+          {
+            "toggleterm_name",
+            fmt = show_toggleterm_name,
           },
         },
       },

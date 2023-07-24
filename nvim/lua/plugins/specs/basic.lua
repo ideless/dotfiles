@@ -117,10 +117,13 @@ return {
     "akinsho/toggleterm.nvim",
     keys = {
       -- <A-*> does not seem to work in which-key, put them here instead
-      { "<A-t>", "<Cmd>ToggleTerm direction=float<CR>", mode = { "i", "n", "t", "x" }, silent = true },
-      { "<A-T>\\", "<Cmd>ToggleTerm direction=vertical<CR>", mode = { "i", "n", "t", "x" }, silent = true },
-      { "<A-T>-", "<Cmd>ToggleTerm direction=horizontal<CR>", mode = { "i", "n", "t", "x" }, silent = true },
-      { "<Leader>gg", desc = "Gitui" },
+      { "<A-t>", ":ToggleTerm direction=float<CR>", mode = { "n" }, silent = true },
+      { "<A-t>", "<Cmd>ToggleTerm direction=float<CR>", mode = { "i", "x", "t" }, silent = true },
+      { "<A-T>\\", ":ToggleTerm direction=vertical<CR>", mode = { "n" }, silent = true },
+      { "<A-T>\\", "<Cmd>ToggleTerm direction=vertical<CR>", mode = { "i", "x", "t" }, silent = true },
+      { "<A-T>-", ":ToggleTerm direction=horizontal<CR>", mode = { "n" }, silent = true },
+      { "<A-T>-", "<Cmd>ToggleTerm direction=horizontal<CR>", mode = { "i", "x", "t" }, silent = true },
+      { "<Leader>gg", desc = "Gitui", silent = true },
     },
     opts = {
       size = function(term)
@@ -132,6 +135,12 @@ return {
       end,
       direction = "float",
       persist_mode = false,
+      winbar = {
+        enabled = true,
+        name_formatter = function(term) --  term: Terminal
+          return term.name
+        end,
+      },
     },
     config = function(_, opts)
       require("toggleterm").setup(opts)
@@ -185,21 +194,21 @@ return {
 
       function OpenSpectre(is_cur)
         local su = require("spectre.utils")
-        local opts = {}
+        local o = {}
 
         if is_cur then
-          opts.path = vim.fn.fnameescape(vim.fn.expand("%:p:."))
+          o.path = vim.fn.fnameescape(vim.fn.expand("%:p:."))
 
           if vim.loop.os_uname().sysname == "Windows_NT" then
-            opts.path = vim.fn.substitute(opts.path, "\\", "/", "g")
+            o.path = vim.fn.substitute(o.path, "\\", "/", "g")
           end
         end
 
-        opts.search_text = su.get_visual_selection()
-        opts.search_text = vim.fn.escape(opts.search_text, ".+*?^$()[]{}|\\")
+        o.search_text = su.get_visual_selection()
+        o.search_text = vim.fn.escape(o.search_text, ".+*?^$()[]{}|\\")
 
         format.save_without_format()
-        sp.open(opts)
+        sp.open(o)
       end
 
       wk.register({
