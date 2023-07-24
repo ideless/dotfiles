@@ -11,7 +11,7 @@ return {
     keys = {
       { "<Leader>f", "<Cmd>Telescope find_files<CR>", desc = "Find files" },
       { "<Leader>ss", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Search" },
-      { "<Leader>st", "<Cmd>Telescope lsp_document_symbols<CR>", desc = "Search tags" },
+      { "<Leader>so", "<Cmd>Telescope lsp_document_symbols<CR>", desc = "Search symbols" },
       { "<Leader>sg", "<Cmd>Telescope live_grep<CR>", desc = "Grep in files" },
       { "<Leader>sw", "<Cmd>Telescope grep_string<CR>", desc = "Grep current word in files" },
     },
