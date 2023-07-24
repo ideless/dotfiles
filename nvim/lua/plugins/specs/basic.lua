@@ -11,6 +11,8 @@ return {
       plugins = { spelling = true },
       defaults = {
         mode = { "n", "v" },
+        [";"] = { name = "+jump" },
+        [","] = { name = "+surround" },
         ["g"] = { name = "+goto" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
@@ -53,32 +55,30 @@ return {
   -- quick jump
   {
     "phaazon/hop.nvim",
-    event = "VeryLazy",
+    keys = {
+      { ";a", "<Cmd>HopAnywhere<CR>", desc = "Anywhere", mode = { "n", "o", "x" } },
+      { ";c", "<Cmd>HopChar1<CR>", desc = "Character", mode = { "n", "o", "x" } },
+      { ";l", "<Cmd>HopLineStart<CR>", desc = "Line", mode = { "n", "o", "x" } },
+      { ";v", "<Cmd>HopVertical<CR>", desc = "Vertical", mode = { "n", "o", "x" } },
+      { ";p", "<Cmd>HopPattern<CR>", desc = "Pattern", mode = { "n", "o", "x" } },
+      { ";w", "<Cmd>HopWord<CR>", desc = "Word", mode = { "n", "o", "x" } },
+    },
     opts = {
       case_insensitive = false,
     },
-    config = function(_, opts)
-      require("hop").setup(opts)
-
-      local wk = require("which-key")
-
-      wk.register({
-        name = "Hop",
-        a = { "<Cmd>HopAnywhere<CR>", "Anywhere" },
-        c = { "<Cmd>HopChar1<CR>", "Character" },
-        l = { "<Cmd>HopLineStart<CR>", "Line" },
-        v = { "<Cmd>HopVertical<CR>", "Vertical" },
-        p = { "<Cmd>HopPattern<CR>", "Pattern" },
-        w = { "<Cmd>HopWord<CR>", "Word" },
-      }, { prefix = ";", mode = { "n", "o", "x" }, noremap = false }) -- mode cannot be set to "", otherwise <a> gets hijacked by matchit, seems to be a bug of which-key
-    end,
   },
 
   -- enhanced search
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      modes = {
+        char = {
+          keys = { "f", "F", "t", "T" },
+        },
+      },
+    },
     keys = {
       {
         ";;",
@@ -212,9 +212,34 @@ return {
       end
 
       wk.register({
-        r = { "<esc><cmd>lua OpenSpectre(true)<CR>", "Replace in document" },
-        R = { "<esc><cmd>lua OpenSpectre(false)<CR>", "Replace in workspace" },
+        r = { "<Esc><Cmd>lua OpenSpectre(true)<CR>", "Replace in document" },
+        R = { "<Esc><Cmd>lua OpenSpectre(false)<CR>", "Replace in workspace" },
       }, { prefix = "<Leader>s", mode = "x" })
     end,
+  },
+
+  -- Add, delete, replace, find, highlight surrounding (like pair of parenthesis, quotes, etc.).
+  {
+    "echasnovski/mini.surround",
+    keys = {
+      { ",,", desc = "Add surrounding" },
+      { ",d", desc = "Delete surrounding" },
+      { ",f", desc = "Find right surrounding" },
+      { ",F", desc = "Find left surrounding" },
+      { ",h", desc = "highlight surrounding" },
+      { ",r", desc = "Replace surrounding" },
+      { ",n", desc = "Update n_lines" },
+    },
+    opts = {
+      mappings = {
+        add = ",,", -- Add surrounding in Normal and Visual modes
+        delete = ",d", -- Delete surrounding
+        find = ",f", -- Find surrounding (to the right)
+        find_left = ",F", -- Find surrounding (to the left)
+        highlight = ",h", -- Highlight surrounding
+        replace = ",r", -- Replace surrounding
+        update_n_lines = ",n", -- Update `n_lines`
+      },
+    },
   },
 }
