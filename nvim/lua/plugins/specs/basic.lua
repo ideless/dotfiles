@@ -160,17 +160,42 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    config = function()
+    opts = {
+      open_cmd = "new", -- open horizontal split (instead of default vertical)
+    },
+    config = function(_, opts)
       local wk = require("which-key")
       local sp = require("spectre")
+
+      sp.setup(opts)
+
       wk.register({
         r = { sp.open_file_search, "Replace in document" },
         R = { sp.open_visual, "Replace in workspace" },
       }, { prefix = "<Leader>s" })
 
+      function OpenSpectre(is_cur)
+        local su = require("spectre.utils")
+        local opts = {}
+
+        if is_cur then
+          opts.path = vim.fn.fnameescape(vim.fn.expand("%:p:."))
+
+          if vim.loop.os_uname().sysname == "Windows_NT" then
+            opts.path = vim.fn.substitute(opts.path, "\\", "/", "g")
+          end
+        end
+
+        opts.search_text = su.get_visual_selection()
+        opts.search_text = vim.fn.escape(opts.search_text, ".+*?^$()[]{}|\\")
+
+        format.save_without_format()
+        sp.open(opts)
+      end
+
       wk.register({
-        r = { "<esc><cmd>lua require('utils').open_spectre(true)<CR>", "Replace in document" },
-        R = { "<esc><cmd>lua require('utils').open_spectre(false)<CR>", "Replace in workspace" },
+        r = { "<esc><cmd>lua OpenSpectre(true)<CR>", "Replace in document" },
+        R = { "<esc><cmd>lua OpenSpectre(false)<CR>", "Replace in workspace" },
       }, { prefix = "<Leader>s", mode = "x" })
     end,
   },

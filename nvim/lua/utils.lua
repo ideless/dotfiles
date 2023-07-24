@@ -51,24 +51,4 @@ M.format_mode = function(mode, type)
   return str
 end
 
-M.open_spectre = function(is_cur)
-  local format = require("format")
-  local sp = require("spectre")
-  local su = require("spectre.utils")
-  local opts = {}
-
-  if is_cur then
-    opts.path = vim.fn.fnameescape(vim.fn.expand("%:p:."))
-
-    if vim.loop.os_uname().sysname == "Windows_NT" then
-      opts.path = vim.fn.substitute(opts.path, "\\", "/", "g")
-    end
-  end
-
-  opts.search_text = vim.fn.escape(su.get_visual_selection(), "/\\")
-
-  format.save_without_format()
-  sp.open(opts)
-end
-
 return M
