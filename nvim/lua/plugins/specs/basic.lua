@@ -120,8 +120,7 @@ return {
       { "<A-t>", "<Cmd>ToggleTerm direction=float<CR>", mode = { "i", "n", "t", "x" }, silent = true },
       { "<A-T>\\", "<Cmd>ToggleTerm direction=vertical<CR>", mode = { "i", "n", "t", "x" }, silent = true },
       { "<A-T>-", "<Cmd>ToggleTerm direction=horizontal<CR>", mode = { "i", "n", "t", "x" }, silent = true },
-      { "<C-\\>", "<Cmd>ToggleTermSendCurrentLine<CR>", mode = "n", silent = true },
-      { "<C-\\>", ":ToggleTermSendVisualLines<CR>", mode = "x", silent = true },
+      { "<Leader>gg", desc = "Gitui" },
     },
     opts = {
       size = function(term)
@@ -134,6 +133,16 @@ return {
       direction = "float",
       persist_mode = false,
     },
+    config = function(_, opts)
+      require("toggleterm").setup(opts)
+
+      local Terminal = require("toggleterm.terminal").Terminal
+      local gitui = Terminal:new { cmd = "gitui", hidden = true }
+
+      vim.keymap.set("n", "<Leader>gg", function()
+        gitui:toggle()
+      end, { noremap = true, silent = true, desc = "Gitui" })
+    end,
   },
 
   -- visualize whitespaces
