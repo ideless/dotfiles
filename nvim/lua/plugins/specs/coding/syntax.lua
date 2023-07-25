@@ -10,7 +10,8 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSUpdateSync" },
     keys = {
-      { "<Enter>", desc = "Increment selection" },
+      { "vs", desc = "Start increment selection" },
+      { "<CR>", desc = "Increment selection", mode = "x" },
       { "<BS>", desc = "Decrement selection", mode = "x" },
     },
     opts = {
@@ -43,8 +44,8 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<Enter>",
-          node_incremental = "<Enter>",
+          init_selection = "vs",
+          node_incremental = "<CR>",
           scope_incremental = false,
           node_decremental = "<BS>",
         },
