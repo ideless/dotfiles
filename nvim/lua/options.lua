@@ -64,3 +64,7 @@ vim.cmd([[
 
 -- visualize whitespaces
 vim.opt.list = true
+
+-- ignore case
+vim.opt.ignorecase = true
+vim.opt.smartcase = true -- do not ignore case when a upper case is typed
