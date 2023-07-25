@@ -250,6 +250,7 @@ if confirm "Setup gitui"; then
         popd
         should_manually_do+=("add_path \"$gitui_prefix\"")
     fi
+    create_link "$SCRIPT_DIR/gitui" "$HOME/.config/gitui"
 fi
 
 if confirm "Link bash scripts"; then
