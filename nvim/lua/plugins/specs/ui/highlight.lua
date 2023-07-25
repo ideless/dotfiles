@@ -15,6 +15,7 @@ return {
       large_file_overrides = {
         providers = { "lsp" },
       },
+      modes_allowlist = { "n" },
     },
     config = function(_, opts)
       require("illuminate").configure(opts)
