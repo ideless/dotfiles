@@ -125,14 +125,14 @@ if confirm "Setup tmux"; then
     if ! installed "tmux"; then
         sudo apt install tmux -y
     fi
-    create_link "$SCRIPT_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
+    create_link "$SCRIPT_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 fi
 
 if confirm "Setup vim-tiny"; then
     if ! installed "vi"; then
         sudo apt install vim-tiny -y
     fi
-    create_link "$SCRIPT_DIR/vim/.vimrc" "$HOME/.vimrc"
+    create_link "$SCRIPT_DIR/vim/vimrc" "$HOME/.vimrc"
 fi
 
 if confirm "Setup nvim"; then
@@ -261,7 +261,7 @@ if confirm "Setup rust"; then
 fi
 
 if confirm "Setup wezterm"; then
-    create_link "$SCRIPT_DIR/wezterm/.wezterm.lua" "$HOME/.wezterm.lua"
+    create_link "$SCRIPT_DIR/wezterm/wezterm.lua" "$HOME/.wezterm.lua"
 fi
 
 # Step 4: cleanup
