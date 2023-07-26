@@ -74,6 +74,13 @@ function Check-Installed {
     return $cmd -ne $null
 }
 
+# Step 0: install scoop
+if (-not (Check-Installed "scoop")) {
+    Write-Host "Installing scoop..."
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+    irm get.scoop.sh | iex
+}
+
 # Step 1: check prerequisites
 $prerequisites = @(
     "scoop"
@@ -106,7 +113,7 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 if (Confirm-Action -Title "Setup nvim") {
     if (!(Check-Installed "nvim")) {
         scoop bucket add main
-        scoop install neovim
+        scoop install main/neovim
     }
     Create-Link -SourcePath "$PSScriptRoot/nvim" -LinkPath "$HOME/AppData/Local/nvim"
 }
@@ -114,9 +121,17 @@ if (Confirm-Action -Title "Setup nvim") {
 if (Confirm-Action -Title "Setup wezterm") {
     if (!(Check-Installed "wezterm")) {
         scoop bucket add extras
-        scoop install wezterm
+        scoop install extras/wezterm
     }
-    Create-Link -SourcePath "$PSScriptRoot/wezterm/.wezterm.lua" -LinkPath "$HOME/.wezterm.lua"
+    Create-Link -SourcePath "$PSScriptRoot/wezterm/wezterm.lua" -LinkPath "$HOME/.wezterm.lua"
+}
+
+if (Confirm-Action -Title "Setup gitui") {
+    if (!(Check-Installed "gitui")) {
+        scoop bucket add main
+        scoop install main/gitui
+    }
+    Create-Link -SourcePath "$PSScriptRoot/gitui" -LinkPath "$env:APPDATA/gitui"
 }
 
 # Step 4: cleanup
