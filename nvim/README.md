@@ -1,40 +1,134 @@
-# Installation
+<a href="https://dotfyle.com/ideless/dotfiles-nvim"><img src="https://dotfyle.com/ideless/dotfiles-nvim/badges/plugins?style=flat" /></a>
+<a href="https://dotfyle.com/ideless/dotfiles-nvim"><img src="https://dotfyle.com/ideless/dotfiles-nvim/badges/leaderkey?style=flat" /></a>
+<a href="https://dotfyle.com/ideless/dotfiles-nvim"><img src="https://dotfyle.com/ideless/dotfiles-nvim/badges/plugin-manager?style=flat" /></a>
 
-- Install [neovim](https://neovim.io/).
-- Clone neovim configuration files to the appropriate folder for your system. For Linux, this is typically `~/.config/nvim/`. For Windows, it is `~\AppData\Local\nvim\`.
-- Open neovim, and it will install plugins automatically.
-- Note that Language servers, formatters, and other tools need to be installed manually (See [Languages](#Languages)).
+## Install Instructions
 
-# Plugins
+> Install requires Neovim 0.9+. Always review the code before installing a configuration.
 
-| Plugin                                                                          | Description              |
-| ------------------------------------------------------------------------------- | ------------------------ |
-| [packer.nvim](https://github.com/wbthomason/packer.nvim)                        | Plugin manager           |
-| [which-key.nvim](https://github.com/folke/which-key.nvim)                       | Key bindings hint        |
-| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                      | Autopair                 |
-| [guess-indent.nvim](https://github.com/nmac427/guess-indent.nvim)               | Guess indent             |
-| [nvim-comment](https://github.com/terrortylor/nvim-comment)                     | Toggle comments          |
-| [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)                 | File explorer            |
-| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)              | Fuzzy finder             |
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                      | Language server config   |
-| [null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)              | External LSP clients     |
-| [mason.nvim](https://github.com/williamboman/mason.nvim)                        | Package manager          |
-| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                 | Code completion          |
-| [bufferline.nvim](https://github.com/bufferline.nvim)                           | Tabs                     |
-| [copilot.vim](https://github.com/github/copilot.vim)                            | Copilot                  |
-| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)           | Language parsers         |
-| [hop.nvim](https://github.com/phaazon/hop.nvim)                                 | Fast jump                |
-| [vimtex](https://github.com/lervag/vimtex)                                      | LaTeX                    |
-| [nvim-osc52](https://github.com/ojroques/nvim-osc52)                            | Copy via OSC52           |
-| [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)                     | TokyoNight theme         |
-| [lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)                         | LSP UI                   |
-| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                     | Git signs, staging, diff |
-| [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)                   | Terminal                 |
-| [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indentation guides       |
-| [nvim-spectre](https://github.com/nvim-pack/nvim-spectre)                       | Search and replace       |
-| [vim-matchup](https://github.com/andymass/vim-matchup)                          | Fuck matchit.vim         |
+Clone the repository and install the plugins:
 
-# Dependencies
+```sh
+git clone git@github.com:ideless/dotfiles ~/.config/ideless/dotfiles
+NVIM_APPNAME=ideless/dotfiles/nvim nvim --headless +Lazy! sync +qa
+```
+
+Open Neovim with this config:
+
+```sh
+NVIM_APPNAME=ideless/dotfiles/nvim nvim
+```
+
+## Plugins
+
+### code-runner
+
+- [stevearc/overseer.nvim](https://dotfyle.com/plugins/stevearc/overseer.nvim)
+
+### colorscheme
+
+- [projekt0n/github-nvim-theme](https://dotfyle.com/plugins/projekt0n/github-nvim-theme)
+- [folke/tokyonight.nvim](https://dotfyle.com/plugins/folke/tokyonight.nvim)
+
+### comment
+
+- [JoosepAlviste/nvim-ts-context-commentstring](https://dotfyle.com/plugins/JoosepAlviste/nvim-ts-context-commentstring)
+- [terrortylor/nvim-comment](https://dotfyle.com/plugins/terrortylor/nvim-comment)
+- [folke/todo-comments.nvim](https://dotfyle.com/plugins/folke/todo-comments.nvim)
+
+### completion
+
+- [zbirenbaum/copilot.lua](https://dotfyle.com/plugins/zbirenbaum/copilot.lua)
+- [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
+
+### cursorline
+
+- [RRethy/vim-illuminate](https://dotfyle.com/plugins/RRethy/vim-illuminate)
+
+### diagnostics
+
+- [folke/trouble.nvim](https://dotfyle.com/plugins/folke/trouble.nvim)
+
+### editing-support
+
+- [windwp/nvim-autopairs](https://dotfyle.com/plugins/windwp/nvim-autopairs)
+
+### file-explorer
+
+- [nvim-neo-tree/neo-tree.nvim](https://dotfyle.com/plugins/nvim-neo-tree/neo-tree.nvim)
+
+### fuzzy-finder
+
+- [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
+
+### git
+
+- [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
+
+### indent
+
+- [lukas-reineke/indent-blankline.nvim](https://dotfyle.com/plugins/lukas-reineke/indent-blankline.nvim)
+
+### keybinding
+
+- [folke/which-key.nvim](https://dotfyle.com/plugins/folke/which-key.nvim)
+
+### lsp
+
+- [smjonas/inc-rename.nvim](https://dotfyle.com/plugins/smjonas/inc-rename.nvim)
+- [jose-elias-alvarez/null-ls.nvim](https://dotfyle.com/plugins/jose-elias-alvarez/null-ls.nvim)
+- [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
+
+### lsp-installer
+
+- [williamboman/mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim)
+
+### motion
+
+- [folke/flash.nvim](https://dotfyle.com/plugins/folke/flash.nvim)
+- [phaazon/hop.nvim](https://dotfyle.com/plugins/phaazon/hop.nvim)
+
+### nvim-dev
+
+- [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
+- [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
+
+### plugin-manager
+
+- [folke/lazy.nvim](https://dotfyle.com/plugins/folke/lazy.nvim)
+
+### startup
+
+- [goolord/alpha-nvim](https://dotfyle.com/plugins/goolord/alpha-nvim)
+
+### statusline
+
+- [nvim-lualine/lualine.nvim](https://dotfyle.com/plugins/nvim-lualine/lualine.nvim)
+
+### syntax
+
+- [echasnovski/mini.surround](https://dotfyle.com/plugins/echasnovski/mini.surround)
+- [nvim-treesitter/nvim-treesitter-textobjects](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-textobjects)
+- [nvim-treesitter/nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)
+
+### tabline
+
+- [akinsho/bufferline.nvim](https://dotfyle.com/plugins/akinsho/bufferline.nvim)
+
+### utility
+
+- [folke/noice.nvim](https://dotfyle.com/plugins/folke/noice.nvim)
+- [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
+- [stevearc/dressing.nvim](https://dotfyle.com/plugins/stevearc/dressing.nvim)
+
+## Language Servers
+
+- ltex
+- pyright
+
+(generated by [Dotfyle](https://dotfyle.com))
+
+## Dependencies
 
 | Dependency                                          | For                               |
 | --------------------------------------------------- | --------------------------------- |
@@ -44,39 +138,14 @@
 | [Nerd font](https://github.com/40huo/Patched-Fonts) | Icons and symbols                 |
 | [zathura](https://pwmt.org/projects/zathura/)       | VimTeX PDF preview                |
 
-# Keymaps
+## Resources
 
-See `lua/keymap.lua`
+- [slides about colorschemes](https://speakerdeck.com/cocopon/creating-your-lovely-color-scheme)
+- [Neovim Spaghetti - LSP Servers, Linters, Formatters, and Treesitter](https://roobert.github.io/2022/12/03/Extending-Neovim/)
+- [nvim-lua-guide (chinese ver)](https://github.com/glepnir/nvim-lua-guide-zh)
 
-# Colorscheme
+## Troubleshooting
 
-Frist read this [slides](https://speakerdeck.com/cocopon/creating-your-lovely-color-scheme) about colorschemes.
-
-See `lua/colors`
-
-# Languages
-
-First read [Neovim Spaghetti - LSP Servers, Linters, Formatters, and Treesitter](https://roobert.github.io/2022/12/03/Extending-Neovim/) to get a picture of luaguage configurations in neovim.
-
-- Install language server & formatter & linter via `:Mason`
-- (Optionally) add custom config in `lua/plugins/mason-config.lua`
-- After opening a file, you can check attached
-  - LSP server (language servers) by `:LspInfo`
-  - null-ls server (formatters & linters) by `:NullLsInfo`
-- Treesitter language parsers should be installed automatically
-
-# Development tips
-
-- Always run `:PackerCompile` after modifying packer configurations.
-- View error/debug/info messages via `:messages`.
-- Run `:checkhealth` to check plugins health (very helpful).
-- Use `:hi`, `:TSEditQuery` and `<C-h>` (See `lua/keymap.lua`) to help configuring themes.
-- Run `nvim --startuptime` to inspect startup time.
-- Run `:luafile path/to/some.lua` to run lua scripts.
-
-# Troubleshooting
-
-- `treesitter/highlighter: Error executing lua: ...` wait or manually install missing Treesitter language parser by `:TSInstall`
 - Tmux not rendering unicodes properly: run `tmux -u` instead of `tmux`
 - Tmux not showing italic fonts: add `set -g default-terminal "xterm-256color"` to `~/.tmux.conf`
 - Osc52 not working in tmux: add `set -s set-clipboard on` to `~/.tmux.conf`
