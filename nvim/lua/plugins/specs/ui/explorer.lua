@@ -8,8 +8,8 @@ return {
       "MunifTanjim/nui.nvim",
     },
     keys = {
-      { "<Leader>e", ":Neotree toggle reveal float<CR>", desc = "Toggle explorer" },
-      { "<Leader>E", ":Neotree toggle reveal left<CR>", desc = "Toggle explorer (side)" },
+      { "<Leader>e", ":Neotree toggle reveal float<CR>", desc = "Toggle explorer", silent = true },
+      { "<Leader>E", ":Neotree toggle reveal left<CR>", desc = "Toggle explorer (side)", silent = true },
     },
     opts = function()
       local utils = require("utils")
