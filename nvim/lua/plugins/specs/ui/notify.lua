@@ -24,6 +24,9 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
+    keys = {
+      { "<Leader>uh", ":NoiceHistory<CR>", desc = "Message history", silent = true },
+    },
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",

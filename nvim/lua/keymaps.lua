@@ -20,6 +20,10 @@ map("in", "<Esc>", "<Cmd>noh<CR><Esc>", { desc = "Escape and clear hlsearch" })
 -- window operations
 map("n", "<C-w>\\", ":vsplit<CR>")
 map("n", "<C-w>-", ":split<CR>")
+map("nitx", "<A-h>", "<Cmd>wincmd h<CR>")
+map("nitx", "<A-j>", "<Cmd>wincmd j<CR>")
+map("nitx", "<A-k>", "<Cmd>wincmd k<CR>")
+map("nitx", "<A-l>", "<Cmd>wincmd l<CR>")
 
 -- conventional shortcuts
 map("in", "<C-s>", "<Cmd>w<CR>")
@@ -42,12 +46,12 @@ map("i", ".", ".<C-g>u")
 map("i", ";", ";<C-g>u")
 
 -- Move Lines
-map("n", "<A-j>", "<cmd>m .+1<CR>==", { desc = "Move down" })
-map("n", "<A-k>", "<cmd>m .-2<CR>==", { desc = "Move up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<CR>==gi", { desc = "Move down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<CR>==gi", { desc = "Move up" })
-map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move down" })
-map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move up" })
+map("n", "<C-j>", "<cmd>m .+1<CR>==", { desc = "Move down" })
+map("n", "<C-k>", "<cmd>m .-2<CR>==", { desc = "Move up" })
+-- map("i", "<A-j>", "<esc><cmd>m .+1<CR>==gi", { desc = "Move down" })
+-- map("i", "<A-k>", "<esc><cmd>m .-2<CR>==gi", { desc = "Move up" })
+map("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "Move down" })
+map("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move up" })
 
 -- Don't leave visual mode when changing indent
 map("x", ">", ">gv")
