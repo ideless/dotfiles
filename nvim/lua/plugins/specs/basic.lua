@@ -18,7 +18,6 @@ return {
         ["["] = { name = "+prev" },
         ["<leader>t"] = { name = "+tasks" },
         ["<leader>g"] = { name = "+git" },
-        ["<leader>h"] = { name = "+hunks" },
         ["<Leader>l"] = { name = "+lsp" },
         ["<Leader>s"] = { name = "+search" },
         ["<Leader>u"] = { name = "+utils" },
@@ -180,7 +179,7 @@ return {
   {
     "echasnovski/mini.surround",
     keys = {
-      { ",,", desc = "Add surrounding" },
+      { ",a", desc = "Add surrounding", mode = { "n", "x" } },
       { ",d", desc = "Delete surrounding" },
       { ",f", desc = "Find right surrounding" },
       { ",F", desc = "Find left surrounding" },
@@ -190,7 +189,7 @@ return {
     },
     opts = {
       mappings = {
-        add = ",,", -- Add surrounding in Normal and Visual modes
+        add = ",a", -- Add surrounding in Normal and Visual modes
         delete = ",d", -- Delete surrounding
         find = ",f", -- Find surrounding (to the right)
         find_left = ",F", -- Find surrounding (to the left)

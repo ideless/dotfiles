@@ -15,7 +15,6 @@ return {
       }
 
       wk.register({
-        name = "hunk",
         s = { gs.stage_hunk, "Stage hunk" },
         u = { gs.undo_stage_hunk, "Undo stage hunk" },
         r = { gs.reset_hunk, "Reset hunk" },
@@ -24,10 +23,6 @@ return {
         p = { gs.preview_hunk, "Preview hunk" },
         b = { gs.blame_line, "Blame line" },
         t = { gs.toggle_current_line_blame, "Toggle blame line" },
-      }, { prefix = "<Leader>h" })
-
-      wk.register({
-        name = "git",
         d = { gs.diffthis, "Diff" },
         D = {
           function()
