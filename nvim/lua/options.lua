@@ -68,3 +68,7 @@ vim.opt.list = true
 -- ignore case
 vim.opt.ignorecase = true
 vim.opt.smartcase = true -- do not ignore case when a upper case is typed
+
+-- check spell
+vim.opt.spelllang = "en_us"
+vim.opt.spell = false

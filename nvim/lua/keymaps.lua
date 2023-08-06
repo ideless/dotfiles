@@ -13,7 +13,7 @@ end
 -- Leader key
 vim.g.mapleader = " "
 
--- hightlight
+-- highlight
 map("n", "<Leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("in", "<Esc>", "<Cmd>noh<CR><Esc>", { desc = "Escape and clear hlsearch" })
 
@@ -57,7 +57,7 @@ map("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move up" })
 map("x", ">", ">gv")
 map("x", "<", "<gv")
 
--- diable annoying keymaps
+-- disable annoying keymaps
 map("n", "q:", "<nop>")
 
 -- <C-c> not triggering InsertLeave event
@@ -101,3 +101,8 @@ map("n", "<Leader>x", function()
   end
 end, { desc = "Close buffer" })
 map("n", "<Leader>X", ":%bd!|e#|bd#<CR>", { desc = "Close all but this buffer" })
+
+-- toggle spell check
+map("n", "<Leader>us", function()
+  vim.wo.spell = not vim.wo.spell
+end, { desc = "Toggle spell check" })
