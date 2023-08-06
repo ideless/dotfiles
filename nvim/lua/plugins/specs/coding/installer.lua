@@ -14,6 +14,9 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    keys = {
+      { "<Leader>um", ":Mason<CR>", desc = "Open Mason" },
+    },
     opts = {
       ensure_installed = {},
     },

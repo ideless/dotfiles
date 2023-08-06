@@ -1,7 +1,13 @@
 local format = require("format")
 
 return {
-  "folke/lazy.nvim",
+  {
+    "folke/lazy.nvim",
+    event = "VimEnter",
+    keys = {
+      { "<Leader>ul", ":Lazy<CR>", desc = "Open Lazy" },
+    },
+  },
 
   -- keymap hint
   {
