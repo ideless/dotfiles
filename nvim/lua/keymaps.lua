@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 local map = function(modes, lhs, rhs, opts)
   -- default options
   local options = { noremap = true, silent = true }
@@ -82,10 +84,9 @@ map("n", "i", function()
   end
 end, { expr = true })
 
--- close buffer
+-- smart close
 map("n", "<Leader>x", function()
-  -- close all buffers whose path starts with "gitsigns://" if there are
-  -- any, and otherwise close the current buffer
+  -- close all buffers whose path starts with "gitsigns://" if there are any
   local gitsigns_bufs_exist = false
   local buf_list = vim.api.nvim_list_bufs()
   for _, buf in ipairs(buf_list) do
@@ -95,14 +96,53 @@ map("n", "<Leader>x", function()
       vim.api.nvim_buf_delete(buf, { force = true })
     end
   end
-
-  if not gitsigns_bufs_exist then
-    vim.api.nvim_buf_delete(0, { force = true })
+  if gitsigns_bufs_exist then
+    return
   end
-end, { desc = "Close buffer" })
-map("n", "<Leader>X", ":%bd!|e#|bd#<CR>", { desc = "Close all but this buffer" })
+
+  -- if there are more than one splits, close the current split
+  if utils.count_split() > 1 then
+    vim.cmd("close")
+    return
+  end
+
+  -- otherwise close the current buffer
+  vim.api.nvim_buf_delete(0, { force = true })
+end, { desc = "Smart close" })
+map("n", "<Leader>X", function()
+  -- if there are more than one splits, close other split
+  if utils.count_split() > 1 then
+    vim.cmd("only")
+    return
+  end
+
+  -- otherwise close all but current buffer
+  vim.cmd("%bd!|e#|bd#")
+end, { desc = "Smart close others" })
 
 -- toggle spell check
 map("n", "<Leader>us", function()
   vim.wo.spell = not vim.wo.spell
 end, { desc = "Toggle spell check" })
+
+-- run current buffer as script
+map("n", "<Leader>ur", function()
+  -- save first
+  vim.cmd("w")
+  -- get current buffer filetype
+  local ft = vim.bo.filetype
+  -- use different commands for different filetypes
+  if ft == "lua" then
+    vim.cmd("luafile %")
+  elseif ft == "python" then
+    vim.cmd("!python3 %")
+  elseif ft == "sh" then
+    vim.cmd("!bash %")
+  elseif ft == "javascript" then
+    vim.cmd("!node %")
+  elseif ft == "typescript" then
+    vim.cmd("!ts-node %")
+  else
+    print("Unsupported filetype: " .. ft)
+  end
+end, { desc = "Run as script" })

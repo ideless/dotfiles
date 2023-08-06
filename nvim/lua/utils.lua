@@ -51,4 +51,19 @@ M.format_mode = function(mode, type)
   return str
 end
 
+M.count_split = function()
+  local wins = vim.api.nvim_tabpage_list_wins(0)
+  local split_count = 0
+
+  for _, win in ipairs(wins) do
+    local cfg = vim.api.nvim_win_get_config(win)
+    -- TODO: is this correct?
+    if cfg.relative == "" and cfg.external == false then
+      split_count = split_count + 1
+    end
+  end
+
+  return split_count
+end
+
 return M
