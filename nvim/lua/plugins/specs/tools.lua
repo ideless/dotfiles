@@ -28,12 +28,17 @@ return {
 
   {
     "lervag/vimtex",
-    ft = "tex",
+    -- ft = "tex",
     config = function()
       vim.g.tex_flavor = "latex"
       vim.g.vimtex_quickfix_mode = 0
 
-      vim.g.vimtex_view_method = "zathura"
+      vim.g.vimtex_view_method = "general"
+      vim.g.vimtex_view_general_viewer = "curl -X POST http://localhost:5050/api/vimtex/view"
+      vim.g.vimtex_view_general_options = "-F 'pdf=@pdf' -F 'tex=@tex' -F 'line=@line' -F 'col=@col'"
+
+      -- vim.g.vimtex_view_method = "zathura"
+
       -- vim.g.vimtex_view_general_viewer = "okular.exe"
       -- vim.g.vimtex_view_general_options = "--unique file:@pdf#src:@line@tex"
 
@@ -50,9 +55,11 @@ return {
     "barreiroleo/ltex_extra.nvim",
     ft = { "markdown", "tex" }, -- TODO: it gets load when opening diagnostic of other ls
     dependencies = { "neovim/nvim-lspconfig" },
-    opts = {
-      path = ".vscode",
-    },
+    -- opts = {
+    --   path = ".vscode",
+    --   load_langs = { "en-US" },
+    --   init_check = true,
+    -- },
   },
 
   -- task runner

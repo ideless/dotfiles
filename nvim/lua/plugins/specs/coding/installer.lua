@@ -44,6 +44,17 @@ return {
             },
           }
         end,
+        ["ltex"] = function()
+          require("lspconfig").ltex.setup {
+            on_attach = function()
+              require("ltex_extra").setup {
+                path = ".vscode",
+                load_langs = { "en-US" },
+                init_check = true,
+              }
+            end,
+          }
+        end,
       }
     end,
   },
