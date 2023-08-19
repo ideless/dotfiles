@@ -17,8 +17,6 @@ return {
       plugins = { spelling = true },
       defaults = {
         mode = { "n", "v" },
-        [";"] = { name = "+jump" },
-        [","] = { name = "+surround" },
         ["g"] = { name = "+goto" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
@@ -61,12 +59,12 @@ return {
   {
     "phaazon/hop.nvim",
     keys = {
-      { ";a", "<Cmd>HopAnywhere<CR>", desc = "Anywhere", mode = { "n", "o", "x" } },
-      { ";c", "<Cmd>HopChar1<CR>", desc = "Character", mode = { "n", "o", "x" } },
-      { ";l", "<Cmd>HopLineStart<CR>", desc = "Line", mode = { "n", "o", "x" } },
-      { ";v", "<Cmd>HopVertical<CR>", desc = "Vertical", mode = { "n", "o", "x" } },
-      { ";p", "<Cmd>HopPattern<CR>", desc = "Pattern", mode = { "n", "o", "x" } },
-      { ";w", "<Cmd>HopWord<CR>", desc = "Word", mode = { "n", "o", "x" } },
+      -- { ";a", "<Cmd>HopAnywhere<CR>", desc = "Anywhere", mode = { "n", "o", "x" } },
+      { "gc", "<Cmd>HopChar1<CR>", desc = "Goto character", mode = { "n", "o", "x" } },
+      { "gl", "<Cmd>HopLineStart<CR>", desc = "Goto line", mode = { "n", "o", "x" } },
+      { "gv", "<Cmd>HopVertical<CR>", desc = "Goto vertical", mode = { "n", "o", "x" } },
+      -- { ";p", "<Cmd>HopPattern<CR>", desc = "Pattern", mode = { "n", "o", "x" } },
+      { "gw", "<Cmd>HopWord<CR>", desc = "Goto word", mode = { "n", "o", "x" } },
     },
     opts = {
       case_insensitive = false,
@@ -80,26 +78,26 @@ return {
     opts = {
       modes = {
         char = {
-          keys = { "f", "F", "t", "T" },
+          jump_labels = true,
         },
       },
     },
     keys = {
       {
-        ";;",
+        "gp",
         mode = { "n", "x", "o" },
         function()
           require("flash").jump()
         end,
-        desc = "Flash jump",
+        desc = "Goto pattern",
       },
       {
-        ";s",
+        "vs",
         mode = { "n", "o", "x" },
         function()
           require("flash").treesitter()
         end,
-        desc = "Flash treesitter",
+        desc = "Select treesitter",
       },
     },
   },
