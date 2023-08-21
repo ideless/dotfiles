@@ -183,22 +183,22 @@ return {
   {
     "echasnovski/mini.surround",
     keys = {
-      { "ys", desc = "Add surrounding", mode = { "n", "x" } },
+      { "ca", desc = "Add surrounding", mode = { "n", "x" } },
       { "ds", desc = "Delete surrounding" },
       -- { ",f", desc = "Find right surrounding" },
       -- { ",F", desc = "Find left surrounding" },
       -- { ",h", desc = "highlight surrounding" },
-      { "cs", desc = "Replace surrounding" },
+      { "cr", desc = "Replace surrounding" },
       -- { ",n", desc = "Update n_lines" },
     },
     opts = {
       mappings = {
-        add = "ys", -- Add surrounding in Normal and Visual modes
+        add = "ca", -- Add surrounding in Normal and Visual modes
         delete = "ds", -- Delete surrounding
         -- find = ",f", -- Find surrounding (to the right)
         -- find_left = ",F", -- Find surrounding (to the left)
         -- highlight = ",h", -- Highlight surrounding
-        replace = "cs", -- Replace surrounding
+        replace = "cr", -- Replace surrounding
         -- update_n_lines = ",n", -- Update `n_lines`
       },
     },
