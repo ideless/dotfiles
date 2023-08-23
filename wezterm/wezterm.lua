@@ -13,10 +13,10 @@ end
 -- This is where you actually apply your config choices
 
 local my_fonts = {
-  wezterm.font("Operator Mono", { weight = "DemiLight" }),
+  -- wezterm.font("Operator Mono", { weight = "DemiLight" }),
   wezterm.font("Code New Roman"),
-  wezterm.font("Fira Code"),
-  wezterm.font("JetBrains Mono"),
+  -- wezterm.font("Fira Code"),
+  -- wezterm.font("JetBrains Mono"),
 }
 
 config.font = my_fonts[math.random(#my_fonts)]
