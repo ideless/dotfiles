@@ -47,11 +47,16 @@ return {
         ["ltex"] = function()
           require("lspconfig").ltex.setup {
             on_attach = function()
-              require("ltex_extra").setup {
-                path = ".vscode",
-                load_langs = { "en-US" },
-                init_check = true,
-              }
+              local suc, ltex_extra = pcall(require, "ltex_extra")
+              if suc then
+                ltex_extra.setup {
+                  path = ".vscode",
+                  load_langs = { "en-US" },
+                  init_check = true,
+                }
+              else
+                vim.notify("ltex_extra not found", vim.log.levels.WARN)
+              end
             end,
           }
         end,
