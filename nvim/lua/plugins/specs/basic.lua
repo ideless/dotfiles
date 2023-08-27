@@ -195,11 +195,11 @@ return {
       mappings = {
         add = "ca", -- Add surrounding in Normal and Visual modes
         delete = "ds", -- Delete surrounding
-        find = nil, -- Find surrounding (to the right)
-        find_left = nil, -- Find surrounding (to the left)
-        highlight = nil, -- Highlight surrounding
+        find = "", -- Find surrounding (to the right)
+        find_left = "", -- Find surrounding (to the left)
+        highlight = "", -- Highlight surrounding
         replace = "cr", -- Replace surrounding
-        update_n_lines = nil, -- Update `n_lines`
+        update_n_lines = "", -- Update `n_lines`
       },
     },
   },
