@@ -1,6 +1,8 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
+local os_is_windows = wezterm.target_triple == "x86_64-pc-windows-msvc"
+
 -- This table will hold the configuration.
 local config = {}
 
@@ -28,10 +30,15 @@ config.window_padding = {
   bottom = 0,
 }
 config.hide_tab_bar_if_only_one_tab = true
--- config.default_prog = {
--- 	"C:/WINDOWS/system32/wsl.exe",
--- }
+
+if os_is_windows then
+  config.default_prog = {
+    "pwsh",
+  }
+end
+
 config.color_scheme = "Andromeda"
+
 config.keys = {
   {
     key = "|",
@@ -84,6 +91,7 @@ config.keys = {
     action = wezterm.action.AdjustPaneSize { "Right", 1 },
   },
 }
+
 -- config.debug_key_events = true
 
 -- and finally, return the configuration to wezterm
