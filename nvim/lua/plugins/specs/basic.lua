@@ -37,9 +37,9 @@ return {
 
   -- autopairs
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {},
+    "altermo/ultimate-autopair.nvim",
+    event = { "InsertEnter", "CmdlineEnter" },
+    branch = "v0.6", -- nvim v0.9.1 stable would crash on it (https://github.com/altermo/ultimate-autopair.nvim/issues/39)
   },
 
   -- guess indent
