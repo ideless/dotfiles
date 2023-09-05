@@ -190,7 +190,7 @@ return {
       -- { ",f", desc = "Find right surrounding" },
       -- { ",F", desc = "Find left surrounding" },
       -- { ",h", desc = "highlight surrounding" },
-      { "cr", desc = "Replace surrounding" },
+      { "cs", desc = "Replace surrounding" },
       -- { ",n", desc = "Update n_lines" },
     },
     opts = {
@@ -200,7 +200,7 @@ return {
         find = "", -- Find surrounding (to the right)
         find_left = "", -- Find surrounding (to the left)
         highlight = "", -- Highlight surrounding
-        replace = "cr", -- Replace surrounding
+        replace = "cs", -- Replace surrounding
         update_n_lines = "", -- Update `n_lines`
       },
     },
