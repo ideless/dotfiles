@@ -24,7 +24,7 @@ return {
         filesystem = {
           filtered_items = {
             hide_dotfiles = true,
-            hide_gitignored = true,
+            hide_gitignored = false, -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/147
             hide_hidden = true, -- only works on Windows for hidden files/directories
             hide_by_name = {
               "node_modules",
