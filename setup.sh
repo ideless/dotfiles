@@ -160,7 +160,7 @@ if confirm "Setup nvim"; then
         sudo apt install fd-find -y
         mkdir -p ~/.local/bin
         ln -s $(which fdfind) ~/.local/bin/fd
-        should_manually_do+=("add_path \"\$HOME/.local/bin\"")
+        should_manually_do+=("add_path $HOME/.local/bin")
     fi
 fi
 
@@ -263,6 +263,14 @@ fi
 
 if confirm "Setup wezterm"; then
     create_link "$SCRIPT_DIR/wezterm/wezterm.lua" "$HOME/.wezterm.lua"
+fi
+
+if confirm "Setup pipenv"; then
+    if ! installed "pipenv"; then
+        # TODO: test this
+        sudo apt install python3-pip-whl -y
+        pip install pipenv
+    fi
 fi
 
 # Step 4: cleanup
