@@ -268,8 +268,8 @@ fi
 if confirm "Setup pipenv"; then
     if ! installed "pipenv"; then
         # TODO: test this
-        sudo apt install python3-pip-whl -y
-        pip install pipenv
+        sudo apt install -y python3-pip
+        sudo pip install pipenv
     fi
 fi
 
