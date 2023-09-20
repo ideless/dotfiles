@@ -35,23 +35,6 @@ return {
               "package-lock.json",
             },
           },
-          window = {
-            mappings = {
-              ["i"] = "show_fs_stat",
-            },
-          },
-          commands = {
-            show_fs_stat = function(state)
-              local node = state.tree:get_node()
-              local stat = vim.loop.fs_stat(node.path)
-              local str = ""
-              str = str .. string.format("Type: %s\n", stat.type)
-              str = str .. string.format("Size: %s\n", utils.format_size(stat.size))
-              str = str .. string.format("Time: %s\n", utils.format_time(stat.mtime.sec))
-              str = str .. string.format("Mode: %s\n", utils.format_mode(stat.mode, stat.type))
-              vim.notify(str)
-            end,
-          },
         },
         source_selector = {
           winbar = true,
@@ -74,5 +57,25 @@ return {
         },
       }
     end,
+  },
+
+  {
+    "stevearc/oil.nvim",
+    keys = {
+      { "<Leader>o", ":Oil<CR>", desc = "Open oil explorer", silent = true },
+    },
+    opts = {
+      columns = {
+        "permissions",
+        "size",
+        "mtime",
+        "icon",
+      },
+      keymaps = {
+        ["<Leader>x"] = "actions.close",
+      },
+    },
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 }

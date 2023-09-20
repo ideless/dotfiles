@@ -40,7 +40,7 @@ return {
     "altermo/ultimate-autopair.nvim",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = "nvim-treesitter/nvim-treesitter",
-    commit = "667d2304e8eb9ddbfa7f962528cfce0a5edcc163", -- https://github.com/altermo/ultimate-autopair.nvim/issues/39
+    -- commit = "667d2304e8eb9ddbfa7f962528cfce0a5edcc163", -- https://github.com/altermo/ultimate-autopair.nvim/issues/39
     opts = {},
   },
 
