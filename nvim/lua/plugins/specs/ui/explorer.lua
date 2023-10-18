@@ -61,6 +61,7 @@ return {
 
   {
     "stevearc/oil.nvim",
+    lazy = false,
     keys = {
       { "<Leader>o", ":Oil<CR>", desc = "Open oil explorer", silent = true },
     },
