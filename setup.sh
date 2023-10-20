@@ -142,7 +142,7 @@ if confirm "Setup nvim"; then
         pushd "$nvim_prefix"
         curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
         chmod u+x nvim.appimage
-        if [ -d "/dev/fuse" ]; then
+        if [ -n "$(dpkg -l | grep libfuse2)" ]; then
             should_manually_do+=("alias vim=\"$nvim_prefix/nvim.appimage\"")
         else
             echo "You do not seem to have fuse installed, extracting nvim.appimage..."
