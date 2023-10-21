@@ -146,3 +146,8 @@ map("n", "<Leader>ur", function()
     print("Unsupported filetype: " .. ft)
   end
 end, { desc = "Run as script" })
+
+-- toggle relative line number
+map("n", "<Leader>un", function()
+  vim.wo.relativenumber = not vim.wo.relativenumber
+end, { desc = "Toggle relative line number" })
