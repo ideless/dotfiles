@@ -67,10 +67,10 @@ map("i", "<C-c>", "<Esc>")
 
 -- search for visually selected text
 -- hint: type :%s//abc/g to replace, <C-r>/ to paste the last search
-map("x", "*", "y:let @/=@0<CR>n")
-map("x", "8", "y:let @/=@0<CR>:set hlsearch<CR>")
-map("x", "#", "y:let @/=@0<CR>N")
-map("x", "3", "y:let @/=@0<CR>:set hlsearch<CR>")
+-- map("x", "*", "y:let @/=@0<CR>n")
+-- map("x", "8", "y:let @/=@0<CR>:set hlsearch<CR>")
+-- map("x", "#", "y:let @/=@0<CR>N")
+-- map("x", "3", "y:let @/=@0<CR>:set hlsearch<CR>")
 
 -- Escape from terminal mode
 map("t", "<A-[>", "<C-\\><C-n>")
