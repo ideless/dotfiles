@@ -65,6 +65,7 @@ return {
   -- task runner
   {
     "stevearc/overseer.nvim",
+    enable = false,
     dependencies = {
       "stevearc/dressing.nvim",
     },
@@ -90,6 +91,7 @@ return {
   -- markdown preview
   {
     "iamcco/markdown-preview.nvim",
+    enable = false,
     build = "cd app && npm install",
     ft = "markdown",
     lazy = true,

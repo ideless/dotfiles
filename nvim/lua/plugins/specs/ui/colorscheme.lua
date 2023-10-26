@@ -48,5 +48,4 @@ return {
       vim.cmd([[colorscheme tokyonight]])
     end,
   },
-  { "projekt0n/github-nvim-theme" },
 }
