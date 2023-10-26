@@ -78,4 +78,17 @@ return {
     },
     config = true,
   },
+
+  -- Clipboard history
+  {
+    "AckslD/nvim-neoclip.lua",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    keys = {
+      { "<Leader>sy", "<Cmd>Telescope neoclip<CR>", desc = "Search yanks" },
+      { "<Leader>sm", "<Cmd>Telescope macroscope<CR>", desc = "Search macros" },
+    },
+    opts = {},
+  },
 }
