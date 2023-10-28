@@ -3,7 +3,7 @@
 set -e
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-INSTRUCTIONS_FILE="instructions.txt"
+INSTRUCTIONS_FILE="$(pwd)/instructions.txt"
 
 cat <<EOF >"$INSTRUCTIONS_FILE"
 # add to profile
@@ -313,6 +313,7 @@ function setup_nodejs {
     if ! installed "node"; then
         n_prefix=$(input "Input n installation path" "$HOME/.local/apps/n")
         curl -L https://git.io/n-install | N_PREFIX="$n_prefix" bash -s -- -y latest
+        write_instruction "export N_PREFIX=\"$n_prefix\""
         write_instruction "add_path \"$n_prefix/bin\""
     fi
     if ! installed "yarn"; then
@@ -358,14 +359,54 @@ function setup_rust {
 }
 
 function setup_wezterm {
+    if ! installed "wezterm"; then
+        # TODO: test this
+        if ! installed "cargo"; then
+            setup_rust
+        fi
+        # build from source
+        git clone --depth=1 --branch=main --recursive https://github.com/wez/wezterm.git
+        pushd wezterm
+        git submodule update --init --recursive
+        ./get-deps
+        cargo build --release
+        popd
+        # create installation directory
+        wezterm_prefix=$(input "Input wezterm installation path" "$HOME/.local/apps/wezterm")
+        mkdir -p "$wezterm_prefix"
+        # copying binaries
+        pushd wezterm/target/release
+        cp wezterm wezterm-gui wezterm-mux-server "$wezterm_prefix"
+        popd
+        write_instruction "add_path \"$wezterm_prefix\""
+        # creating .desktop file
+        desktop_dir="$HOME/.local/share/applications"
+        mkdir -p "$desktop_dir"
+        cp wezterm/assets/wezterm.desktop "$desktop_dir"
+        desktop_file="$desktop_dir/wezterm.desktop"
+        sed -i "s|^TryExec=.*|TryExec=$wezterm_prefix/wezterm|" "$desktop_file"
+        sed -i "s|^Exec=.*|Exec=$wezterm_prefix/wezterm start --cwd .|" "$desktop_file"
+        # copying icon
+        icon_dir="$HOME/.local/share/icons"
+        mkdir -p "$icon_dir"
+        cp wezterm/assets/icon/wezterm-icon.svg "$icon_dir/org.wezfurlong.wezterm.svg"
+        # add context menu item
+        sudo apt install -y python3-nautilus
+        nautilus_dir="$HOME/.local/share/nautilus-python/extensions"
+        cp wezterm/assets/wezterm-nautilus.py "$nautilus_dir"
+        sed -i "s|'wezterm'|'$wezterm_prefix/wezterm'|" "$nautilus_dir/wezterm-nautilus.py"
+        # clean up
+        rm -rf wezterm
+    fi
     create_link "$SCRIPT_DIR/wezterm/wezterm.lua" "$HOME/.wezterm.lua"
 }
 
 function setup_pipenv {
     if ! installed "pipenv"; then
+        # sudo apt install -y python3-pip
+        # sudo pip install pipenv
         # TODO: test this
-        sudo apt install -y python3-pip
-        sudo pip install pipenv
+        sudo apt install -y pipenv python3-pip
     fi
 }
 
