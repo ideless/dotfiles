@@ -185,7 +185,7 @@ return {
   {
     "echasnovski/mini.surround",
     keys = {
-      { "ca", desc = "Add surrounding", mode = { "n", "x" } },
+      { "gs", desc = "Add surrounding", mode = { "n", "x" } },
       { "ds", desc = "Delete surrounding" },
       -- { ",f", desc = "Find right surrounding" },
       -- { ",F", desc = "Find left surrounding" },
@@ -195,7 +195,7 @@ return {
     },
     opts = {
       mappings = {
-        add = "ca", -- Add surrounding in Normal and Visual modes
+        add = "gs", -- Add surrounding in Normal and Visual modes
         delete = "ds", -- Delete surrounding
         find = "", -- Find surrounding (to the right)
         find_left = "", -- Find surrounding (to the left)
