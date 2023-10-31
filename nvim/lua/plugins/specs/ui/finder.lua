@@ -9,7 +9,17 @@ return {
     },
     cmd = "Telescope",
     keys = {
-      { "<Leader>f", "<Cmd>Telescope find_files<CR>", desc = "Find files" },
+      { "<Leader>sf", "<Cmd>Telescope find_files<CR>", desc = "Find files" },
+      {
+        "<Leader>sh",
+        function()
+          require("telescope.builtin").oldfiles {
+            cwd_only = true,
+          }
+        end,
+        desc = "Buffer history (Current)",
+      },
+      { "<Leader>sH", "<Cmd>Telescope oldfiles<CR>", desc = "Buffer history (All)" },
       { "<Leader>ss", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Search" },
       { "<Leader>so", "<Cmd>Telescope lsp_document_symbols<CR>", desc = "Search symbols" },
       { "<Leader>sg", "<Cmd>Telescope live_grep<CR>", desc = "Grep in files" },
