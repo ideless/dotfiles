@@ -410,6 +410,14 @@ function setup_pipenv {
     fi
 }
 
+function setup_flatpak {
+    if ! installed "flatpak"; then
+        sudo apt install -y flatpak
+    fi
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    flatpak remote-add --if-not-exists sjtu https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
+}
+
 # Step 1: install prerequisites
 prerequisites=(
     "git"
@@ -451,6 +459,7 @@ jobs=(
     "rust"
     "wezterm"
     "pipenv"
+    "flatpak"
 )
 for job in "${jobs[@]}"; do
     options_string+="$job;"
