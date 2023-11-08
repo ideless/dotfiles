@@ -418,6 +418,21 @@ function setup_flatpak {
     flatpak remote-add --if-not-exists sjtu https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
 }
 
+function setup_bibclean {
+    if ! installed "bibclean"; then
+        bc_name="bibclean-3.07"
+        curl -LO https://ftp.math.utah.edu/pub/bibclean/$bc_name.tar.gz
+        tar xzvf $bc_name.tar.gz
+        pushd $bc_name
+        bc_prefix=$(input "Input bibclean installation path" "$HOME/.local/apps/bibclean")
+        ./configure
+        make prefix=$bc_prefix install
+        popd
+        rm -rf $bc_name $bc_name.tar.gz
+        write_instruction "add_path \"$bc_prefix/bin\""
+    fi
+}
+
 # Step 1: install prerequisites
 prerequisites=(
     "git"
@@ -460,6 +475,7 @@ jobs=(
     "wezterm"
     "pipenv"
     "flatpak"
+    "bibclean"
 )
 for job in "${jobs[@]}"; do
     options_string+="$job;"
