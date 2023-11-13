@@ -75,6 +75,7 @@ return {
       },
       keymaps = {
         ["<Leader>x"] = "actions.close",
+        ["<C-y>"] = "actions.copy_entry_path",
       },
     },
     -- Optional dependencies
