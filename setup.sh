@@ -360,7 +360,6 @@ function setup_rust {
 
 function setup_wezterm {
     if ! installed "wezterm"; then
-        # TODO: test this
         if ! installed "cargo"; then
             setup_rust
         fi
@@ -393,6 +392,7 @@ function setup_wezterm {
         # add context menu item
         sudo apt install -y python3-nautilus
         nautilus_dir="$HOME/.local/share/nautilus-python/extensions"
+        mkdir -p "$nautilus_dir"
         cp wezterm/assets/wezterm-nautilus.py "$nautilus_dir"
         sed -i "s|'wezterm'|'$wezterm_prefix/wezterm'|" "$nautilus_dir/wezterm-nautilus.py"
         # clean up
@@ -403,9 +403,6 @@ function setup_wezterm {
 
 function setup_pipenv {
     if ! installed "pipenv"; then
-        # sudo apt install -y python3-pip
-        # sudo pip install pipenv
-        # TODO: test this
         sudo apt install -y pipenv python3-pip
     fi
 }
@@ -439,6 +436,7 @@ prerequisites=(
     "curl"
     "make"
     "tar"
+    "gcc"
 )
 for cmd in "${prerequisites[@]}"; do
     if installed "$cmd"; then
@@ -459,6 +457,24 @@ if confirm "Set proxy"; then
     set_proxy "$http_host" "$http_port" "$socks_host" "$socks_port"
     should_unset_proxy=true
 fi
+
+TEMP_DIR=$(mktemp -d)
+pushd $TEMP_DIR
+
+function cleanup {
+    info "cleaning up..."
+
+    if [ "$should_unset_proxy" = true ]; then
+        unset_proxy
+    fi
+
+    popd
+    rm -rf $TEMP_DIR
+}
+
+# https://stackoverflow.com/a/53063602
+# trap "exit 1" HUP INT PIPE QUIT TERM
+trap "cleanup" EXIT
 
 # Step 3: jobs
 jobs=(
@@ -488,8 +504,3 @@ for i in "${!jobs[@]}"; do
         setup_${jobs[$i]}
     fi
 done
-
-# Step 4: cleanup
-if [ "$should_unset_proxy" = true ]; then
-    unset_proxy
-fi
