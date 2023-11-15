@@ -10,8 +10,8 @@ return {
       gs.setup(opts)
 
       wk.register {
-        ["[h"] = { gs.prev_hunk, "Previous hunk" },
-        ["]h"] = { gs.next_hunk, "Previous hunk" },
+        ["[g"] = { gs.prev_hunk, "Previous hunk" },
+        ["]g"] = { gs.next_hunk, "Previous hunk" },
       }
 
       wk.register({
