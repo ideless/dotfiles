@@ -47,6 +47,10 @@ return {
             fmt = show_toggleterm_name,
           },
         },
+        lualine_y = {
+          "searchcount",
+          "selectioncount",
+        },
       },
     },
     config = function(_, opts)
