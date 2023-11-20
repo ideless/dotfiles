@@ -69,7 +69,7 @@ return {
       { "gw", "<Cmd>HopWord<CR>", desc = "Goto word", mode = { "n", "o", "x" } },
     },
     opts = {
-      case_insensitive = false,
+      multi_windows = true,
     },
   },
 
