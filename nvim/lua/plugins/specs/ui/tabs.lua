@@ -20,6 +20,7 @@ return {
 
       require("which-key").register {
         ["gb"] = { ":BufferLinePick<CR>", "Pick buffer" },
+        ["gB"] = { ":BufferLinePickClose<CR>", "Pick close buffer" },
         ["[b"] = { ":BufferLineCyclePrev<CR>", "Previous buffer" },
         ["]b"] = { ":BufferLineCycleNext<CR>", "Next buffer" },
       }
