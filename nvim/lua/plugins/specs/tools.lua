@@ -91,7 +91,7 @@ return {
   -- markdown preview
   {
     "iamcco/markdown-preview.nvim",
-    enable = false,
+    cond = false,
     build = "cd app && npm install",
     ft = "markdown",
     lazy = true,

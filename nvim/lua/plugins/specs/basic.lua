@@ -124,10 +124,10 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     event = { "BufReadPost", "BufNewFile" },
+    main = "ibl";
     opts = {
-      space_char_blankline = " ",
-      show_current_context = true,
-      show_current_context_start = false,
+      indent = { char = "│" },
+      scope = { show_start = false, show_end = false },
     },
   },
 

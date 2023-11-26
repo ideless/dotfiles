@@ -3,7 +3,6 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
       "yioneko/nvim-yati",
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
