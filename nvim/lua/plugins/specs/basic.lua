@@ -5,7 +5,7 @@ return {
     "folke/lazy.nvim",
     event = "VimEnter",
     keys = {
-      { "<Leader>ul", ":Lazy<CR>", desc = "Open Lazy" },
+      { "<Leader>ul", ":Lazy<CR>", desc = "Open Lazy" }, -- FIX: this not working?
     },
   },
 

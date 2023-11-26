@@ -28,10 +28,6 @@ return {
       },
       sync_install = false,
       auto_install = true,
-      context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-      },
       yati = {
         enable = true,
       },
@@ -57,7 +53,7 @@ return {
   },
 
   -- comment
-  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+  { "JoosepAlviste/nvim-ts-context-commentstring" },
   {
     "terrortylor/nvim-comment",
     keys = {
