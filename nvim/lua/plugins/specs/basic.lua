@@ -4,9 +4,6 @@ return {
   {
     "folke/lazy.nvim",
     event = "VimEnter",
-    keys = {
-      { "<Leader>ul", ":Lazy<CR>", desc = "Open Lazy" }, -- FIX: this not working?
-    },
   },
 
   -- keymap hint
@@ -26,6 +23,7 @@ return {
         ["<Leader>s"] = { name = "+search" },
         ["<Leader>u"] = { name = "+utils" },
         ["<Leader>d"] = { name = "+diagnostics" },
+        ["<Leader>ul"] = { "<Cmd>Lazy<CR>", "Open Lazy" },
       },
     },
     config = function(_, opts)
@@ -38,10 +36,16 @@ return {
   -- autopairs
   {
     "altermo/ultimate-autopair.nvim",
+    cond = false,
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = "nvim-treesitter/nvim-treesitter",
-    -- commit = "667d2304e8eb9ddbfa7f962528cfce0a5edcc163", -- https://github.com/altermo/ultimate-autopair.nvim/issues/39
     opts = {},
+  },
+
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {}, -- this is equalent to setup({}) function
   },
 
   -- guess indent
@@ -124,7 +128,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     event = { "BufReadPost", "BufNewFile" },
-    main = "ibl";
+    main = "ibl",
     opts = {
       indent = { char = "│" },
       scope = { show_start = false, show_end = false },
