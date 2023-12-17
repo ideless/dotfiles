@@ -22,10 +22,6 @@ map("in", "<Esc>", "<Cmd>noh<CR><Esc>", { desc = "Escape and clear hlsearch" })
 -- window operations
 map("n", "<C-w>\\", ":vsplit<CR>")
 map("n", "<C-w>-", ":split<CR>")
-map("nitx", "<A-h>", "<Cmd>wincmd h<CR>")
-map("nitx", "<A-j>", "<Cmd>wincmd j<CR>")
-map("nitx", "<A-k>", "<Cmd>wincmd k<CR>")
-map("nitx", "<A-l>", "<Cmd>wincmd l<CR>")
 
 -- conventional shortcuts
 map("in", "<C-s>", "<Cmd>w<CR>")
@@ -33,12 +29,16 @@ map("in", "<C-z>", "<Cmd>u<CR>")
 map("n", "<C-a>", "gg^vG$")
 
 -- motions
--- map("i", "<C-a>", "<C-o>I")
--- map("i", "<C-e>", "<End>") -- useless, and conflicts with Copilot
-map("i", "<C-h>", "<Left>")
-map("i", "<C-l>", "<Right>")
-map("i", "<C-j>", "<Down>")
-map("i", "<C-k>", "<Up>")
+map("i", "<A-h>", "<Left>")
+map("i", "<A-l>", "<Right>")
+map("i", "<A-j>", "<Down>")
+map("i", "<A-k>", "<Up>")
+map("i", "<A-w>", "<Esc>lwi")
+map("i", "<A-W>", "<Esc>lWi")
+map("i", "<A-e>", "<Esc>ea")
+map("i", "<A-E>", "<Esc>Ea")
+map("i", "<A-b>", "<Esc>lbi")
+map("i", "<A-B>", "<Esc>lBi")
 map("nxo", "H", "^")
 map("nxo", "L", "$")
 
