@@ -240,11 +240,14 @@ function setup_nvim {
         curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
         chmod u+x nvim.appimage
         if [ -n "$(dpkg -l | grep libfuse2)" ]; then
-            write_instruction "alias nvim=\"$nvim_prefix/nvim.appimage\""
+            write_instruction "alias vim=\"$nvim_prefix/nvim.appimage\""
+            write_instruction "alias vi=\"$nvim_prefix/nvim.appimage\" -u \$HOME/.config/nvim/mini.lua"
         else
             warn "You do not seem to have fuse installed, extracting nvim.appimage..."
             ./nvim.appimage --appimage-extract
             write_instruction "add_path \"$nvim_prefix/squashfs-root/usr/bin\""
+            write_instruction "alias vim=nvim"
+            write_instruction "alias vi=nvim -u \$HOME/.config/nvim/mini.lua"
         fi
         popd
     fi
