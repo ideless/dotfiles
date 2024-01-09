@@ -66,4 +66,28 @@ M.count_split = function()
   return split_count
 end
 
+M.random_string = function(length, num, alpha, Alpha)
+  local chars = {}
+  if num then
+    for i = 48, 57 do
+      table.insert(chars, string.char(i))
+    end
+  end
+  if alpha then
+    for i = 97, 122 do
+      table.insert(chars, string.char(i))
+    end
+  end
+  if Alpha then
+    for i = 65, 90 do
+      table.insert(chars, string.char(i))
+    end
+  end
+  local str = ""
+  for _ = 1, length do
+    str = str .. chars[math.random(#chars)]
+  end
+  return str
+end
+
 return M

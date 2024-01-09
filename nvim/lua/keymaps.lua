@@ -151,3 +151,9 @@ end, { desc = "Run as script" })
 map("n", "<Leader>un", function()
   vim.wo.relativenumber = not vim.wo.relativenumber
 end, { desc = "Toggle relative line number" })
+
+-- random string
+map("i", "<A-r>", function()
+  local str = utils.random_string(4, true, true, false)
+  vim.api.nvim_put({ str }, "c", false, true)
+end, { desc = "Random string" })
