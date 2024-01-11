@@ -1,3 +1,5 @@
+math.randomseed(os.time())
+
 local M = {}
 
 local SIZE_TYPES = { "", "K", "M", "G", "T", "P", "E", "Z" }
