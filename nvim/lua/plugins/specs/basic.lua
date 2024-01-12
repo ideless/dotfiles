@@ -240,4 +240,12 @@ return {
       -- vim.keymap.set("n", "|", search.in_place)
     end,
   },
+
+  -- sudo read or write
+  {
+    "lambdalisue/suda.vim",
+    config = function()
+      vim.g.suda_smart_edit = 1
+    end
+  }
 }
